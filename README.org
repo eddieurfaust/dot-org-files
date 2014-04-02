@@ -1,0 +1,4 @@
+#+TITLE: My dot-org-files
+
+*** Source
+    I got this great idea and template from [[https://github.com/ivoarch][ivoarch@github]].
