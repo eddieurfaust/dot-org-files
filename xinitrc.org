@@ -1,0 +1,114 @@
+#+TITLE: My .xinitrc file
+
+** Header
+   #+BEGIN_SRC sh :tangle ~/.xinitrc
+     #!/bin/sh
+     #
+     # ~/.xinitrc
+     #
+     # Executed by startx (run your window manager from here)
+
+     if [ -d /etc/X11/xinit/xinitrc.d ]; then
+       for f in /etc/X11/xinit/xinitrc.d/*; do
+         [ -x "$f" ] && . "$f"
+       done
+       unset f
+     fi
+   #+END_SRC
+
+** Configure the keyboard layout.
+Toggle between typing in German (de) and English (us) with =right_CTRL= key.
+*CHOOSE ONE*
+
+*** KEYS
+    From man xkeyboard-config:
+
+    Key(s) to change layout
+
+   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+   │Option                      Description                                                                    │
+   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+   │grp:switch                  Right Alt (while pressed)                                                      │
+   │grp:lswitch                 Left Alt (while pressed)                                                       │
+   │grp:lwin_switch             Left Win (while pressed)                                                       │
+   │grp:rwin_switch             Right Win (while pressed)                                                      │
+   │grp:win_switch              Any Win key (while pressed)                                                    │
+   │grp:caps_switch             Caps Lock (while pressed), Alt+Caps Lock does the original capslock action     │
+   │grp:rctrl_switch            Right Ctrl (while pressed)                                                     │
+   │grp:toggle                  Right Alt                                                                      │
+   │grp:lalt_toggle             Left Alt                                                                       │
+   │grp:caps_toggle             Caps Lock                                                                      │
+   │grp:shift_caps_toggle       Shift+Caps Lock                                                                │
+   │grp:shift_caps_switch       Caps Lock (to first layout), Shift+Caps Lock (to last layout)                  │
+   │grp:win_menu_switch         Left Win (to first layout), Right Win/Menu (to last layout)                    │
+   │grp:lctrl_rctrl_switch      Left Ctrl (to first layout), Right Ctrl (to last layout)                       │
+   │grp:alt_caps_toggle         Alt+Caps Lock                                                                  │
+   │grp:shifts_toggle           Both Shift keys together                                                       │
+   │grp:alts_toggle             Both Alt keys together                                                         │
+   │grp:ctrls_toggle            Both Ctrl keys together                                                        │
+   │grp:ctrl_shift_toggle       Ctrl+Shift                                                                     │
+   │grp:lctrl_lshift_toggle     Left Ctrl+Left Shift                                                           │
+   │grp:rctrl_rshift_toggle     Right Ctrl+Right Shift                                                         │
+   │grp:ctrl_alt_toggle         Alt+Ctrl                                                                       │
+   │grp:alt_shift_toggle        Alt+Shift                                                                      │
+   │grp:lalt_lshift_toggle      Left Alt+Left Shift                                                            │
+   │grp:alt_space_toggle        Alt+Space                                                                      │
+   │grp:menu_toggle             Menu                                                                           │
+   │grp:lwin_toggle             Left Win                                                                       │
+   │grp:rwin_toggle             Right Win                                                                      │
+   │grp:lshift_toggle           Left Shift                                                                     │
+   │grp:rshift_toggle           Right Shift                                                                    │
+   │grp:lctrl_toggle            Left Ctrl                                                                      │
+   │grp:rctrl_toggle            Right Ctrl                                                                     │
+   │grp:sclk_toggle             Scroll Lock                                                                    │
+   │grp:lctrl_lwin_rctrl_menu   LeftCtrl+LeftWin (to first layout), RightCtrl+Menu (to second layout)          │
+   │                                                                                                           │
+   └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+*** right_CTRL -> TOGGLE
+#+begin_src sh :tangle ~/.xinitrc
+setxkbmap -layout de,us -option ctrl:nocaps -option grp:rctrl_toggle
+#+end_src
+
+*** right_CTRL -> SWITCH
+#+begin_src sh :tangle no
+setxkbmap -layout de,us -option ctrl:nocaps -option grp:rctrl_switch
+#+end_src
+
+** Deactivate *BEEEEEP*
+   Schaltet den nervigen PC-Piep-Ton ab(nur innerhalb von X)
+   #+BEGIN_SRC sh :tangle ~/.xinitrc
+     xset b off
+   #+END_SRC
+
+** Start volumeicon
+   #+BEGIN_SRC sh :tangle ~/.xinitrc
+     volumeicon&
+   #+END_SRC
+
+** Start dropbox
+   #+BEGIN_SRC sh :tangle ~/.xinitrc
+     dropboxd&
+   #+END_SRC
+
+** Start i3wm
+
+   #+BEGIN_SRC sh :tangle ~/.xinitrc
+     DEFAULT_SESSION=i3
+
+     case $1 in
+     awesome)
+             exec awesome
+             ;;
+     i3)
+             exec i3 -V >> ~/.i3/i3log 2>&1  # es wird eine entsprechende log-file genutzt
+             ;;
+     rox)
+             rox -b Default -p default; exec awesome
+             ;;
+     ,*)
+             exec $DEFAULT_SESSION
+             ;;
+     esac
+   #+END_SRC
+

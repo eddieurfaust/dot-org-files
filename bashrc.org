@@ -1,0 +1,75 @@
+#+TITLE: My .bashrc file
+
+** Header
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     #
+     # ~/.bashrc
+     #
+
+     # If not running interactively, don't do anything
+     [[ $- != *i* ]] && return
+   #+END_SRC
+
+** Console Prompt
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     PS1='[\u@\h \W]\$ '
+   #+END_SRC
+
+
+** aliases
+*** colored =ls=
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     alias ls='ls --color=auto'
+   #+END_SRC
+
+
+*** personalized =ls= commands
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     alias lsd='clear; ls -al'
+     alias ll='clear; ls -l'
+   #+END_SRC
+** Standard EDITOR
+  #+BEGIN_SRC sh :tangle ~/.bashrc
+    EDITOR=zile; export EDITOR
+  #+END_SRC
+** customize PATH
+*** =~/bin=-directory
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     PATH='/home/urfaust/bin/':$PATH; export PATH
+   #+END_SRC
+*** COPE-Package
+    cope-git(colorful wrapper for terminal programs)
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     PATH=$(cope_path):$PATH; export PATH
+   #+END_SRC
+** set background picture
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     nitrogen --restore &
+   #+END_SRC
+** f.lux
+   Destination ist hier Hannover.
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     xflux -l 52.3 -g 9.7; clear
+   #+END_SRC
+** autocomplete in der shell
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     complete -cf sudo
+     complete -cf man
+     complete -cf netctl
+   #+END_SRC
+** colored output for =ls=
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     eval $(dircolors -b)
+   #+END_SRC
+** colored output for =less=
+   broken (orphan) symlinks will start showing in a red hue
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     export LESS=-R
+     export LESS_TERMCAP_me=$(printf '\e[0m')
+     export LESS_TERMCAP_se=$(printf '\e[0m')
+     export LESS_TERMCAP_ue=$(printf '\e[0m')
+     export LESS_TERMCAP_mb=$(printf '\e[1;32m')
+     export LESS_TERMCAP_md=$(printf '\e[1;34m')
+     export LESS_TERMCAP_us=$(printf '\e[1;32m')
+     export LESS_TERMCAP_so=$(printf '\e[1;44;1m')
+   #+END_SRC

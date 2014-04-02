@@ -1,0 +1,139 @@
+#+TITLE: Xdefaults
+
+** XFT settings.
+
+Necessary to improve the xft fonts.
+
+#+begin_src sh :tangle ~/.Xdefaults :padline yes
+Xft.dpi: 96
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+#+end_src
+
+** URxvt Customization and Optimization.
+
+*** Start Urxvt as a login shell.
+
+#+begin_src sh :tangle ~/.Xdefaults :padline no
+URxvt*loginShell: true
+#+end_src
+
+*** Enable 256 color support.
+
+I use gnu-screen so this is helpful.
+
+#+begin_src sh :tangle ~/.Xdefaults :padline no
+URxvt*termName: screen-256color
+#+end_src
+
+*** Scrolling/mouse wheel improvments.
+
+Someone who really need scroll bars?
+
+#+begin_src sh :tangle ~/.Xdefaults :padline no
+URxvt*scrollBar: false
+URxvt*mouseWheelScrollPage: true
+#+end_src
+
+*** URL and Mouseless text selection.
+
+I want to select and open URLs in my browser without using the mouse, by this we installed [[https://www.archlinux.org/packages/community/any/urxvt-perls/][urxvt-perls]]
+from Arch/community repo.
+
+#+begin_src sh :tangle ~/.Xdefaults :padline yes
+URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
+URxvt.url-select.launcher:  conkeror
+URxvt.url-select.underline: true
+URxvt.keysym.M-u:           perl:url-select:select_nextnnn
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-s:           perl:keyboard-select:search
+#+end_src
+
+*** Font Appearance.
+**** Inconsolata
+     Inconsolata!!!
+
+#+begin_src sh :tangle ~/.Xdefaults :padline yes
+  URxvt*letterSpace: -1
+  URxvt*font:            xft:Inconsolata:style=Semibold:pixelsize=16:antialias=true:hinting=slight
+  URxvt*imFont:          xft:Inconsolata:style=Semibold:pixelsize=16:antialias=true:hinting=slight
+  URxvt*boldFont:        xft:Inconsolata:style=bold:pixelsize=16:antialias=true:hinting=slight
+  URxvt*italicFont:      xft:Inconsolata:style=italic:pixelsize=16:antialias=true:hinting=slight
+  URxvt*boldItalicFont:  xft:Inconsolata:style=bold:italic:pixelsize=16:antialias=true:hinting=slight
+#+end_src
+**** Monaco
+I use Monaco as my font choice.
+
+#+begin_src sh :tangle no
+URxvt*letterSpace: -1
+URxvt*font:                 xft:Monaco:style=regular:size=10
+URxvt*imFont:               xft:Monaco:style=regular:size=10
+URxvt*boldFont:             xft:Monaco:style=bold:size=10
+URxvt*italicFont:           xft:Monaco:style=italic:size=10
+URxvt*boldItalicFont:       xft:Monaco:style=bold:italic:size=10
+#+end_src
+
+*** Zenburn color-scheme.
+
+The Color scheme that Changed the World!
+
+#+begin_src sh :tangle ~/.Xdefaults :padline yes
+URxvt*background: #3F3F3F
+URxvt*foreground: #DCDCCC
+URxvt*cursorColor: #DCDCCC
+URxvt*cursorColor2: #3F3F3F
+URxvt*colorUL: #8CD0D3
+URxvt*underlineColor: #F0DFAF
+URxvt*colorBD: #E0CF9F
+URxvt*colorIT: #656555
+
+!! black dark/light
+URxvt*color0: #3F3F3F
+URxvt*color8: #5F5F5F
+!! red dark/light
+URxvt*color1: #BC8383
+URxvt*color9: #CC9393
+!! green dark/light
+URxvt*color2: #5F7F5F
+URxvt*color10: #7F9F7F
+!! yellow dark/light
+URxvt*color3: #E0CF9F
+URxvt*color11: #F0DFAF
+!! blue dark/light
+URxvt*color4: #7CB8BB
+URxvt*color12: #8CD0D3
+!! magenta dark/light
+URxvt*color5: #DC8CC3
+URxvt*color13: #DC8CC3
+!! cyan dark/light
+URxvt*color6: #93E0E3
+URxvt*color14: #93E0E3
+!! white dark/light
+URxvt*color7: #DCDCCC
+URxvt*color15: #FFFFFF
+#+end_src
+
+** XMESSAGE
+
+Configure the appearance of xmessage, I like red background and yellow foreground.
+
+#+begin_src sh :tangle ~/.Xdefaults :padline yes
+Xmessage*font: -*-terminus-medium-r-*-*-14-*-*-*-*-*-iso10646-1
+Xmessage*background: red
+Xmessage*foreground: yellow
+Xmessage*form.*.shapeStyle: rectangle
+Xmessage*Scrollbar.width: 1
+Xmessage*Scrollbar.borderWidth: 0
+Xmessage*Buttons: OK
+Xmessage*defaultButton: OK
+#+end_src
+
+
+** misc
+   #+BEGIN_SRC sh :tangle ~/.Xdefaults :padline yes
+     URxvt.imLocale: de_DE.UTF-8
+   #+END_SRC
