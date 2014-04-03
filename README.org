@@ -1,7 +1,7 @@
 #+TITLE: My dot-org-files
 
 *** Source
-    I got this great idea and template from [[https://github.com/ivoarch][ivoarch@github]].
+    I got this great idea and template from [[https://github.com/ivoarch/.dot-org-files][ivoarch@github]].
 
 *** Usage
     Run =C-c C-v C-t= or =C-c C-v t= or the command =org-babel-tangle=
