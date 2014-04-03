@@ -196,23 +196,14 @@ Conventions]]
 ;; we can rather copy them then ...
 (setq backup-by-copying t)
 #+END_SRC
-
-** UNDO the region-word-wrap thingy (M-q)
-*** Code
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-  ;; (M-q) rückgängig machen
-  (defun unfill-region ()
-    "UNDO the region-word-wrap thingy (M-q)"
-    (interactive)
-    (let ((fill-column (point-max)))
-      (fill-paragraph nil)))
-#+END_SRC
-
-*** Passender shortcut
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-;; passenden Shortcut setzen
-(global-set-key "\C-\M-q" 'unfill-region)
-#+END_SRC
+** BUFFER-MOVE
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     ;; Buffer-Move shortcuts
+     (global-set-key (kbd "<C-M-up>")     'buf-move-up)
+     (global-set-key (kbd "<C-M-down>")   'buf-move-down)
+     (global-set-key (kbd "<C-M-left>")   'buf-move-left)
+     (global-set-key (kbd "<C-M-right>")  'buf-move-right)
+   #+END_SRC
 
 ** PACKAGE MANAGER
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -240,6 +231,22 @@ Conventions]]
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; ... und der passende Shortcut
 (global-set-key [(control meta return)] 'toggle-fullscreen)
+#+END_SRC
+** UNDO the region-word-wrap thingy (M-q)
+*** Code
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; (M-q) rückgängig machen
+  (defun unfill-region ()
+    "UNDO the region-word-wrap thingy (M-q)"
+    (interactive)
+    (let ((fill-column (point-max)))
+      (fill-paragraph nil)))
+#+END_SRC
+
+*** Passender shortcut
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; passenden Shortcut setzen
+(global-set-key "\C-\M-q" 'unfill-region)
 #+END_SRC
 ** Opening links to .pdf in evince
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
