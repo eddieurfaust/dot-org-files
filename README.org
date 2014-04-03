@@ -2,3 +2,10 @@
 
 *** Source
     I got this great idea and template from [[https://github.com/ivoarch][ivoarch@github]].
+
+*** Usage
+    Run =C-c C-v C-t= or =C-c C-v t= or the command =org-babel-tangle=
+    to create the files specified in the SRC-blocks.
+
+    Remember to make backups of those files, since I didn't get any
+    warnings when a file was overwritten.
