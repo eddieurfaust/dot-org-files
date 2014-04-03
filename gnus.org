@@ -1,0 +1,34 @@
+#+TITLE: My .gnus file
+
+A very basic setup
+
+** select method
+   #+BEGIN_SRC sh :tangle ~/.gnus
+     (setq gnus-select-method '(nnnil))
+   #+END_SRC
+
+** secondary select method
+   #+BEGIN_SRC sh :tangle ~/.gnus
+     (setq gnus-secondary-select-methods '((nntp "news.gwene.org")))
+   #+END_SRC
+
+
+** list all groups
+   List all groups, whether they have unread articles or not.
+   #+BEGIN_SRC sh :tangle ~/.gnus
+     (setq gnus-group-list-all-groups t)
+   #+END_SRC
+
+
+** fetch-old-headers
+   #+BEGIN_SRC sh :tangle no
+     (setq gnus-fetch-old-headers 'some)
+   #+END_SRC
+
+
+
+
+
+
+
+
