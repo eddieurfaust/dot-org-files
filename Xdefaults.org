@@ -54,6 +54,11 @@ URxvt.keysym.M-s:           perl:keyboard-select:search
 #+end_src
 
 *** Font Appearance.
+    [[https://wiki.archlinux.org/index.php/fonts][Fonts@archwiki]] [[https://wiki.archlinux.org/index.php/Font_Configuration][Font Configuration@archwiki]] 
+
+    =fc-list | grep inconsolata= to see which inconsolata versions are
+    installed
+
 **** Inconsolata
      Inconsolata!!!
 
