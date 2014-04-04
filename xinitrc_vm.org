@@ -1,5 +1,5 @@
 
-
+** head
 #+BEGIN_SRC sh :tangle ~/.xinitrc
 #!/bin/bash
 export BROWSER=firefox
@@ -20,19 +20,19 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 ** keyboard layout
 
-*** simple german
-#+BEGIN_SRC sh :tangle ~/.xinitrc
-setxkbmap -layout de,us -option ctrl:nocaps -option grp:ctrls_toggle
+*** de/us
+#+BEGIN_SRC sh :tangle no
+setxkbmap -layout de,us -option ctrl:nocaps -option grp:sclk_toggle
 #+END_SRC
 
 *** NEO2/DE
     Probleme mit der 4. Ebene. - Siehe [[http://wiki.neo-layout.org/wiki/FAQ#Beimirgehtdie4.EbeneMod4ehemalsAltGr-Tastenicht.StattdessenerscheinenimmerdieZeichender1.EbeneegalwelchenderbeidenModifikatorenichdr%25C3%25BCcke.Warum][hier]].
 
     Wenn =CAPSLOCK= weiterhin als =CTRL= genutzt werden soll, dann den
-    linken =Mod3= einfach auf den eigentlichen =CTRL= legen.
-#+BEGIN_SRC sh :tangle no
-setxkbmap -layout de,de -variant basic,neo -option -option grp:sclk_toggle
-#+END_SRC
+    linken =Mod3= einfach auf den eigentlichen =CTRL= legen. ("einfach")
+    #+BEGIN_SRC sh :tangle ~/.xinitrc
+    setxkbmap -layout de,de -variant basic,neo -option -option grp:sclk_toggle
+    #+END_SRC
 
 ** VIRTUALBOX
 #+BEGIN_SRC sh :tangle ~/.xinitrc
