@@ -66,14 +66,19 @@ Toggle between typing in German (de) and English (us) with =right_CTRL= key.
    └────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 *** right_CTRL -> TOGGLE
-#+begin_src sh :tangle ~/.xinitrc
-setxkbmap -layout de,us -option ctrl:nocaps -option grp:rctrl_toggle
+#+begin_src sh :tangle  ~/.xinitrc
+setxkbmap -layout de,us -option ctrl:nocaps -option grp:ctrls_toggle
 #+end_src
 
 *** right_CTRL -> SWITCH
 #+begin_src sh :tangle no
-setxkbmap -layout de,us -option ctrl:nocaps -option grp:rctrl_switch
+setxkbmap -layout de,us -option ctrl:nocaps -option grp:ctrls_toggle
 #+end_src
+
+*** NEO2/DE
+#+BEGIN_SRC sh :tangle no
+  setxkbmap -layout de,de -variant basic,neo -option -option grp:ctrls_toggle
+#+END_SRC
 
 ** Deactivate *BEEEEEP*
    Schaltet den nervigen PC-Piep-Ton ab(nur innerhalb von X)

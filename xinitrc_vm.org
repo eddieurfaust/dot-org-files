@@ -1,0 +1,46 @@
+
+
+#+BEGIN_SRC sh :tangle ~/.xinitrc
+#!/bin/bash
+export BROWSER=firefox
+export DE=openbox
+#+END_SRC
+
+** Dbus fix
+#+BEGIN_SRC sh :tangle ~/.xinitrc
+if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+    eval "$(dbus-launch --sh-syntax --exit-with-session)"
+fi
+#+END_SRC
+
+** Gtk themes
+#+BEGIN_SRC sh :tangle ~/.xinitrc
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+#+END_SRC
+
+** keyboard layout
+
+*** simple german
+#+BEGIN_SRC sh :tangle ~/.xinitrc
+setxkbmap -layout de,us -option ctrl:nocaps -option grp:ctrls_toggle
+#+END_SRC
+
+*** NEO2/DE
+    Probleme mit der 4. Ebene. - Siehe [[http://wiki.neo-layout.org/wiki/FAQ#Beimirgehtdie4.EbeneMod4ehemalsAltGr-Tastenicht.StattdessenerscheinenimmerdieZeichender1.EbeneegalwelchenderbeidenModifikatorenichdr%25C3%25BCcke.Warum][hier]].
+
+    Wenn =CAPSLOCK= weiterhin als =CTRL= genutzt werden soll, dann den
+    linken =Mod3= einfach auf den eigentlichen =CTRL= legen.
+#+BEGIN_SRC sh :tangle no
+setxkbmap -layout de,de -variant basic,neo -option -option grp:sclk_toggle
+#+END_SRC
+
+** VIRTUALBOX
+#+BEGIN_SRC sh :tangle ~/.xinitrc
+/usr/bin/VBoxClient-all
+#sudo mount -t vboxsf -o uid=1000,gid=1000 dropbox /mnt/
+#+END_SRC
+
+** i3 FTW
+#+BEGIN_SRC sh :tangle ~/.xinitrc
+exec i3
+#+END_SRC
