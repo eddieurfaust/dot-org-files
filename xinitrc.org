@@ -16,9 +16,7 @@
      fi
    #+END_SRC
 
-** Configure the keyboard layout.
-Toggle between typing in German (de) and English (us) with =right_CTRL= key.
-*CHOOSE ONE*
+** keyboard layout.
 
 *** KEYS
     From man xkeyboard-config:
@@ -62,23 +60,19 @@ Toggle between typing in German (de) and English (us) with =right_CTRL= key.
    │grp:rctrl_toggle            Right Ctrl                                                                     │
    │grp:sclk_toggle             Scroll Lock                                                                    │
    │grp:lctrl_lwin_rctrl_menu   LeftCtrl+LeftWin (to first layout), RightCtrl+Menu (to second layout)          │
-   │                                                                                                           │
    └────────────────────────────────────────────────────────────────────────────────────────────────┘
-
-*** right_CTRL -> TOGGLE
-#+begin_src sh :tangle  ~/.xinitrc
-setxkbmap -layout de,us -option ctrl:nocaps -option grp:ctrls_toggle
-#+end_src
-
-*** right_CTRL -> SWITCH
-#+begin_src sh :tangle no
-setxkbmap -layout de,us -option ctrl:nocaps -option grp:ctrls_toggle
-#+end_src
-
-*** NEO2/DE
-#+BEGIN_SRC sh :tangle no
-  setxkbmap -layout de,de -variant basic,neo -option -option grp:ctrls_toggle
-#+END_SRC
+*** de/us
+    #+begin_src sh :tangle no
+    setxkbmap -layout de,us -option ctrl:nocaps -option grp:sclk_toggle
+    #+end_src
+*** de/dvorak
+    #+begin_src sh :tangle no
+    setxkbmap -layout de,dvorak -option ctrl:nocaps -option grp:sclk_toggle
+    #+end_src    
+*** de/de(NEO2)
+    #+BEGIN_SRC sh :tangle  ~/.xinitrc
+    setxkbmap -layout de,de -variant basic,neo
+    #+END_SRC
 
 ** Deactivate *BEEEEEP*
    Schaltet den nervigen PC-Piep-Ton ab(nur innerhalb von X)
