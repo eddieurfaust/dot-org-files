@@ -1,3 +1,4 @@
+#+TITLE: My .xinitrc file
 
 ** head
 #+BEGIN_SRC sh :tangle ~/.xinitrc
@@ -14,16 +15,16 @@ fi
 #+END_SRC
 
 ** Gtk themes
-#+BEGIN_SRC sh :tangle ~/.xinitrc
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-#+END_SRC
+   #+BEGIN_SRC sh :tangle ~/.xinitrc
+   export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+   #+END_SRC
 
 ** keyboard layout
 
 *** de/us
-#+BEGIN_SRC sh :tangle no
-setxkbmap -layout de,us -option ctrl:nocaps -option grp:sclk_toggle
-#+END_SRC
+    #+BEGIN_SRC sh :tangle no
+    setxkbmap -layout de,us -option ctrl:nocaps -option grp:sclk_toggle
+    #+END_SRC
 
 *** NEO2/DE
     Probleme mit der 4. Ebene. - Siehe [[http://wiki.neo-layout.org/wiki/FAQ#Beimirgehtdie4.EbeneMod4ehemalsAltGr-Tastenicht.StattdessenerscheinenimmerdieZeichender1.EbeneegalwelchenderbeidenModifikatorenichdr%25C3%25BCcke.Warum][hier]].
@@ -35,12 +36,13 @@ setxkbmap -layout de,us -option ctrl:nocaps -option grp:sclk_toggle
     #+END_SRC
 
 ** VIRTUALBOX
-#+BEGIN_SRC sh :tangle ~/.xinitrc
-/usr/bin/VBoxClient-all
-#sudo mount -t vboxsf -o uid=1000,gid=1000 dropbox /mnt/
-#+END_SRC
+   #+BEGIN_SRC sh :tangle ~/.xinitrc
+   /usr/bin/VBoxClient-all
+   #sudo mount -t vboxsf -o uid=1000,gid=1000 dropbox /mnt/
+   #+END_SRC
 
 ** i3 FTW
-#+BEGIN_SRC sh :tangle ~/.xinitrc
-exec i3
-#+END_SRC
+   #+BEGIN_SRC sh :tangle ~/.xinitrc
+   exec i3
+   #+END_SRC
+
