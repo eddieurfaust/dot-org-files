@@ -3,7 +3,7 @@
 Do =M-x org-babel-load-file= and provide this file (=~/.emacs.d/init.org=). This
 should evaluate every piece of emacs-lisp code available here.
 
-Next time, simply reload changes wich "C-c i"
+Next time, simply reload changes with =C-c i=
 
 * Loading essentials:
 
@@ -377,6 +377,16 @@ don't want is there, but I haven't had any such problems yet.
 (setq org-hide-leading-stars 'hidestars)
 #+END_SRC
 
+** org-id
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     ;; org-id laden
+     (require 'org-id)
+
+     ;; passender shortcut - org-mode intern
+     (add-hook 'org-mode-hook
+               (lambda ()
+                 (local-set-key "\C-ck" 'org-id-get-create)))
+   #+END_SRC
 ** Agenda
 *** Überwachte agenda-files
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -436,7 +446,7 @@ don't want is there, but I haven't had any such problems yet.
 *** passender Shortcut
 **** Org-Mode only
 #+BEGIN_SRC emacs-lisp :tangle no
-  ;; passender shortcut - global
+  ;; passender shortcut - org-mode intern
   (add-hook 'org-mode-hook
             (lambda ()
               (local-set-key "\C-cö" 'org-my-custom-timestamp)))
