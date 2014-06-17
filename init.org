@@ -546,6 +546,7 @@ Additional shortcuts for navigating through org-mode documents:
      (org . t)
      (python . t)
      (C . t)
+     (C++ . t)
      (gnuplot . t)
      (latex . t)
      (R . t)
