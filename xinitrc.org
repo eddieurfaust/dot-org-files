@@ -63,15 +63,15 @@
    └────────────────────────────────────────────────────────────────────────────────────────────────┘
 *** de/us
     #+begin_src sh :tangle no
-    setxkbmap -layout de,us -option ctrl:nocaps -option grp:sclk_toggle
+    setxkbmap -layout de,us -option ctrl:nocaps -option grp:rctrl_rshift_toggle
     #+end_src
 *** de/dvorak
     #+begin_src sh :tangle no
-    setxkbmap -layout de,dvorak -option ctrl:nocaps -option grp:sclk_toggle
+    setxkbmap -layout de,dvorak -option ctrl:nocaps -option grp:rctrl_rshift_toggle
     #+end_src    
 *** de/de(NEO2)
     #+BEGIN_SRC sh :tangle  ~/.xinitrc
-    setxkbmap -layout de,de -variant basic,neo
+    setxkbmap -layout de,de -variant basic,neo -option grp:rctrl_rshift_toggle
     #+END_SRC
 
 ** Deactivate *BEEEEEP*
