@@ -1,7 +1,6 @@
 #+TITLE: Xdefaults
 
 ** XFT settings.
-
 Necessary to improve the xft fonts.
 
 #+begin_src sh :tangle ~/.Xdefaults :padline yes

@@ -1,4 +1,4 @@
-#+TITLE: My .xinitrc file
+#+TITLE: My ~/.xinitrc
 
 ** Header
    #+BEGIN_SRC sh :tangle ~/.xinitrc

@@ -3,7 +3,7 @@
 Do =M-x org-babel-load-file= and provide this file (=~/.emacs.d/init.org=). This
 should evaluate every piece of emacs-lisp code available here.
 
-Next time, simply reload changes wich "C-c i"
+Next time, simply reload changes with =C-c i=
 
 * Loading essentials:
 
@@ -132,7 +132,7 @@ Next time, simply reload changes wich "C-c i"
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 #+END_SRC
 *** load Zenburn
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; load Zenburn theme
 (load-theme 'zenburn t)
 #+END_SRC
@@ -213,6 +213,7 @@ Conventions]]
     (package-initialize)
     (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
     (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
     (package-initialize) )
 #+END_SRC
 
@@ -377,6 +378,16 @@ don't want is there, but I haven't had any such problems yet.
 (setq org-hide-leading-stars 'hidestars)
 #+END_SRC
 
+** org-id
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     ;; org-id laden
+     (require 'org-id)
+
+     ;; passender shortcut - org-mode intern
+     (add-hook 'org-mode-hook
+               (lambda ()
+                 (local-set-key "\C-ck" 'org-id-get-create)))
+   #+END_SRC
 ** Agenda
 *** Überwachte agenda-files
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -436,7 +447,7 @@ don't want is there, but I haven't had any such problems yet.
 *** passender Shortcut
 **** Org-Mode only
 #+BEGIN_SRC emacs-lisp :tangle no
-  ;; passender shortcut - global
+  ;; passender shortcut - org-mode intern
   (add-hook 'org-mode-hook
             (lambda ()
               (local-set-key "\C-cö" 'org-my-custom-timestamp)))
@@ -562,7 +573,7 @@ Additional shortcuts for navigating through org-mode documents:
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;;For Auctex < 11.82 exchange ";;" in the following 2 lines
 ;;(require ’tex-site)
-(load "auctex.el" nil t t)
+;(load "auctex.el" nil t t)
 #+END_SRC
 
 ** Automatic parsing of TeX files
@@ -670,7 +681,7 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 ** preview-latex
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; Nur benutzen falls Auctex > 11.81 mit preview-latex:
-(load "preview-latex.el" nil t t)
+;(load "preview-latex.el" nil t t)
 #+END_SRC
 
 ** Multifile-Dokumente
