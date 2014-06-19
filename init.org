@@ -131,11 +131,19 @@ Next time, simply reload changes with =C-c i=
 ;; load themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 #+END_SRC
-*** load Zenburn
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+*** load Zenburn standard - DOESN'T WORK
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; load Zenburn theme
 (load-theme 'zenburn t)
 #+END_SRC
+*** load Zenburn - WORKAROUND
+    [[http://stackoverflow.com/questions/11127109/emacs-24-package-system-initialization-problems/11140619#11140619][link]]
+    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+      (defun zenburn-init ()
+        (load-theme 'zenburn)
+        )
+      (add-hook 'after-init-hook 'zenburn-init)
+    #+END_SRC
 *** Solarized
     #+BEGIN_SRC emacs-lisp :tangle no
       ;; load Solarized theme
