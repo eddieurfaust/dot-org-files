@@ -35,7 +35,7 @@ Next time, simply reload changes with =C-c i=
 #+END_SRC
 
 ** Adding .el files stored in folder elisp:
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; Erweiterungen aus site-lisp laden
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 #+END_SRC
@@ -127,12 +127,12 @@ Next time, simply reload changes with =C-c i=
 #+END_SRC
 ** Color theme
 *** Extend load-path with theme-path
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; load themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 #+END_SRC
 *** load Zenburn
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; load Zenburn theme
 (load-theme 'zenburn t)
 #+END_SRC
@@ -197,7 +197,7 @@ Conventions]]
 (setq backup-by-copying t)
 #+END_SRC
 ** BUFFER-MOVE
-   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   #+BEGIN_SRC emacs-lisp :tangle no
      ;; Buffer-Move shortcuts
      (global-set-key (kbd "<C-M-up>")     'buf-move-up)
      (global-set-key (kbd "<C-M-down>")   'buf-move-down)
@@ -361,6 +361,7 @@ don't want is there, but I haven't had any such problems yet.
 ;; ### ORG-MODE ###
 ;;  #############
 #+END_SRC
+
 ** Default Directory
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; Set to the location of your Org files on your local system
@@ -400,7 +401,7 @@ don't want is there, but I haven't had any such problems yet.
 (add-hook 'org-agenda-mode-hook '(lambda () (hl-line-mode 1 )))
 #+END_SRC
 *** Shortcuts
-**** open agendda
+**** open agenda
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; org-agenda shortcut
 (define-key global-map "\C-ca" 'org-agenda)
@@ -461,6 +462,7 @@ don't want is there, but I haven't had any such problems yet.
 ** Process logging
 Do you want to capture time stamps and/or notes when TODO state
 changes, in particular when a task is DONE?
+
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; timestamps einfügen wenn TODO -> DONE
 (setq org-log-done t)
@@ -476,6 +478,7 @@ changes, in particular when a task is DONE?
 *** Extra-Ordner
     Übernommen von:
     http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
+
 #+BEGIN_SRC emacs-lisp :tangle no
   ;; org-html-Exporte in einen extra-Ordner schieben 
   ;; --> in den Pubilc-Teil der Dropbox mounten
@@ -517,6 +520,7 @@ changes, in particular when a task is DONE?
 
 ** Navigating through org-mode:
 Additional shortcuts for navigating through org-mode documents:
+
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
   ;; Additional shortcuts for navigating through org-mode documents
   (global-set-key (kbd "C-c <up>") 'outline-up-heading)
@@ -526,6 +530,7 @@ Additional shortcuts for navigating through org-mode documents:
 
 ** LaTeX formula image program
    Nur eines von beiden aktivieren.
+
 *** dvipng
 #+BEGIN_SRC emacs-lisp  :tangle no
   ;; dvipng für LaTeX formula export
@@ -570,10 +575,10 @@ Additional shortcuts for navigating through org-mode documents:
 #+END_SRC
 
 ** Loading the package
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no 
 ;;For Auctex < 11.82 exchange ";;" in the following 2 lines
 ;;(require ’tex-site)
-;(load "auctex.el" nil t t)
+(load "auctex.el" nil t t)
 #+END_SRC
 
 ** Automatic parsing of TeX files
@@ -591,7 +596,7 @@ Additional shortcuts for navigating through org-mode documents:
 
 ** Filling
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-;; yZeilenumbruch
+;; Zeilenumbruch
 (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
 #+END_SRC
 
@@ -679,9 +684,9 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 #+END_SRC
 
 ** preview-latex
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; Nur benutzen falls Auctex > 11.81 mit preview-latex:
-;(load "preview-latex.el" nil t t)
+(load "preview-latex.el" nil t t)
 #+END_SRC
 
 ** Multifile-Dokumente
@@ -737,8 +742,6 @@ the current directory in Python's search path."
 
 
 
-
-
 ** gnuplot
    "==> To add the gnuplot mode in Emacs, add the content of
    /usr/share/emacs/site-lisp/dotemacs to your ~/.emacs file."
@@ -767,7 +770,6 @@ the current directory in Python's search path."
 
    #+END_SRC
 
-
 ** PlantUML
    [[http://plantuml.sourceforge.net/download.html][plantuml.jar]]
 *** auf plantuml.jar zeigen
@@ -776,7 +778,6 @@ the current directory in Python's search path."
   (setq org-plantuml-jar-path
         (expand-file-name "~/build/plantuml/plantuml.7995.jar"))
 #+END_SRC
-
 
 ** ditaa
    [[http://ditaa.sourceforge.net/#download][ditaa.jar]]
@@ -787,7 +788,6 @@ the current directory in Python's search path."
         (expand-file-name "~/build/ditaa/ditaa0_9.jar"))
 #+END_SRC
 
-
 ** Lua-Mode
 *** Lua-Mode aktivieren
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -796,14 +796,12 @@ the current directory in Python's search path."
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 #+END_SRC
 
-
 ** MoinMoin-Mode
 *** MoinMoin-Mode aktivieren
 #+BEGIN_SRC emacs-lisp :tangle no
 ;; MoinMoin-Mode aktivieren
 (require 'moinmoin-mode)
 #+END_SRC
-
 
 ** Chrome-Extension "Edit with Emacs"
 *** edit-server aktivieren
@@ -823,7 +821,7 @@ the current directory in Python's search path."
 #+END_SRC
 
 ** Zentrale ORG-Datei
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; meine zentrale ORG-Datei
 (find-file "~/org/life.org")
 #+END_SRC
