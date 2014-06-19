@@ -1,7 +1,7 @@
 #+TITLE: My .bash_aliases file for Ubuntu
 
 ** Console Prompt
-   #+BEGIN_SRC sh :tangle ~/.bash_aliases
+   #+BEGIN_SRC sh :tangle no
      PS1='[\u@\h \W]\$ '
    #+END_SRC
 
