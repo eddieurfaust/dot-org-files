@@ -1,0 +1,61 @@
+#+TITLE: My .bash_aliases file for Ubuntu
+
+** Console Prompt
+   #+BEGIN_SRC sh :tangle ~/.bash_aliases
+     PS1='[\u@\h \W]\$ '
+   #+END_SRC
+
+** =emacs -nw= + zenburn
+   #+BEGIN_SRC sh :tangle ~/.bash_aliases
+     export TERM=xterm-256color
+   #+END_SRC
+** aliases
+*** personalized =ls= commands
+   #+BEGIN_SRC sh :tangle ~/.bash_aliases
+     alias lsd='clear; ls -al'
+   #+END_SRC
+** Standard EDITOR
+  #+BEGIN_SRC sh :tangle ~/.bash_aliases
+    EDITOR=zile; export EDITOR
+  #+END_SRC
+** customize PATH
+*** =~/bin=-directory
+   #+BEGIN_SRC sh :tangle ~/.bash_aliases
+     PATH='/home/SETSETSET/bin/':$PATH; export PATH
+   #+END_SRC
+*** COPE-Package
+    cope-git(colorful wrapper for terminal programs)
+   #+BEGIN_SRC sh :tangle no
+     PATH=$(cope_path):$PATH; export PATH
+   #+END_SRC
+** set background picture
+   #+BEGIN_SRC sh :tangle no
+     nitrogen --restore &
+   #+END_SRC
+** f.lux
+   Destination ist hier Hannover.
+   #+BEGIN_SRC sh :tangle no
+     xflux -l 52.3 -g 9.7; clear
+   #+END_SRC
+** autocomplete in der shell
+   #+BEGIN_SRC sh :tangle no
+     complete -cf sudo
+     complete -cf man
+     complete -cf netctl
+   #+END_SRC
+** colored output for =ls=
+   #+BEGIN_SRC sh :tangle no
+     eval $(dircolors -b)
+   #+END_SRC
+** colored output for =less=
+   broken (orphan) symlinks will start showing in a red hue
+   #+BEGIN_SRC sh :tangle no
+     export LESS=-R
+     export LESS_TERMCAP_me=$(printf '\e[0m')
+     export LESS_TERMCAP_se=$(printf '\e[0m')
+     export LESS_TERMCAP_ue=$(printf '\e[0m')
+     export LESS_TERMCAP_mb=$(printf '\e[1;32m')
+     export LESS_TERMCAP_md=$(printf '\e[1;34m')
+     export LESS_TERMCAP_us=$(printf '\e[1;32m')
+     export LESS_TERMCAP_so=$(printf '\e[1;44;1m')
+   #+END_SRC
