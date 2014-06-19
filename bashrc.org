@@ -15,7 +15,10 @@
      PS1='[\u@\h \W]\$ '
    #+END_SRC
 
-
+** =emacs -nw= + zenburn
+   #+BEGIN_SRC sh :tangle ~/.bashrc
+     export TERM=xterm-256color
+   #+END_SRC
 ** aliases
 *** colored =ls=
    #+BEGIN_SRC sh :tangle ~/.bashrc
