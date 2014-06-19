@@ -8,9 +8,9 @@ Next time, simply reload changes with =C-c i=
 * Loading essentials:
 
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-;;  #######################
-;; ### loading ssentials ###
-;;  #######################
+;;  ########################
+;; ### loading essentials ###
+;;  ########################
 #+END_SRC
 
 ** Load common Lisp for Emacs
