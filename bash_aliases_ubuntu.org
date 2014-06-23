@@ -21,7 +21,7 @@
 ** customize PATH
 *** =~/bin=-directory
    #+BEGIN_SRC sh :tangle ~/.bash_aliases
-     PATH='/home/SETSETSET/bin/':$PATH; export PATH
+     PATH='/home/saul/bin/':$PATH; export PATH
    #+END_SRC
 *** COPE-Package
     cope-git(colorful wrapper for terminal programs)
