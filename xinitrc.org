@@ -70,10 +70,13 @@
     setxkbmap -layout de,dvorak -option ctrl:nocaps -option grp:rctrl_rshift_toggle
     #+end_src    
 *** de/de(NEO2)
-    #+BEGIN_SRC sh :tangle  ~/.xinitrc
+    #+BEGIN_SRC sh :tangle no
     setxkbmap -layout de,de -variant basic,neo -option grp:rctrl_rshift_toggle
     #+END_SRC
-
+*** de(NEO2)
+    #+BEGIN_SRC sh :tangle  ~/.xinitrc
+    setxkbmap de neo
+    #+END_SRC
 ** Deactivate *BEEEEEP*
    Schaltet den nervigen PC-Piep-Ton ab(nur innerhalb von X)
    #+BEGIN_SRC sh :tangle ~/.xinitrc
