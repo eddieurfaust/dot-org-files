@@ -1,0 +1,843 @@
+*USAGE*
+[[http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php][QUELLE]]
+Do =M-x org-babel-load-file= and provide this file (=~/.emacs.d/init.org=). This
+should evaluate every piece of emacs-lisp code available here.
+
+Next time, simply reload changes with =C-c i=
+
+* Loading essentials:
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;;  ########################
+;; ### loading essentials ###
+;;  ########################
+#+END_SRC
+
+** Load common Lisp for Emacs
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; mandatory for tabbar to work 
+(require 'cl)
+#+END_SRC
+
+** VERDAMMTE System-Locale setzen - Englisch -Punkt-
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; System-Loacale
+(setq system-time-locale "C")
+#+END_SRC
+
+
+* Loading files:
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;;  ##################
+;; ### loading files ###
+;;  ##################
+#+END_SRC
+
+** Adding .el files stored in folder elisp:
+#+BEGIN_SRC emacs-lisp :tangle no
+;; Erweiterungen aus site-lisp laden
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
+#+END_SRC
+
+
+* Emacs aesthetics:
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;;  #####################
+;; ### Emacs aesthetics ###
+;;  #####################
+#+END_SRC
+
+** REMOVE SPLASH SCREEN
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; remove splash-screen
+(setq inhibit-splash-screen t)
+#+END_SRC
+
+** Regarding Fonts
+*** Standard Font
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; set font for all windows
+;(set-frame-font "DejaVu Sans Mono-11" nil t)
+(set-frame-font "Inconsolata-13" nil t)
+#+END_SRC
+*** Font Size
+#+BEGIN_SRC emacs-lisp :tangle no
+;; Font size
+(set-default-font "9x15")
+#+END_SRC
+
+** Zeilennummern anzeigen
+#+BEGIN_SRC emacs-lisp :tangle no
+;; Zeilennummern anzeigen
+(global-linum-mode 1)
+#+END_SRC
+
+** REMOVE unnecessary window-decorations
+*** disable menu bar
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; window-decoration - Menubar
+(menu-bar-mode -1)
+#+END_SRC
+
+*** disable scrollbar
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; window-decoration - Scrollbar
+(toggle-scroll-bar -1) 
+#+END_SRC
+
+*** disable toolbar
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; window-decoration - Toolbar
+(tool-bar-mode -1)
+#+END_SRC
+** Status-bar customization
+*** Zeilennummern anzeigen
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; status-bar - Zeilennummern
+(setq line-number-mode t)
+#+END_SRC
+
+*** Spaltennummern anzeigen
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; status-bar - Spaltennummern
+(setq column-number-mode t)
+#+END_SRC
+
+*** Uhrzeit anzeigen - [24h]
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; status-bar - Uhrzeit aktivieren
+(display-time-mode 1)
+
+;; status-bar - Uhrzeit im 24h Format
+(setq display-time-24hr-format t)
+#+END_SRC
+
+*** Dateigröße/Curser-Fortschritt anzeigen
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; status-bar - Dateigrößen-Indikator
+(setq size-indication-mode t)
+#+END_SRC
+** Was ist das hier? - SEE "WRITING GNU EMACS EXTENSIONS"
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Was ist das hier? (aus Writing GNU emacs extensions??)
+(setq scroll-conservatively 10000)
+(setq auto-window-vscroll nil)
+#+END_SRC
+** Color theme
+*** Extend load-path with theme-path
+#+BEGIN_SRC emacs-lisp :tangle no
+;; load themes
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+#+END_SRC
+*** load Zenburn standard - DOESN'T WORK
+#+BEGIN_SRC emacs-lisp :tangle no
+;; load Zenburn theme
+(load-theme 'zenburn t)
+#+END_SRC
+*** load Zenburn - WORKAROUND
+    [[http://stackoverflow.com/questions/11127109/emacs-24-package-system-initialization-problems/11140619#11140619][link]]
+    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+      (defun zenburn-init ()
+        (load-theme 'zenburn)
+        )
+      (add-hook 'after-init-hook 'zenburn-init)
+    #+END_SRC
+*** Solarized
+    #+BEGIN_SRC emacs-lisp :tangle no
+      ;; load Solarized theme
+      ;(load-theme 'solarized-light t)
+      (load-theme 'solarized-dark t)
+    #+END_SRC
+** Parenthesis
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Klammer-Hilfs-Modus aktivieren
+(show-paren-mode t)
+
+;; *optische* Klammer-Hilfe aktivieren
+(setq show-paren-style 'expression)
+#+END_SRC
+
+
+* Personal ease of use
+Schöner Artikel zum Thema [[http://ergoemacs.org/emacs/emacs_make_modern.html][How to Set Emacs's User Interface to Modern
+Conventions]]
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;;  #########################
+;; ### Personal ease of use ###
+;;  #########################
+#+END_SRC
+
+** Enable ido-mode  # C-f für die NORMALE AUSWAHLMETHODE
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Enable ido-mode global and with flex matching
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+#+END_SRC
+
+** auto-complete 1.3.1
+#+BEGIN_SRC emacs-lisp :tangle no
+;; veraltetes auto-complete
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete/build")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/auto-complete/build/ac-dict")
+(ac-config-default)
+#+END_SRC
+
+** HIPPIE-EXPAND
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Hippie-expand auf ( Meta - SPC ) legen
+(global-set-key "\M- " 'hippie-expand)
+#+END_SRC
+
+** Backsup-file handling
+*** pipe *~ BACKUP-DATEIEN to _one_ folder
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; pipe the backup files in a special folder
+(setq backup-directory-alist `(("." . "~/.emacs_saves")))
+#+END_SRC
+*** Die BACKUPS dann besser gleich KOPIEREN
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; we can rather copy them then ...
+(setq backup-by-copying t)
+#+END_SRC
+** BUFFER-MOVE
+   #+BEGIN_SRC emacs-lisp :tangle no
+     ;; Buffer-Move shortcuts
+     (global-set-key (kbd "<C-M-up>")     'buf-move-up)
+     (global-set-key (kbd "<C-M-down>")   'buf-move-down)
+     (global-set-key (kbd "<C-M-left>")   'buf-move-left)
+     (global-set-key (kbd "<C-M-right>")  'buf-move-right)
+   #+END_SRC
+
+** PACKAGE MANAGER
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; activate package-maganer and define sources
+  (when (>= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+    (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+    (package-initialize) )
+#+END_SRC
+
+** Fullscreen-mode
+   DEFINE C-M-RET to go into fullscreen mode and C-M-RET to leave it.
+*** Makro
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; mein eigener toggle-fullscreen approach ...
+(defun toggle-fullscreen ()
+  (interactive)
+  (set-frame-parameter nil 'fullscreen (if (frame-parameter nil
+                                           'fullscreen) nil
+                                           'fullboth)))
+#+END_SRC
+*** passender Shortcut
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; ... und der passende Shortcut
+(global-set-key [(control meta return)] 'toggle-fullscreen)
+#+END_SRC
+** UNDO the region-word-wrap thingy (M-q)
+*** Code
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; (M-q) rückgängig machen
+  (defun unfill-region ()
+    "UNDO the region-word-wrap thingy (M-q)"
+    (interactive)
+    (let ((fill-column (point-max)))
+      (fill-paragraph nil)))
+#+END_SRC
+
+*** Passender shortcut
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; passenden Shortcut setzen
+(global-set-key "\C-\M-q" 'unfill-region)
+#+END_SRC
+** Opening links to .pdf in evince
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; evince um *.PDF Dateien zu öffnen
+(add-hook 'org-mode-hook
+      '(lambda ()
+         (delete '("\\.pdf\\'" . default) org-file-apps)
+         (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))))
+(setq TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "Evince") (output-html "xdg-open"))))
+#+END_SRC
+
+** Asking for confirmation concisely
+Link: http://org.ryuslash.org/dotfiles/emacs/init.html#sec-7-1 Being
+asked to type in yes explicitly all the time gets very tedious. I
+understand that it is safer since y is much easier to type in
+accidentally than yes and so the potential to say yes to things you
+don't want is there, but I haven't had any such problems yet.
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; BAD: "yes or no" - GOOD: "y or n"
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+** Global shortcuts
+*** GNU-EMACS EXTENSIONS
+**** Some Keybindings
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; global shortcuts from "GNU-emacs extensions"
+(global-set-key "\M-?" 'help-command)
+(global-set-key "\C-h" 'delete-backward-char)
+(global-set-key "\M-#" 'query-replace-regexp)
+(global-set-key "\C-x\C-n" 'other-window)
+(global-set-key "\C-x\C-p" 'other-window-backward)
+#+END_SRC
+
+**** Simple Example to change Windows
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; einfache Funktion aus "GNU-emacs extensions"
+(defun other-window-backward (&optional n)
+  "Select Nth previous window."
+  (interactive "P")
+  (other-window (- (prefix-numeric-value n))))
+#+END_SRC
+
+*** Own personal additions
+**** Reload buffer
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; [F10] um den buffer neu einzulesen
+(global-set-key [f10] '(lambda () (interactive) (revert-buffer nil t nil)))
+#+END_SRC
+
+**** Horizontal scrolling
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; enable horizontal scrolling
+(put 'scroll-left 'disabled nil)
+#+END_SRC
+
+**** =M-x= zusätzlich setzen
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; =M-x= Alternative
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+#+END_SRC
+
+**** BACKWARD-KILL-WORD
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; backward-kill shortcut
+(global-set-key "\C-w"     'backward-kill-word)
+#+END_SRC
+
+**** KILL-REGION
+     liegt ursprünglich auf =C-w= und ist zu wertvoll um darauf zu
+     verzichten
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; kill-region shortcut
+(global-set-key "\C-x\C-k" 'kill-region)
+#+END_SRC
+
+**** GOTO-LINE
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; goto-line shortcut
+(global-set-key "\M-g" 'goto-line)
+#+END_SRC
+**** Fix view TODO tree
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; org-show-todo-tree shortcut
+(global-set-key (kbd "C-c v") 'org-show-todo-tree)
+#+END_SRC
+**** JOIN-LINES
+     [[http://whattheemacsd.com/key-bindings.el-03.html][QUELLE]] - Here's one keybinding I could not live without.
+     #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+       (global-set-key (kbd "M-j")
+                       (lambda ()
+                         (interactive)
+                         (join-line -1)))
+     #+END_SRC
+**** MAGIT-STATUS
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; magit-status shortcut
+(global-set-key (kbd "C-x g") 'magit-status)
+#+END_SRC
+**** Load emacs initialization file
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; load emacs initialization file
+(global-set-key (kbd "C-c i") 
+(lambda() (interactive)(org-babel-load-file "~/.dot-org-files/init.org")))
+#+END_SRC
+
+
+* ORG-MODE
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;;  #############
+;; ### ORG-MODE ###
+;;  #############
+#+END_SRC
+
+** Default Directory
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Set to the location of your Org files on your local system
+(setq org-directory "~/org")
+#+END_SRC
+** File association
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; file associations for org-mode
+(add-to-list 'auto-mode-alist '("\\.\\(org\\|jrnl\\)$" . org-mode))
+#+END_SRC
+
+** Hide leading starts
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Nur einen Stern bei Headlines anzeigen, die vorderen ausblenden:
+(setq org-hide-leading-stars 'hidestars)
+#+END_SRC
+
+** org-id
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     ;; org-id laden
+     (require 'org-id)
+
+     ;; passender shortcut - org-mode intern
+     (add-hook 'org-mode-hook
+               (lambda ()
+                 (local-set-key "\C-ck" 'org-id-get-create)))
+   #+END_SRC
+** Agenda
+*** Überwachte agenda-files
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; ZU ÜBERWACHENDE DATEIEN für den org-mode
+(setq org-agenda-files (list "~/org/work.org"))
+#+END_SRC
+*** highlight current line
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Aktuelle Zeile in der Agenda hervorheben
+(add-hook 'org-agenda-mode-hook '(lambda () (hl-line-mode 1 )))
+#+END_SRC
+*** Shortcuts
+**** open agenda
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; org-agenda shortcut
+(define-key global-map "\C-ca" 'org-agenda)
+#+END_SRC
+
+** Custom date format
+   date - http://unixhelp.ed.ac.uk/CGI/man-cgi?date
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; nutzt date-commands
+  (setq org-agenda-format-date "%Y-%m-%d - %A ")
+#+END_SRC
+
+** CAPTURE TEMPLATES
+*** Code
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; Meine Capture-Templates
+  (setq org-capture-templates '(
+          ("t" "Todo" entry (file+headline "~/org/work.org" "Inbox")
+           "* TODO %?\n  %i\n\n")
+          ("k" "Knowledge" entry (file+headline "~/org/life.org" "Knowledge")
+           "* %?\n %i\n\n")
+           (function (color-theme-buffer-local
+           'color-theme-retro-orange (current-buffer))))))
+#+END_SRC
+*** passender Shortcut
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; passender shortcut
+(define-key global-map "\C-cc" 'org-capture)
+#+END_SRC
+
+** Custom timestamp
+*** Code
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; mein persönlicher timestamp
+  (defun org-my-custom-timestamp ()
+    "Print a custom timestamp: [HH:MM]."
+    (interactive)
+    (insert (format-time-string "[%H:%M]")))
+#+END_SRC
+*** passender Shortcut
+**** Org-Mode only
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;; passender shortcut - org-mode intern
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (local-set-key "\C-cö" 'org-my-custom-timestamp)))
+#+END_SRC
+**** global
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; passender shortcut - org-mode (local)
+(define-key global-map "\C-cö" 'org-my-custom-timestamp)
+#+END_SRC
+
+** Process logging
+Do you want to capture time stamps and/or notes when TODO state
+changes, in particular when a task is DONE?
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; timestamps einfügen wenn TODO -> DONE
+(setq org-log-done t)
+#+END_SRC
+
+** ORG-STORE-LINK
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; org-store-link shortcut
+(define-key global-map "\C-cl" 'org-store-link)
+#+END_SRC
+
+** Export-Options
+*** Extra-Ordner
+    Übernommen von:
+    http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;; org-html-Exporte in einen extra-Ordner schieben 
+  ;; --> in den Pubilc-Teil der Dropbox mounten
+  (require 'org-publish)
+  (setq org-publish-project-alist
+        '(("html"
+           :base-directory "~/org/"
+           :base-extension "org"
+           :publishing-directory "~/org/html"
+           :publishing-function org-publish-org-to-html)
+          ("all" :components ("html"))))
+#+END_SRC
+
+*** org-article
+    [[http://orgmode.org/worg/org-contrib/babel/examples/article-class.html#latex-classfile][Quelle]] - "boooo!"
+*** condensed exporter-settings
+    for exporting agenda views
+
+    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+      ;; set some exporter-settings
+      (setq org-agenda-exporter-settings
+            '((ps-number-of-columns 1)
+              (ps-landscape-mode nil)
+              (ps-print-color-p 'black-white)
+              (org-agenda-add-entry-text-maxlines 5)
+              (htmlize-output-type 'css)))
+
+    #+END_SRC
+
+
+
+** OrgMobile
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Set to the name of the file where new notes will be stored
+(setq org-mobile-inbox-for-pull "~/org/from-mobile.org")
+;; Set to <your Dropbox root directory>/MobileOrg.
+(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+#+END_SRC
+
+** Navigating through org-mode:
+Additional shortcuts for navigating through org-mode documents:
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; Additional shortcuts for navigating through org-mode documents
+  (global-set-key (kbd "C-c <up>") 'outline-up-heading)
+  (global-set-key (kbd "C-c <left>") 'outline-previous-visible-heading)
+  (global-set-key (kbd "C-c <right>") 'outline-next-visible-heading)
+#+END_SRC
+
+** LaTeX formula image program
+   Nur eines von beiden aktivieren.
+
+*** dvipng
+#+BEGIN_SRC emacs-lisp  :tangle no
+  ;; dvipng für LaTeX formula export
+  (setq org-latex-create-formula-image-program 'dvipng)
+#+END_SRC
+*** Imagemagick
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; imagemagick für LaTeX formula export
+  (setq org-latex-create-formula-image-program 'imagemagick)
+#+END_SRC
+
+** initial babel supported languages
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; initial babel language support
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(
+     (sh . t)
+     (org . t)
+     (python . t)
+     (C . t)
+     (gnuplot . t)
+     (latex . t)
+     (R . t)
+     (calc . t)
+     (emacs-lisp . t)
+     (ruby . t)
+     (octave . t)
+     (matlab . t)
+     (perl . t)
+     (plantuml . t)
+     (ditaa . t)
+     ))
+#+END_SRC
+
+
+* AUCTEX
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;;  ###########
+;; ### AUCTEX ###
+;;  ###########
+#+END_SRC
+
+** Loading the package
+#+BEGIN_SRC emacs-lisp :tangle no 
+;;For Auctex < 11.82 exchange ";;" in the following 2 lines
+;;(require ’tex-site)
+(load "auctex.el" nil t t)
+#+END_SRC
+
+** Automatic parsing of TeX files
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Automatic parsing of TeX files
+(setq TeX-parse-self t) ; Enable parse on load.
+(setq TeX-auto-save t) ; Enable parse on save.
+#+END_SRC
+
+** PDF-Mode
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; .pdf statt .dvi per default:
+(setq TeX-PDF-mode t)
+#+END_SRC
+
+** Filling
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Zeilenumbruch
+(add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
+#+END_SRC
+
+** auto-fill-mode
+[[http://www.emacswiki.org/emacs/AutoFillMode][EmacsWiki: Auto Fill Mode]]
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; shortcut to quickly toggle auto fill mode
+(global-set-key (kbd "C-c q") 'auto-fill-mode)
+#+END_SRC
+** Syntax highlight
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Syntax Higlight
+(add-hook 'LaTeX-mode-hook 'turn-on-font-lock)
+#+END_SRC
+
+** Math-Mode
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Mathe Modus
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+#+END_SRC
+
+** Reftex
+*** Reftex laden
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Reftex einflechten und laden
+(setq reftex-plug-into-AUCTeX t)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+#+END_SRC
+
+*** OWN bib-file
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; RefTeX soll meine Diplomarbeits-Bibliothek finden
+(setq reftex-default-bibliography '("/home/urfaust/Dropbox/0_uni/00_Dipl/schriftlicher_Teil/Diplomarbeit.bib"))
+#+END_SRC
+
+** sentence-end
+[[http://www.gnu.org/software/emacs/manual/html_node/emacs/Sentences.html][Quelle]]
+"If you want to use just one space between sentences, you can set the
+variable sentence-end-double-space to nil to make the sentence
+commands stop for single spaces. However, this has a drawback: there
+is no way to distinguish between periods that end sentences and those
+that indicate abbreviations. For convenient and reliable editing, we
+therefore recommend you follow the two-space convention. The variable
+sentence-end-double-space also affects filling (see [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Fill-Commands.html#Fill-Commands][Fill Commands]])."
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Definition Satzende
+(setq sentence-end-double-space nil)
+#+END_SRC
+
+** Rechtschreibung
+*** Flyspell aktivieren
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;;enable Rechtschreib Korrektur:
+  (add-hook ’LaTeX-mode-hook ’flyspell-mode)
+#+END_SRC
+*** dictionary-changer
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; dictionary changer
+  (defun fd-switch-dictionary()
+    (interactive)
+    (let* ((dic ispell-current-dictionary)
+           (change (if (string= dic "deutsch8") "english" "deutsch8")))
+      (ispell-change-dictionary change)
+      (message "Dictionary switched from %s to %s" dic change)
+      ))
+
+  ;; passender shortcut
+  (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
+#+END_SRC
+
+*** Aspell statt ispell nutzen
+    "GNU Aspell, usually called just Aspell, is a free software spell
+    checker designed to replace Ispell."
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; [ASPELL] Zeile auskommentieren, falls nicht installiert:
+(setq-default ispell-program-name "aspell")
+#+END_SRC
+
+*** Deutsche Rechtschreibung
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Deutsche Rechtschreibung falls \usepackage{ngerman}
+;; oder german benutzt wird
+(add-hook 'TeX-language-de-hook
+	  (function (lambda () (ispell-change-dictionary "german8"))))
+#+END_SRC
+
+** preview-latex
+#+BEGIN_SRC emacs-lisp :tangle no
+;; Nur benutzen falls Auctex > 11.81 mit preview-latex:
+(load "preview-latex.el" nil t t)
+#+END_SRC
+
+** Multifile-Dokumente
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Query for master file.
+(setq-default TeX-master nil)
+#+END_SRC
+
+** GNU Make nutzen
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; [AUCTEX] ADD Make TO THE TEX COMMAND LIST. 
+(eval-after-load "tex" 
+  '(add-to-list 'TeX-command-list '("Make" "make" TeX-run-command nil t))) 
+
+#+END_SRC
+
+** OWN PERSONAL stuff
+*** Umlaute und ß batch ersetzen
+#+BEGIN_SRC emacs-lisp :tangle no
+;; EIGENES DEFINIERTES MAKRO ==> Batch-Ersetzen aller Umlaute und ß in einem LaTeX-Dokument
+(fset 'umlauts-substitution-auctex
+      (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([134217788 134217765 228 return 34 97 return 33 134217788 134217765 246 return 34 111 return 33 134217788 134217765 252 return 34 117 return 33 134217788 134217765 223 return 34 115 return 33 134217788] 0 "%d")) arg)))
+#+END_SRC
+
+
+* Less important Modes
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;;  #########################
+;; ### Less important Modes ###
+;;  #########################
+#+END_SRC
+
+** Python
+*** PYTHON-MODE-FIX -- WOKRS! *YAY*
+   [OUTDATED?]
+#+BEGIN_SRC emacs-lisp :tangle no
+;; Python-Mode-Fix
+(defun python-reinstate-current-directory ()
+  "When running Python, add the current directory ('') to the head of sys.path.
+For reasons unexplained, run-python passes arguments to the
+interpreter that explicitly remove '' from sys.path. This means
+that, for example, using `python-send-buffer' in a buffer
+visiting a module's code will fail to find other modules in the
+same directory.
+
+Adding this function to `inferior-python-mode-hook' reinstates
+the current directory in Python's search path."
+  (python-send-string "sys.path[0:0] = ['']"))
+
+(add-hook 'inferior-python-mode-hook 'python-reinstate-current-directory)
+#+END_SRC
+
+
+
+** gnuplot
+   "==> To add the gnuplot mode in Emacs, add the content of
+   /usr/share/emacs/site-lisp/dotemacs to your ~/.emacs file."
+   #+BEGIN_SRC emacs-lisp :tangle no
+     ;;--------------------------------------------------------------------
+     ;; Lines enabling gnuplot-mode
+
+     ;; move the files gnuplot.el to someplace in your lisp load-path or
+     ;; use a line like
+     ;;  (setq load-path (append (list "/path/to/gnuplot") load-path))
+
+     ;; these lines enable the use of gnuplot mode
+       (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
+       (autoload 'gnuplot-make-buffer "gnuplot" "open a buffer in gnuplot mode" t)
+
+     ;; this line automatically causes all files with the .gp extension to
+     ;; be loaded into gnuplot mode
+       (setq auto-mode-alist (append '(("\\.gp$" . gnuplot-mode)) auto-mode-alist))
+
+     ;; This line binds the function-9 key so that it opens a buffer into
+     ;; gnuplot mode
+      ; (global-set-key [(f9)] 'gnuplot-make-buffer)
+
+     ;; end of line for gnuplot-mode
+     ;;--------------------------------------------------------------------
+
+   #+END_SRC
+
+** PlantUML
+   [[http://plantuml.sourceforge.net/download.html][plantuml.jar]]
+*** auf plantuml.jar zeigen
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; auf plantuml.jar zeigen
+  (setq org-plantuml-jar-path
+        (expand-file-name "~/build/plantuml/plantuml.7995.jar"))
+#+END_SRC
+
+** ditaa
+   [[http://ditaa.sourceforge.net/#download][ditaa.jar]]
+*** auf ditaa.jar zeigen
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; auf ditaa.jar zeigen
+  (setq org-ditaa-jar-path
+        (expand-file-name "~/build/ditaa/ditaa0_9.jar"))
+#+END_SRC
+
+** Lua-Mode
+*** Lua-Mode aktivieren
+#+BEGIN_SRC emacs-lisp :tangle no
+;; Lua-Mode aktivieren
+(setq auto-mode-alist (cons '("\.lua$" . lua-mode) auto-mode-alist))
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+#+END_SRC
+
+** MoinMoin-Mode
+*** MoinMoin-Mode aktivieren
+#+BEGIN_SRC emacs-lisp :tangle no
+;; MoinMoin-Mode aktivieren
+(require 'moinmoin-mode)
+#+END_SRC
+
+** Chrome-Extension "Edit with Emacs"
+*** edit-server aktivieren
+#+BEGIN_SRC emacs-lisp :tangle no
+;; Chrome-Extension "Edit with Emacs" aktivieren
+(require 'edit-server)
+(edit-server-start)
+#+END_SRC
+
+
+* Startup files
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;;  ##################
+;; ### Startup Files ###
+;;  ##################
+#+END_SRC
+
+** Zentrale ORG-Datei
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; meine zentrale ORG-Datei
+(find-file "~/org/work.org")
+#+END_SRC
+
+
+* TODOs
+
+** TODO Neue Funktion zum Einbinden
+   [[http://www.emacswiki.org/emacs/DescribeThingAtPoint][DescribeThingsAtPoint]]
+** DONE Kommentare
+   CLOSED: [2014-03-27 Thu 17:05]
+   Ich könnte in jedem SRC-Block noch einen Kommentar schrieben, der
+   dann (vielleicht?) mit in die =.el=-Datei geschrieben wird. Damit
+   hätte ich dann auch meine =initl.el= kommentiert.
+ 
