@@ -28,6 +28,27 @@
    #+BEGIN_SRC sh :tangle no
      PATH=$(cope_path):$PATH; export PATH
    #+END_SRC
+** start volumeicon
+   #+BEGIN_SRC sh :tangle ~/.bash_aliases
+     start_if_not_running.sh volumeicon
+   #+END_SRC
+*** executable
+    - check for existing folder/create-if-not
+    - tangle to: /home/${USER}/bin/start_if_not_running.sh
+    - make executable chmod +x …
+
+    #+BEGIN_SRC sh
+      #!/bin/bash
+
+      #check if {arg1} is running
+      if pgrep $1 >/dev/null 2>&1
+        then
+          echo "$1 is running ..."
+        else
+          echo  "starting $1 ..."
+          $1 &
+      fi
+    #+END_SRC
 ** ROS - Enviroment setup
 *** Hydro
     #+BEGIN_SRC sh :tangle no
