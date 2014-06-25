@@ -369,6 +369,8 @@ don't want is there, but I haven't had any such problems yet.
    #+END_SRC
 
 
+
+
 * ORG-MODE
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;;  #############
@@ -839,6 +841,7 @@ the current directory in Python's search path."
 ;; meine zentrale ORG-Datei
 (find-file "~/org/work.org")
 #+END_SRC
+
 
 * TODOs
 

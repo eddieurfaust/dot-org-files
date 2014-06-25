@@ -29,9 +29,14 @@
      PATH=$(cope_path):$PATH; export PATH
    #+END_SRC
 ** ROS - Enviroment setup
-   #+BEGIN_SRC sh :tangle ~/.bash_aliases
-   source /opt/ros/hydro/setup.bash
-   #+END_SRC
+*** Hydro
+    #+BEGIN_SRC sh :tangle no
+    source /opt/ros/hydro/setup.bash
+    #+END_SRC
+*** Groovy
+    #+BEGIN_SRC sh :tangle ~/.bash_aliases
+      source /opt/ros/groovy/setup.bash
+    #+END_SRC
 *** set tutorial ENV
     #+BEGIN_SRC sh :tangle ~/.bash_aliases
       source /home/saul/catkin_ws/devel/setup.bash
