@@ -62,6 +62,13 @@
     #+BEGIN_SRC sh :tangle no
       source /home/saul/catkin_ws/devel/setup.bash
     #+END_SRC
+*** set Baxter ENV
+    #+BEGIN_SRC sh :tangle ~/.bash_aliases
+      source /home/saul/baxter_ws/devel/setup.bash
+    #+END_SRC
+
+    #+RESULTS:
+
 ** set background picture
    #+BEGIN_SRC sh :tangle no
      nitrogen --restore &
