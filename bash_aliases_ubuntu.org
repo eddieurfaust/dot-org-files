@@ -28,6 +28,10 @@
    #+BEGIN_SRC sh :tangle no
      PATH=$(cope_path):$PATH; export PATH
    #+END_SRC
+** volumeicon
+   #+BEGIN_SRC sh :tangle ~/.bash_aliases
+     volumeicon &
+   #+END_SRC
 ** ROS - Enviroment setup
 *** Hydro
     #+BEGIN_SRC sh :tangle no
