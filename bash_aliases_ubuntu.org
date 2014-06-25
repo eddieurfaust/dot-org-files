@@ -38,7 +38,7 @@
       source /opt/ros/groovy/setup.bash
     #+END_SRC
 *** set tutorial ENV
-    #+BEGIN_SRC sh :tangle ~/.bash_aliases
+    #+BEGIN_SRC sh :tangle no
       source /home/saul/catkin_ws/devel/setup.bash
     #+END_SRC
 ** set background picture
