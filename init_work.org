@@ -441,7 +441,7 @@ don't want is there, but I haven't had any such problems yet.
           ("k" "Knowledge" entry (file+headline "~/org/life.org" "Knowledge")
            "* %?\n %i\n\n")
            (function (color-theme-buffer-local
-           'color-theme-retro-orange (current-buffer))))))
+           'color-theme-retro-orange (current-buffer)))))
 #+END_SRC
 *** passender Shortcut
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -838,6 +838,15 @@ the current directory in Python's search path."
 ;; meine zentrale ORG-Datei
 (find-file "~/org/work.org")
 #+END_SRC
+
+
+* Work-specific
+
+** =.launch= file association
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   ;; file associations for org-mode
+   (add-to-list 'auto-mode-alist '("\\.\\(launch\\)$" . xml-mode))
+   #+END_SRC
 
 
 * TODOs
