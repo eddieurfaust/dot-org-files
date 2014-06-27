@@ -67,7 +67,7 @@
       source /home/saul/baxter_ws/devel/setup.bash
     #+END_SRC
 
-    #+RESULTS:
+
 
 ** set background picture
    #+BEGIN_SRC sh :tangle no
