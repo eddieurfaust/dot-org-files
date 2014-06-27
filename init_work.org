@@ -842,10 +842,10 @@ the current directory in Python's search path."
 
 * Work-specific
 
-** =.launch= file association
+** =.launch= & =.world= file association
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
    ;; file associations for org-mode
-   (add-to-list 'auto-mode-alist '("\\.\\(launch\\)$" . xml-mode))
+   (add-to-list 'auto-mode-alist '("\\.\\(launch\\|world\\)$" . xml-mode))
    #+END_SRC
 
 
