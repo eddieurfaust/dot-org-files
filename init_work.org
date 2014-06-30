@@ -440,7 +440,7 @@ don't want is there, but I haven't had any such problems yet.
              "* TODO %?\n  %i\n\n")
             ("k" "Knowledge" entry (file+headline "~/org/work.org" "Knowledge")
              "* %?\n %i\n\n")
-            ("m" "Mittagspause" entry (file+headline "~/org/work.org" "Mittagspause")
+            ("m" "Mittagspause" entry (file+regexp "~/org/work.org" "Mittagspause")
              "* TODO %?\n %i\n\n")
             ))
 #+END_SRC
