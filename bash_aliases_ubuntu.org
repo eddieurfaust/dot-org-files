@@ -66,8 +66,10 @@
     #+BEGIN_SRC sh :tangle ~/.bash_aliases
       source /home/saul/baxter_ws/devel/setup.bash
     #+END_SRC
-
-
+*** set LeapMotion PYTHONPATH
+    #+BEGIN_SRC sh :tangle ~/.bash_aliases
+      export PYTHONPATH=$PYTHONPATH:$HOME/tech/LeapSDK/lib:$HOME/tech/LeapSDK/lib/x64
+    #+END_SRC
 
 ** set background picture
    #+BEGIN_SRC sh :tangle no
