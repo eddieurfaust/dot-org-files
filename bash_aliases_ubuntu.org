@@ -72,7 +72,7 @@
     #+END_SRC
 
 ** set background picture
-   #+BEGIN_SRC sh :tangle no
+   #+BEGIN_SRC sh :tangle ~/.bash_aliases
      nitrogen --restore &
    #+END_SRC
 ** f.lux
