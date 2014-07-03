@@ -662,7 +662,7 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 
 ** Rechtschreibung
 *** Flyspell aktivieren
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
   ;;enable Rechtschreib Korrektur:
   (add-hook 'LaTeX-mode-hook '(flyspell-mode t))
 #+END_SRC
@@ -700,7 +700,7 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 ;; Deutsche Rechtschreibung falls \usepackage{ngerman}
 ;; oder german benutzt wird
 (add-hook 'TeX-language-de-hook
-	  (function (lambda () (ispell-change-dictionary "german8"))))
+	  (function (lambda () (ispell-change-dictionary "english"))))
 #+END_SRC
 
 ** preview-latex
