@@ -676,10 +676,15 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
       (ispell-change-dictionary change)
       (message "Dictionary switched from %s to %s" dic change)
       ))
-
-  ;; passender shortcut
-  (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
 #+END_SRC
+
+*** Flyspell shortcuts
+    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+      ;; Flyspell shortcuts
+      (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
+      (global-set-key (kbd "C-S-<f8>") 'flyspell-mode)
+      (global-set-key (kbd "C-<f8>") 'flyspell-buffer)
+    #+END_SRC
 
 *** Aspell statt ispell nutzen
     "GNU Aspell, usually called just Aspell, is a free software spell
