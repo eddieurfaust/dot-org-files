@@ -662,9 +662,9 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 
 ** Rechtschreibung
 *** Flyspell aktivieren
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
   ;;enable Rechtschreib Korrektur:
-  (add-hook ’LaTeX-mode-hook ’flyspell-mode)
+  (add-hook 'LaTeX-mode-hook '(flyspell-mode t))
 #+END_SRC
 *** dictionary-changer
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -672,7 +672,7 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
   (defun fd-switch-dictionary()
     (interactive)
     (let* ((dic ispell-current-dictionary)
-           (change (if (string= dic "deutsch8") "english" "deutsch8")))
+           (change (if (string= dic "de_DE") "english" "de_DE")))
       (ispell-change-dictionary change)
       (message "Dictionary switched from %s to %s" dic change)
       ))
@@ -688,7 +688,7 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 ;; [ASPELL] Zeile auskommentieren, falls nicht installiert:
 (setq-default ispell-program-name "aspell")
 #+END_SRC
-
+    
 *** Deutsche Rechtschreibung
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; Deutsche Rechtschreibung falls \usepackage{ngerman}
