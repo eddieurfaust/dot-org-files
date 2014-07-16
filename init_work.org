@@ -541,7 +541,13 @@ changes, in particular when a task is DONE?
        )
      (add-hook 'org-mode-hook 'org-mode-reftex-setup)
    #+END_SRC
-
+*** about this querying for a master-file …
+    …
+    #+BEGIN_QUOTE
+     Note: When first opening the org document, RefTeX will ask you to
+     give him the name of the “master” which is the .tex-file
+     corresponding to your org-file.
+    #+END_QUOTE
 ** LaTeX-RefTeX org-mode-export
    stunden ...
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
