@@ -205,7 +205,7 @@ Conventions]]
 (setq backup-by-copying t)
 #+END_SRC
 ** BUFFER-MOVE
-   #+BEGIN_SRC emacs-lisp :tangle no
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
      ;; Buffer-Move shortcuts
      (global-set-key (kbd "<C-M-up>")     'buf-move-up)
      (global-set-key (kbd "<C-M-down>")   'buf-move-down)
@@ -409,9 +409,14 @@ don't want is there, but I haven't had any such problems yet.
 ** Agenda
 *** Überwachte agenda-files
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-;; ZU ÜBERWACHENDE DATEIEN für den org-mode
-(setq org-agenda-files (list "~/org/work.org"))
+  ;; ZU ÜBERWACHENDE DATEIEN für den org-mode
+  (setq org-agenda-files (list "~/org/work.org"
+                               "~/org/weekly_appointment.org"))
 #+END_SRC
+
+#+RESULTS:
+| ~/org/work.org | ~/org/weekly_appointment.org |
+
 *** highlight current line
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; Aktuelle Zeile in der Agenda hervorheben
@@ -730,7 +735,21 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 ;; Deutsche Rechtschreibung falls \usepackage{ngerman}
 ;; oder german benutzt wird
 (add-hook 'TeX-language-de-hook
+	  (function (lambda () (ispell-change-dictionary "de_DE"))))
+#+END_SRC
+
+*** Englische Rechtschreibung
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; englische Rechtschreibung 
+(add-hook 'TeX-language-en-hook
 	  (function (lambda () (ispell-change-dictionary "english"))))
+#+END_SRC
+
+*** Quotes anpassen
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; anpassen der englischen quotes
+  (setq TeX-open-quote "``")
+  (setq TeX-close-quote "''")
 #+END_SRC
 
 ** preview-latex
