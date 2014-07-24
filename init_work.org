@@ -538,6 +538,7 @@ changes, in particular when a task is DONE?
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
      ;; RefTeX with org-mode
      (defun org-mode-reftex-setup ()
+       (setq TeX-master t)
        (load-library "reftex")
        (and (buffer-file-name)
             (file-exists-p (buffer-file-name))
