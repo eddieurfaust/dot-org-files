@@ -365,7 +365,7 @@ don't want is there, but I haven't had any such problems yet.
 ** Opening external links in chromium
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
      (setq browse-url-browser-function 'browse-url-generic
-           browse-url-generic-program "chromium-browser")
+           browse-url-generic-program "chromium")
    #+END_SRC
 
 
@@ -526,6 +526,31 @@ changes, in particular when a task is DONE?
 
 
 
+** RefTeX with org-mode 
+   [[http://blog.karssen.org/2013/08/22/using-bibtex-from-org-mode/][link]]
+   Configure RefTeX for use with org-mode. At the end of your
+   org-mode file you need to insert your style and bib file:
+   \bibliographystyle{plain}
+   \bibliography{ProbePosition}
+   See http://www.mfasold.net/blog/2009/02/using-emacs-org-mode-to-draft-papers/
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     ;; RefTeX with org-mode
+     (defun org-mode-reftex-setup ()
+       (load-library "reftex")
+       (and (buffer-file-name)
+            (file-exists-p (buffer-file-name))
+            (reftex-parse-all))
+       (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
+       )
+     (add-hook 'org-mode-hook 'org-mode-reftex-setup)
+   #+END_SRC
+
+** LaTeX-RefTeX org-mode-export
+   stunden ...
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     (setq org-latex-pdf-process (list "pdflatex %f" "biber %b" "pdflatex %f" "pdflatex %f"))
+   #+END_SRC
+
 ** OrgMobile
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; Set to the name of the file where new notes will be stored
@@ -666,7 +691,7 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 *** Flyspell aktivieren
 #+BEGIN_SRC emacs-lisp :tangle no
   ;;enable Rechtschreib Korrektur:
-  (add-hook ’LaTeX-mode-hook ’flyspell-mode)
+  (add-hook 'LaTeX-mode-hook '(flyspell-mode t))
 #+END_SRC
 *** dictionary-changer
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -674,14 +699,20 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
   (defun fd-switch-dictionary()
     (interactive)
     (let* ((dic ispell-current-dictionary)
-           (change (if (string= dic "deutsch8") "english" "deutsch8")))
+           (change (if (string= dic "de_DE") "english" "de_DE")))
       (ispell-change-dictionary change)
       (message "Dictionary switched from %s to %s" dic change)
       ))
-
-  ;; passender shortcut
-  (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
 #+END_SRC
+
+*** Flyspell shortcuts
+    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+      ;; Flyspell shortcuts
+      (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
+      (global-set-key (kbd "C-S-<f8>") 'flyspell-mode)
+      (global-set-key (kbd "C-<f8>") 'flyspell-buffer)
+      (global-set-key (kbd "M-<f8>") 'flyspell-check-previous-highlighted-word)
+    #+END_SRC
 
 *** Aspell statt ispell nutzen
     "GNU Aspell, usually called just Aspell, is a free software spell
@@ -690,13 +721,13 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 ;; [ASPELL] Zeile auskommentieren, falls nicht installiert:
 (setq-default ispell-program-name "aspell")
 #+END_SRC
-
+    
 *** Deutsche Rechtschreibung
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; Deutsche Rechtschreibung falls \usepackage{ngerman}
 ;; oder german benutzt wird
 (add-hook 'TeX-language-de-hook
-	  (function (lambda () (ispell-change-dictionary "german8"))))
+	  (function (lambda () (ispell-change-dictionary "english"))))
 #+END_SRC
 
 ** preview-latex
@@ -837,7 +868,7 @@ the current directory in Python's search path."
 #+END_SRC
 
 ** Zentrale ORG-Datei
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; meine zentrale ORG-Datei
 (find-file "~/org/work.org")
 #+END_SRC
