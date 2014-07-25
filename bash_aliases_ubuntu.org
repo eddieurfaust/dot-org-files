@@ -49,6 +49,10 @@
           $1 &
       fi
     #+END_SRC
+** start xscreensaver
+   #+BEGIN_SRC sh :tangle ~/.bash_aliases
+     start_if_not_running.sh xscreensaver
+   #+END_SRC
 ** ROS - Enviroment setup
 *** Hydro
     #+BEGIN_SRC sh :tangle no
