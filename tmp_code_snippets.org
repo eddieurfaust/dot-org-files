@@ -6,15 +6,22 @@
 #+STARTUP: entriespretty
 *** Symbole
     [[http://orgmode.org/worg/org-symbols.html][verfügbare Symbols]]
+** misc
+#+TITLE: State of the Art: Implementation of a Gesture Control for the Baxter Robot using the Leap Motion Controller
+#+DATE: today
+#+AUTHOR: Frank Saul
+#+EMAIL: frank.saul@gmail.com
 ** LaTeX Header
 *** Font
+**** libertine
+#+LATEX_HEADER: \usepackage{libertine}
 **** garamond
 ,#+LaTeX_CLASS_OPTIONS: [garamond]
 **** Arial
-#+LATEX_HEADER: \renewcommand{\rmdefault}{phv} % Arial as Font!
-*** language-specific [babel]
-#+LANGUAGE:  de
-#+LATEX_HEADER: \usepackage[ngerman]{babel}
+,#+LATEX_HEADER: \renewcommand{\rmdefault}{phv} % Arial as Font!
+*** english [babel]
+#+LANGUAGE:  en
+#+LATEX_HEADER: \usepackage[english]{babel}
 *** Links [hyperref]
 **** get rid of the red boxes drawn around links
 #+LATEX_HEADER: \usepackage{hyperref}  % 
@@ -25,30 +32,59 @@
 #+LATEX_HEADER:     linkcolor=blue,%
 #+LATEX_HEADER:     urlcolor=black
 #+LATEX_HEADER: }
-*** extra packages [graphicx]
-,#+LATEX_HEADER: \usepackage{graphicx}
+*** extra packages
+**** {graphicx}
+#+LATEX_HEADER: \usepackage{graphicx}
+**** {tikz}
+#+LATEX_HEADER: \usepackage{tikz}
+**** {todonotes}
+#+LaTeX_HEADER: \usepackage[colorinlistoftodos]{todonotes}
+***** vorher laden, falls mit optionen geladen werden soll
+      - ifthen
+      - xkeyval
+      - xcolor
+      - tikz
+      - calc
+      - graphicx
+**** {inputenc}
+Zeichencodierung UTF-8
+#+LATEX_HEADER: \usepackage[utf8]{inputenc} 
+**** {uniinput}
+#+LATEX_HEADER: \usepackage{uniinput}
+**** {siunitx}
+#+LATEX_HEADER: \usepackage{siunitx}
+**** {csquotes}
+#+LATEX_HEADER: \usepackage[babel]{csquotes}
+**** {array}
+     für erweiterte Tabelleneigenschaften
+#+LATEX_HEADER: \usepackage{array}
+**** {amsmath}
+     Um die <bmatrix> Geschichten frei zu schalten
+#+LATEX_HEADER: \usepackage{amsmath}
+**** {amssymb}
+#+LATEX_HEADER: \usepackage{amssymb}
 
+**** {rotating}
+     Paket um Textteile drehen zu können
+#+LATEX_HEADER: \usepackage{rotating}
+**** {ulem}
+     allows the use of \uline{} to underline text
+#+LATEX_HEADER: \usepackage[normalem]{ulem}
+**** {natbib}
+     Zitate werden nummeriert ausgegeben und bei mehrfachen Zitaten
+     werden die vorkommenden Nummern sortiert und ggf. in einer
+     verkürzten Datstellung gesetzt
+#+LATEX_HEADER: \usepackage[numbers,sort&compress]{natbib}
+**** {subfigure}
+#+LATEX_HEADER: \usepackage{subfigure}
 *** Seitenränder anpassen [geometry]
-#+LATEX_HEADER: \usepackage{geometry}
-#+LATEX_HEADER: \geometry{left=1.2in,right=1.2in,top=1.2in,bottom=1.2in}
-
-*** [todonotes]
-#+LaTeX_HEADER: \usepackage{todonotes}
-**** vorher laden, falls mit optionen geladen werden soll
-     - ifthen
-     - xkeyval
-     - xcolor
-     - tikz
-     - calc
-     - graphicx
-*** bibliograbhy [biblatex][csquotes]
+,#+LATEX_HEADER: \usepackage{geometry}
+,#+LATEX_HEADER: \geometry{left=1.2in,right=1.2in,top=1.2in,bottom=1.2in}
+*** bibliograbhy [biblatex]
 ,#+LATEX_HEADER: \usepackage["citestyle=authoryear-icomp,bibstyle=authoryear, hyperref=true,backref=true,maxcitenames=3,url=true,natbib=true"]{biblatex}
 ,#+LaTeX_HEADER: \usepackage[backend=biber]{biblatex}
-,#+LaTeX_HEADER: \usepackage{csquotes}
 ,#+LaTeX_HEADER: \bibliography{./bibliography}
 ,#+LATEX_HEADER: \addbibresource{./bibliography}
-
-,#+LaTeX_HEADER: \bibliography{references}
 ** Options
 *** Inhaltsverzeichnis anpassen
 #+OPTIONS: toc:2 H:3 num:2
@@ -65,12 +101,6 @@
 
 *** Tags exportieren?
 #+OPTIONS: tags:n
-
-** misc
-#+TITLE: MEIN TITEL
-#+DATE: today
-#+AUTHOR: Eddie Urfaust
-#+EMAIL: eddie.urfaust@googlemail.com
 
 ** Tags
 #+TAGS: export noexport
