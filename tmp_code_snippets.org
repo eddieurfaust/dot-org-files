@@ -1,4 +1,4 @@
-* Variables 							   :noexport:
+* [org-mode] PDF-Export-Variables 				   :noexport:
   [[https://github.com/vikasrawal/orgpaper/][orgpaper]] [[http://orgmode.org/manual/Export-settings.html][Org-Mode Export-Settings]] [[http://en.wikibooks.org/wiki/LaTeX/Print_version][nice LaTeX reference]]
 ** org-mode startup
 #+STARTUP: overview
