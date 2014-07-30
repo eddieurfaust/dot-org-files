@@ -411,6 +411,7 @@ don't want is there, but I haven't had any such problems yet.
      (add-to-list 'org-latex-packages-alist '("" "minted"))
      (setq org-latex-listings 'minted)   
    #+END_SRC
+
 ** org-id
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
      ;; org-id laden
@@ -428,9 +429,6 @@ don't want is there, but I haven't had any such problems yet.
   (setq org-agenda-files (list "~/org/work.org"
                                "~/org/weekly_appointment.org"))
 #+END_SRC
-
-#+RESULTS:
-| ~/org/work.org | ~/org/weekly_appointment.org |
 
 *** highlight current line
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
