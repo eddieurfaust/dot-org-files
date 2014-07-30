@@ -396,6 +396,10 @@ don't want is there, but I haven't had any such problems yet.
 (setq org-hide-leading-stars 'hidestars)
 #+END_SRC
 
+** Source-Code Syntax highlighting
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     (setq org-src-fontify-natively t)
+   #+END_SRC
 ** org-id
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
      ;; org-id laden
@@ -809,9 +813,11 @@ the current directory in Python's search path."
 
 (add-hook 'inferior-python-mode-hook 'python-reinstate-current-directory)
 #+END_SRC
-
-
-
+*** set code-checker
+**** [pylint]
+     #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+       (setq python-check-command "pylint")
+     #+END_SRC
 ** gnuplot
    "==> To add the gnuplot mode in Emacs, add the content of
    /usr/share/emacs/site-lisp/dotemacs to your ~/.emacs file."

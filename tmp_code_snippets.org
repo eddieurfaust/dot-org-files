@@ -3,7 +3,7 @@
 ** org-mode startup
 #+STARTUP: overview
 #+STARTUP: hidestars
-#+STARTUP: entriespretty
+#+STARTUP: entitiespretty
 *** Symbole
     [[http://orgmode.org/worg/org-symbols.html][verfügbare Symbols]]
 ** misc
