@@ -1,5 +1,5 @@
 * [org-mode] PDF-Export-Variables 				   :noexport:
-  [[https://github.com/vikasrawal/orgpaper/][orgpaper]] [[http://orgmode.org/manual/Export-settings.html][Org-Mode Export-Settings]] [[http://en.wikibooks.org/wiki/LaTeX/Print_version][nice LaTeX reference]]
+  [[https://github.com/vikasrawal/orgpaper/][orgpaper]] [[http://orgmode.org/manual/Export-settings.html][Org-Mode Export-Settings]] [[http://en.wikibooks.org/wiki/LaTeX/Print_version][nice LaTeX reference]] [[http://eschulte.github.io/org-scraps/][org-scraps]]
 ** org-mode startup
 #+STARTUP: overview
 #+STARTUP: hidestars
