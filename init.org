@@ -564,17 +564,17 @@ changes, in particular when a task is DONE?
    #+END_SRC
 
 ** LaTeX-RefTeX org-mode-export
-
+   [[http://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex/72#72][XeTeX, LuaTeX usw.]]
 *** pdf-export with minted & pygmentize & toc generated
     [[http://joat-programmer.blogspot.de/2013/07/org-mode-version-8-and-pdf-export-with.html][link]]
-    #+BEGIN_SRC emacs-lisp :tangle no
-      (setq org-latex-pdf-process (list "latexmk -pdflatex='xelatex --shell-escape' -pdf %f"))
+    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+      (setq org-latex-pdf-process (list "latexmk -pdflatex='pdflatex --shell-escape' -pdf %f"))
     #+END_SRC
 
 **** TODO test for export with bibtex/biber!
 
 *** older version. works well though.
-    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+    #+BEGIN_SRC emacs-lisp :tangle no
       (setq org-latex-pdf-process (list "pdflatex %f" "biber %b" "pdflatex %f" "pdflatex -shell-escape %f"))
     #+END_SRC
 
