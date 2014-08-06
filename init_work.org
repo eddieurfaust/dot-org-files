@@ -193,6 +193,12 @@ Conventions]]
 (global-set-key "\M- " 'hippie-expand)
 #+END_SRC
 
+** GDB - Many-Windows
+   Der Modus kann verlassen werden mit =C-c k=
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; we want to start GDB with not just one lil' window!
+  (setq gdb-many-windows t)
+#+END_SRC
 ** Backsup-file handling
 *** pipe *~ BACKUP-DATEIEN to _one_ folder
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -572,7 +578,9 @@ changes, in particular when a task is DONE?
 *** pdf-export with minted & pygmentize & toc generated
     [[http://joat-programmer.blogspot.de/2013/07/org-mode-version-8-and-pdf-export-with.html][link]]
     #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-      (setq org-latex-pdf-process (list "latexmk -pdflatex='xelatex --shell-escape' -pdf %f"))
+      ; Set the org-mode pdf-export command (--shell-escape to be able to run 'pygmentize')
+      ;(setq org-latex-pdf-process (list "latexmk -pdflatex='xelatex --shell-escape' -pdf %f"))
+      (setq org-latex-pdf-process (list "latexmk -pdflatex='pdflatex --shell-escape' -pdf %f"))
     #+END_SRC
 
 **** TODO test for export with bibtex/biber!
