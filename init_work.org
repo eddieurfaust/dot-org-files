@@ -923,7 +923,7 @@ the current directory in Python's search path."
 #+END_SRC
 
 ** Zentrale ORG-Datei
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; meine zentrale ORG-Datei
 (find-file "~/org/work.org")
 #+END_SRC
