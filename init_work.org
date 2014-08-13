@@ -646,6 +646,12 @@ Additional shortcuts for navigating through org-mode documents:
      ))
 #+END_SRC
 
+** babel code-block evaluation (no questions asked)
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; Do not ask whether to evaluate every single code-block, but rather
+  ;; just DO IT!
+  (setq org-confirm-babel-evaluate nil)
+#+END_SRC
 
 * AUCTEX
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
