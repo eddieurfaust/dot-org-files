@@ -81,6 +81,17 @@ URxvt*italicFont:           xft:Monaco:style=italic:size=10
 URxvt*boldItalicFont:       xft:Monaco:style=bold:italic:size=10
 #+end_src
 
+*** i3 urgent-flag
+    [[https://faq.i3wm.org/question/203/how-to-set-the-urgency-hint-in-a-shell/][link]]
+    1. Set =URxvt.urgentOnBell= in your .Xresources file
+    2. Start a long-running command
+    3. Type =ctrl+t=
+    4. Do something else for awhile...
+    5. Urgent!
+
+    #+begin_src sh :tangle ~/.Xdefaults :padline yes
+      URxvt.urgentOnBell : true
+    #+END_SRC
 *** Zenburn color-scheme.
 
 The Color scheme that Changed the World!
