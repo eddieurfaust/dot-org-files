@@ -17,7 +17,7 @@
    #+END_SRC
 
 ** keyboard layout.
-
+   WIRD AKTUELL VON VCONSOLE.CONF & XORG GEHANDLED!!!
 *** KEYS
     From man xkeyboard-config:
 
@@ -74,7 +74,7 @@
     setxkbmap -layout de,de -variant basic,neo -option grp:rctrl_rshift_toggle
     #+END_SRC
 *** de(NEO2)
-    #+BEGIN_SRC sh :tangle  ~/.xinitrc
+    #+BEGIN_SRC sh :tangle no
     setxkbmap de neo
     #+END_SRC
 ** Deactivate *BEEEEEP*
@@ -85,12 +85,12 @@
 
 ** Start volumeicon
    #+BEGIN_SRC sh :tangle ~/.xinitrc
-     volumeicon&
+     start_if_not_running.sh volumeicon
    #+END_SRC
 
 ** Start dropbox
    #+BEGIN_SRC sh :tangle ~/.xinitrc
-     dropboxd&
+     start_if_not_running.sh dropboxd
    #+END_SRC
 
 ** Start i3wm
