@@ -850,7 +850,7 @@ the current directory in Python's search path."
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
   ;; auf plantuml.jar zeigen
   (setq org-plantuml-jar-path
-        (expand-file-name "~/build/plantuml/plantuml.7995.jar"))
+        (expand-file-name "~/build/plantuml/plantuml.8000.jar"))
 #+END_SRC
 
 ** ditaa
