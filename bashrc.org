@@ -24,8 +24,6 @@
    #+BEGIN_SRC sh :tangle ~/.bashrc
      alias ls='ls --color=auto'
    #+END_SRC
-
-
 *** personalized =ls= commands
    #+BEGIN_SRC sh :tangle ~/.bashrc
      alias lsd='clear; ls -al'
@@ -38,11 +36,11 @@
 ** customize PATH
 *** =~/bin=-directory
    #+BEGIN_SRC sh :tangle ~/.bashrc
-     PATH='/home/urfaust/bin/':$PATH; export PATH
+     PATH='/home/urfaust/bin':$PATH; export PATH
    #+END_SRC
 *** COPE-Package
     cope-git(colorful wrapper for terminal programs)
-   #+BEGIN_SRC sh :tangle ~/.bashrc
+   #+BEGIN_SRC sh :tangle no
      PATH=$(cope_path):$PATH; export PATH
    #+END_SRC
 ** set background picture
