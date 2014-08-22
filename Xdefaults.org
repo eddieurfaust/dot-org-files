@@ -147,7 +147,6 @@ Xmessage*Buttons: OK
 Xmessage*defaultButton: OK
 #+end_src
 
-
 ** misc
    #+BEGIN_SRC sh :tangle ~/.Xdefaults :padline yes
      URxvt.imLocale: de_DE.UTF-8
