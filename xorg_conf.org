@@ -1,84 +1,88 @@
 #+TITLE: My XOrg-confs
 
 * create folder
+  create a dummy folder to be ible to tangle these files in the
+  home-dir of the user because we shouldn't have permissions to write
+  to the desired places
+
   #+BEGIN_SRC sh
     mkdir -p ~/etc/X11/xorg.conf.d/
   #+END_SRC
-** 20-graka.conf
-   for Arch I just want/need my intel-on-board-card
+* 20-graka.conf
+  for Arch I just want/need my intel-on-board-card
 
-   #+BEGIN_SRC sh :tangle ~/etc/X11/xorg.conf.d/20-graka.conf
-     # Grafikkarten-Treiber fuer meine Intel-onboard-Karte. Fuer die Nvidia habe ich vorerst keinen Treiber installiert.
-     Section "Device"
-	     ### Available Driver options are:-
-	     ### Values: <i>: integer, <f>: float, <bool>: "True"/"False",
-	     ### <string>: "String", <freq>: "<f> Hz/kHz/MHz",
-	     ### <percent>: "<f>%"
-	     ### [arg]: arg optional
-	     #Option     "NoAccel"                   # [<bool>]
-	     #Option     "AccelMethod"               # <str>
-	     #Option     "Backlight"                 # <str>
-	     #Option     "DRI"                       # <str>
-	     #Option     "Present"                   # [<bool>]
-	     #Option     "ColorKey"                  # <i>
-	     #Option     "VideoKey"                  # <i>
-	     #Option     "Tiling"                    # [<bool>]
-	     #Option     "LinearFramebuffer"         # [<bool>]
-	     #Option     "VSync"                     # [<bool>]
-	     #Option     "PageFlip"                  # [<bool>]
-	     #Option     "SwapbuffersWait"           # [<bool>]
-	     #Option     "TripleBuffer"              # [<bool>]
-	     #Option     "XvPreferOverlay"           # [<bool>]
-	     #Option     "HotPlug"                   # [<bool>]
-	     #Option     "ReprobeOutputs"            # [<bool>]
-	     #Option     "DeleteUnusedDP12Displays"  # [<bool>]
-	     #Option     "XvMC"                      # [<bool>]
-	     #Option     "ZaphodHeads"               # <str>
-	     #Option     "VirtualHeads"              # <i>
-	     #Option     "TearFree"                  # [<bool>]
-	     #Option     "PerCrtcPixmaps"            # [<bool>]
-	     #Option     "FallbackDebug"             # [<bool>]
-	     #Option     "DebugFlushBatches"         # [<bool>]
-	     #Option     "DebugFlushCaches"          # [<bool>]
-	     #Option     "DebugWait"                 # [<bool>]
-	     #Option     "BufferCache"               # [<bool>]
-	     Identifier  "Card0"
-	     Driver      "intel"
-	     BusID       "PCI:0:2:0"
-     EndSection
+  #+BEGIN_SRC sh :tangle ~/etc/X11/xorg.conf.d/20-graka.conf
+    # Grafikkarten-Treiber fuer meine Intel-onboard-Karte. Fuer die Nvidia habe ich vorerst keinen Treiber installiert.
+    Section "Device"
+	    ### Available Driver options are:-
+	    ### Values: <i>: integer, <f>: float, <bool>: "True"/"False",
+	    ### <string>: "String", <freq>: "<f> Hz/kHz/MHz",
+	    ### <percent>: "<f>%"
+	    ### [arg]: arg optional
+	    #Option     "NoAccel"                   # [<bool>]
+	    #Option     "AccelMethod"               # <str>
+	    #Option     "Backlight"                 # <str>
+	    #Option     "DRI"                       # <str>
+	    #Option     "Present"                   # [<bool>]
+	    #Option     "ColorKey"                  # <i>
+	    #Option     "VideoKey"                  # <i>
+	    #Option     "Tiling"                    # [<bool>]
+	    #Option     "LinearFramebuffer"         # [<bool>]
+	    #Option     "VSync"                     # [<bool>]
+	    #Option     "PageFlip"                  # [<bool>]
+	    #Option     "SwapbuffersWait"           # [<bool>]
+	    #Option     "TripleBuffer"              # [<bool>]
+	    #Option     "XvPreferOverlay"           # [<bool>]
+	    #Option     "HotPlug"                   # [<bool>]
+	    #Option     "ReprobeOutputs"            # [<bool>]
+	    #Option     "DeleteUnusedDP12Displays"  # [<bool>]
+	    #Option     "XvMC"                      # [<bool>]
+	    #Option     "ZaphodHeads"               # <str>
+	    #Option     "VirtualHeads"              # <i>
+	    #Option     "TearFree"                  # [<bool>]
+	    #Option     "PerCrtcPixmaps"            # [<bool>]
+	    #Option     "FallbackDebug"             # [<bool>]
+	    #Option     "DebugFlushBatches"         # [<bool>]
+	    #Option     "DebugFlushCaches"          # [<bool>]
+	    #Option     "DebugWait"                 # [<bool>]
+	    #Option     "BufferCache"               # [<bool>]
+	    Identifier  "Card0"
+	    Driver      "intel"
+	    BusID       "PCI:0:2:0"
+    EndSection
 
-   #+END_SRC
+  #+END_SRC
 
-** 20-tastatur.conf
-   neo2 unter X aktivieren
+* 20-tastatur.conf
+  neo2 unter X aktivieren
 
-   #+BEGIN_SRC sh :tangle ~/etc/X11/xorg.conf.d/20-tastatur.conf
-     # Deutsches Neo-Layout
-     Section "InputClass"
-	     Identifier "keyboard"
-	     MatchIsKeyboard "yes"
-	     Option "XkbLayout" "de"
-	     Option "XkbVariant" "neo"
-     EndSection
-   #+END_SRC
+  #+BEGIN_SRC sh :tangle ~/etc/X11/xorg.conf.d/20-tastatur.conf
+    # Deutsches Neo-Layout
+    Section "InputClass"
+	    Identifier "keyboard"
+	    MatchIsKeyboard "yes"
+	    Option "XkbLayout" "de"
+	    Option "XkbVariant" "neo"
+    EndSection
+  #+END_SRC
 
-** 50-synaptics.conf
-   the synaptics touchpad
+* 50-synaptics.conf
+  the synaptics touchpad
 
-   #+BEGIN_SRC sh :tangle ~/etc/X11/xorg.conf.d/20-synaptics.conf
-     # Synaptics-Touchpad
-	 Section "InputClass"
-	     Identifier "touchpad"
-	     Driver "synaptics"
-	     MatchIsTouchpad "on"
-		 Option "TapButton1" "1"
-		 Option "TapButton2" "2"
-		 Option "TapButton3" "3"
-		 Option "VertEdgeScroll" "on"
-		 Option "VertTwoFingerScroll" "on"
-		 Option "HorizEdgeScroll" "on"
-		 Option "HorizTwoFingerScroll" "on"
-		 Option "CircularScrolling" "on"
-		 Option "CircScrollTrigger" "2"
-	 EndSection
-   #+END_SRC
+  #+BEGIN_SRC sh :tangle ~/etc/X11/xorg.conf.d/20-synaptics.conf
+    # Synaptics-Touchpad
+	Section "InputClass"
+	    Identifier "touchpad"
+	    Driver "synaptics"
+	    MatchIsTouchpad "on"
+		Option "TapButton1" "1"
+		Option "TapButton2" "2"
+		Option "TapButton3" "3"
+		Option "VertEdgeScroll" "on"
+		Option "VertTwoFingerScroll" "on"
+		Option "HorizEdgeScroll" "on"
+		Option "HorizTwoFingerScroll" "on"
+		Option "CircularScrolling" "on"
+		Option "CircScrollTrigger" "2"
+	EndSection
+  #+END_SRC

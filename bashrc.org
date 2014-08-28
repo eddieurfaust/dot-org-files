@@ -29,6 +29,43 @@
      alias lsd='clear; ls -al'
      alias ll='clear; ls -l'
    #+END_SRC
+*** diff (=colordiff= required)
+    #+BEGIN_SRC sh :tangle ~/.bashrc
+      alias diff='colordiff'    
+    #+END_SRC
+*** grep
+    #+BEGIN_SRC sh :tangle ~/.bashrc
+      alias grep='grep --color=auto'
+    #+END_SRC
+*** history
+    #+BEGIN_SRC sh :tangle ~/.bashrc
+      alias hist='history | grep'
+    #+END_SRC
+*** ..
+    #+BEGIN_SRC sh :tangle ~/.bashrc
+      alias ..='cd ..'    
+    #+END_SRC
+*** rm
+    #+BEGIN_SRC sh :tangle ~/.bashrc
+      alias rm='rm -I'    
+    #+END_SRC
+*** cl()
+    #+BEGIN_SRC sh :tangle ~/.bashrc
+      # cd and ls in one
+      cl() {
+          dir=$1
+          if [[ -z "$dir" ]]; then
+              dir=$HOME
+          fi
+          if [[ -d "$dir" ]]; then
+              cd "$dir"
+              ls
+          else
+              echo "bash: cl: '$dir': Directory not found"
+          fi
+      }
+    #+END_SRC
+
 ** Standard EDITOR
   #+BEGIN_SRC sh :tangle ~/.bashrc
     EDITOR=zile; export EDITOR
@@ -49,7 +86,7 @@
    #+END_SRC
 ** f.lux
    Destination ist hier Hannover.
-   #+BEGIN_SRC sh :tangle ~/.bashrc
+   #+BEGIN_SRC sh :tangle no
      xflux -l 52.3 -g 9.7; clear
    #+END_SRC
 ** autocomplete in der shell

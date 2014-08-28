@@ -85,12 +85,18 @@
 
 ** Start volumeicon
    #+BEGIN_SRC sh :tangle ~/.xinitrc
-     start_if_not_running.sh volumeicon
+     /home/urfaust/bin/start_if_not_running.sh volumeicon
    #+END_SRC
 
 ** Start dropbox
    #+BEGIN_SRC sh :tangle ~/.xinitrc
-     start_if_not_running.sh dropboxd
+     /home/urfaust/bin/start_if_not_running.sh dropboxd
+   #+END_SRC
+
+** Start xflux
+   Destination [Europe]-[Germany]-[Lower-Saxony]-[Hanover]
+   #+BEGIN_SRC sh :tangle ~/.xinitrc
+     /home/urfaust/bin/start_if_not_running.sh xflux -l 52.3 -g 9.7
    #+END_SRC
 
 ** Start i3wm
