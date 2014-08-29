@@ -55,11 +55,11 @@
    #+END_SRC
 ** ROS - Enviroment setup
 *** Hydro
-    #+BEGIN_SRC sh :tangle no
-    source /opt/ros/hydro/setup.bash
+    #+BEGIN_SRC sh :tangle ~/.bash_aliases
+      source /opt/ros/hydro/setup.bash
     #+END_SRC
 *** Groovy
-    #+BEGIN_SRC sh :tangle ~/.bash_aliases
+    #+BEGIN_SRC sh :tangle no
       source /opt/ros/groovy/setup.bash
     #+END_SRC
 *** set tutorial ENV
