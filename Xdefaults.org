@@ -81,6 +81,25 @@ URxvt*italicFont:           xft:Monaco:style=italic:size=10
 URxvt*boldItalicFont:       xft:Monaco:style=bold:italic:size=10
 #+end_src
 
+*** NEO2 - numblock(layer4)
+    #+BEGIN_SRC sh :tangle ~/.Xdefaults :padline yes
+      URxvt.keysym.KP_Add:    +
+      URxvt.keysym.KP_Subtract: -
+      URxvt.keysym.KP_Multiply: *
+      URxvt.keysym.KP_Divide  : /
+      URxvt.keysym.KP_Decimal : .
+      URxvt.keysym.KP_Separator : ,
+      URxvt.keysym.KP_1:      1
+      URxvt.keysym.KP_2:      2
+      URxvt.keysym.KP_3:      3
+      URxvt.keysym.KP_4:      4
+      URxvt.keysym.KP_5:      5
+      URxvt.keysym.KP_6:      6
+      URxvt.keysym.KP_7:      7
+      URxvt.keysym.KP_8:      8
+      URxvt.keysym.KP_9:      9
+      URxvt.keysym.KP_0:      0
+    #+END_SRC
 *** i3 urgent-flag
     [[https://faq.i3wm.org/question/203/how-to-set-the-urgency-hint-in-a-shell/][link]]
     1. Set =URxvt.urgentOnBell= in your .Xresources file
