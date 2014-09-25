@@ -14,6 +14,10 @@
    #+BEGIN_SRC sh :tangle ~/.bash_aliases
      alias lsd='clear; ls -al'
    #+END_SRC
+*** pygmentize
+    #+BEGIN_SRC sh :tangle ~/.bash_aliases
+      alias ccat='pygmentize -g '
+    #+END_SRC
 ** Standard EDITOR
   #+BEGIN_SRC sh :tangle ~/.bash_aliases
     EDITOR=zile; export EDITOR
