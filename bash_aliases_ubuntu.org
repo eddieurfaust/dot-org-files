@@ -29,9 +29,14 @@
    #+END_SRC
 *** LeapSDK path
     #+BEGIN_SRC sh :tangle ~/.bash_aliases
+<<<<<<< HEAD
       LEAPSDK='/home/saul/tech/LeapSDK/lib'; export LEAPSDK
     #+END_SRC
 
+=======
+      LEAPSDK='/home/saul/tech/LeapSDK/lib:/home/saul/tech/LeapSDK/lib/x64:/home/saul/tech/LeapSDK/lib/x86'; export LEAPSDK
+    #+END_SRC
+>>>>>>> ec17720e029a497e324926fdd6a95a54001f74f2
 *** COPE-Package
     cope-git(colorful wrapper for terminal programs)
    #+BEGIN_SRC sh :tangle no
