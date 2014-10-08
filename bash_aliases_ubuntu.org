@@ -27,6 +27,11 @@
    #+BEGIN_SRC sh :tangle ~/.bash_aliases
      PATH='/home/saul/bin/':$PATH; export PATH
    #+END_SRC
+*** LeapSDK path
+    #+BEGIN_SRC sh :tangle ~/.bash_aliases
+      LEAPSDK='/home/saul/tech/LeapSDK/lib'; export LEAPSDK
+    #+END_SRC
+
 *** COPE-Package
     cope-git(colorful wrapper for terminal programs)
    #+BEGIN_SRC sh :tangle no
