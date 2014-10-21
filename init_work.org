@@ -284,6 +284,11 @@ don't want is there, but I haven't had any such problems yet.
 (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
+** NO-TABS-INDENT
+   [[http://www.emacswiki.org/emacs/NoTabs][link]]
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     (setq-default indent-tabs-mode nil)
+   #+END_SRC
 ** Global shortcuts
 *** GNU-EMACS EXTENSIONS
 **** Some Keybindings
