@@ -284,6 +284,11 @@ don't want is there, but I haven't had any such problems yet.
 (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
+** NO-TABS-INDENT
+   [[http://www.emacswiki.org/emacs/NoTabs][link]]
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     (setq-default indent-tabs-mode nil)
+   #+END_SRC
 ** Global shortcuts
 *** GNU-EMACS EXTENSIONS
 **** Some Keybindings
@@ -653,6 +658,7 @@ Additional shortcuts for navigating through org-mode documents:
   (setq org-confirm-babel-evaluate nil)
 #+END_SRC
 
+
 * AUCTEX
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;;  ###########
@@ -681,7 +687,7 @@ Additional shortcuts for navigating through org-mode documents:
 #+END_SRC
 
 ** Filling
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; Zeilenumbruch
 (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
 #+END_SRC
