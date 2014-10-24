@@ -7,10 +7,10 @@
 *** Symbole
     [[http://orgmode.org/worg/org-symbols.html][verfügbare Symbols]]
 ** misc
-#+TITLE: State of the Art: Implementation of a Gesture Control for the Baxter Robot using the Leap Motion Controller
-#+DATE: today
-#+AUTHOR: Frank Saul
-#+EMAIL: frank.saul@gmail.com
+#+TITLE: Demo
+#+DATE: /today
+#+AUTHOR: Ich
+#+EMAIL: ich@gmail.com
 ** LaTeX Header
 *** Font
 **** libertine
