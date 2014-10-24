@@ -901,7 +901,16 @@ the current directory in Python's search path."
   (setq org-ditaa-jar-path
         (expand-file-name "~/build/ditaa/ditaa0_9.jar"))
 #+END_SRC
+** rosemacs
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     ;; Load the rosemacs-library and start it up
+     (require 'rosemacs)
+     (invoke-rosemacs)
 
+     ;; Optional but highly recommended: add a prefix for quick access
+     ;; to the rosemacs commands
+     (global-set-key "\C-x\C-r" ros-keymap)
+   #+END_SRC
 ** Lua-Mode
 *** Lua-Mode aktivieren
 #+BEGIN_SRC emacs-lisp :tangle no
