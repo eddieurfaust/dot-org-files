@@ -688,8 +688,9 @@ Additional shortcuts for navigating through org-mode documents:
 
 ** Filling
 #+BEGIN_SRC emacs-lisp :tangle no
-;; Zeilenumbruch
-(add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
+  ;; Zeilenumbruch
+  (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
+  (setq-default fill-column 80)
 #+END_SRC
 
 ** auto-fill-mode
