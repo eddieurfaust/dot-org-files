@@ -543,7 +543,6 @@ changes, in particular when a task is DONE?
 
     #+END_SRC
 
-
 ** RefTeX with org-mode 
    [[http://blog.karssen.org/2013/08/22/using-bibtex-from-org-mode/][link]]
    Configure RefTeX for use with org-mode. At the end of your
@@ -633,6 +632,13 @@ Additional shortcuts for navigating through org-mode documents:
      (plantuml . t)
      (ditaa . t)
      ))
+#+END_SRC
+
+** babel code-block evaluation (no questions asked)
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; Do not ask whether to evaluate every single code-block, but rather
+  ;; just DO IT!
+  (setq org-confirm-babel-evaluate nil)
 #+END_SRC
 
 
