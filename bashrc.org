@@ -20,6 +20,10 @@
      export TERM=xterm-256color
    #+END_SRC
 ** aliases
+*** colored =cat= via pygmentize
+    #+BEGIN_SRC sh :tangle ~/.bashrc
+      alias ccat='pygmentize -g'
+    #+END_SRC
 *** colored =ls=
    #+BEGIN_SRC sh :tangle ~/.bashrc
      alias ls='ls --color=auto'
