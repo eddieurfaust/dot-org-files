@@ -18,6 +18,10 @@
     #+BEGIN_SRC sh :tangle ~/.bash_aliases
       alias ccat='pygmentize -g '
     #+END_SRC
+*** baxter-shell
+    #+BEGIN_SRC sh :tangle ~/.bash_aliases
+      alias baxter_shell='cd ~/tech/BAXTER_workspace; ./baxter.sh sim'
+    #+END_SRC
 ** Standard EDITOR
   #+BEGIN_SRC sh :tangle ~/.bash_aliases
     EDITOR=zile; export EDITOR

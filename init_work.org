@@ -945,6 +945,7 @@ the current directory in Python's search path."
 #+END_SRC
 
 ** Zentrale ORG-Datei
+   [[file:~/org/work.org::*Last%20practical%20steps][Last practical steps]] ?
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; meine zentrale ORG-Datei
 (find-file "~/org/work.org")
