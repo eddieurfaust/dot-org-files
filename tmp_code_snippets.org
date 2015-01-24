@@ -21,6 +21,125 @@
           \end{scope}
       \end{tikzpicture}
     #+END_SRC
+*** Extract from here - many examples
+    #+BEGIN_SRC latex
+      \begin{tikzpicture}[>=latex,font=\sffamily,every node/.style={minimum width=1cm,minimum height=1.5em,outer sep=0pt,draw=black,fill=green!40,semithick}]
+
+        \node at (0,0) (A) {valid};
+        \node [anchor=west] at (A.east) (B) {valid};
+        \node [anchor=west] at (B.east) (C) {valid};
+        \node [anchor=west, fill=red!40] at (C.east) (D) {None};
+        \node [anchor=west] at (D.east) (E) {valid};
+        \node [anchor=west] at (E.east) (F) {valid};
+        \node [anchor=west, fill=red!40] at (F.east) (G) {None};
+
+        \uncover<7->{
+          \node [anchor=south east] at (A.north west) (v_m) [above=1 and 0 of A] {$\begin{pmatrix} x_m \\ y_m \\ r_m \end{pmatrix}$};
+          \draw [->, semithick] (v_m.south) -- (A.north);
+        }
+        % \pause
+
+        \uncover<2->{
+
+          \node (Filter0) [below=0.5 and 0 of D, fill=blue!40] {!= None};
+
+          \node (J) [below=1.5 and 0 of B] {valid};
+          \node [anchor=west] at (J.east) (K) {valid};
+          \node [anchor=west] at (K.east) (L) {valid};
+          \node [anchor=west] at (L.east) (M) {valid};
+          \node [anchor=west] at (M.east) (N) {valid};
+
+          \draw [decorate,decoration={brace,amplitude=10pt},rotate=90] (G.south east) -- (A.south west);
+
+          \draw [decorate,decoration={brace,amplitude=10pt},rotate=90] (J.north west) -- (N.north east);
+        }
+        % \pause
+        \uncover<3->{
+          \draw [decorate,decoration={brace,amplitude=10pt},rotate=90] (N.south east) -- (J.south west);
+
+          \node (Filter1) [below=0.5 and 0 of L, fill=yellow!40] {Enough valid tuples?};
+        }
+        % \pause
+        \uncover<4->{
+          \node (Average) [right=0 and 3 of Filter1, fill=blue!40] {Calculate averages};
+
+          \draw [->, semithick] (Filter1.east) -- (Average.west);
+
+          \node [anchor=south] at (Average.north) (Averaged) {$\begin{pmatrix} x_{avg} \\ y_{avg} \\ r_{avg} \end{pmatrix}$};
+
+          \node (Update) [above=1 and 0 of Averaged, fill=blue!40, align=center] {Update\\Object Properties};
+
+          \draw [->, semithick] (Averaged.north) -- (Update.south);
+        }
+
+        \uncover<4>{
+          \node (explanation0) [draw=none, fill=none, right=0 and 2 of v_m, align=center] {These are actually used to draw\\the circles on the feedback camera-stream};
+          \draw (explanation0.south) edge[->, thick, out=325, in=135] (Update.north);
+        }
+
+        \uncover<6->{
+          \node (Comparison) [right=0 and 2 of v_m, fill=yellow!40] {
+            \(
+            \left\vert
+              \begin{pmatrix}
+                x_{avg} \\
+                y_{avg} \\ 
+              \end{pmatrix}
+              -
+              \begin{pmatrix}
+                x_{cand} \\
+                y_{cand} \\ 
+              \end{pmatrix}
+            \right\vert
+            <
+            {dist}_{max}
+            \)
+          };
+        }
+        % \pause
+        \uncover<5->{
+          \node (Candidate) [right=0 and 2 of Comparison.north east] {
+            \(\begin{pmatrix}
+              x_{cand} \\
+              y_{cand} \\ 
+            \end{pmatrix}\)
+          };
+
+          \uncover<5>{
+            \node (Candidate_expl) [draw=none, fill=none, left=2 of Candidate, align=center] {A circle found in\\a new image from the stream};
+            \draw (Candidate_expl.east) edge[->, thick, out=15, in=180-15] (Candidate.west);
+          }
+
+        }
+        % \pause
+        \uncover<6->{
+          \draw [->, semithick] (Candidate.west) -- (Comparison.north east);
+          \draw [->, semithick] (Update.north) |- (Comparison.south east);
+        }
+
+        \uncover<7->{
+          \draw [->, semithick] (Comparison.west) -- (v_m.east);
+
+          \draw (A.north) edge[out=45,in=135,->] (B.north);
+          \draw (B.north) edge[out=45,in=135,->] (C.north);
+          \draw (C.north) edge[out=45,in=135,->] (D.north);
+          \draw (D.north) edge[out=45,in=135,->] (E.north);
+          \draw (E.north) edge[out=45,in=135,->] (F.north);
+          \draw (F.north) edge[out=60,in=120,->] (G.north);
+
+          \draw (G.south west) edge[-, thick] (G.north east);
+          \draw (G.north west) edge[-, thick] (G.south east);
+        }
+
+        \uncover<1>{
+          \node (FIFO) [draw=none, fill=none, right=0 and 3 of v_m] {\Large{FIFO-Buffer}};
+          \node (FIFO_expl) [draw=none, fill=none, below left = 0 and -2 of FIFO, align=center] {(One entry per\\processed image!)};
+          \draw (FIFO.east) edge[->, thick, out=325, in=45] (G.north east);
+        }
+
+      \end{tikzpicture}
+
+    #+END_SRC
 * [org-mode] PDF-Export-Variables                                  :noexport:
   [[https://github.com/vikasrawal/orgpaper/][orgpaper]] [[http://orgmode.org/manual/Export-settings.html][Org-Mode Export-Settings]] [[http://en.wikibooks.org/wiki/LaTeX/Print_version][nice LaTeX reference]]
 ** org-mode startup
