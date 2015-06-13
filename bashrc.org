@@ -42,9 +42,15 @@
       alias grep='grep --color=auto'
     #+END_SRC
 *** history
-    #+BEGIN_SRC sh :tangle ~/.bashrc
-      alias hist='history | grep'
-    #+END_SRC
+**** history with timestamp
+     taken from [[http://linux.byexamples.com/archives/467/list-command-line-history-with-timestamp/][link]]
+     #+BEGIN_SRC sh :tangle ~/.bashrc
+       export HISTTIMEFORMAT="%F %T "
+     #+END_SRC
+**** =hist= alias
+     #+BEGIN_SRC sh :tangle ~/.bashrc
+       alias hist='history | grep'
+     #+END_SRC
 *** ..
     #+BEGIN_SRC sh :tangle ~/.bashrc
       alias ..='cd ..'    
