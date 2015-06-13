@@ -1,0 +1,27 @@
+#+TITLE: My /etc/pacman.d/0_rank_them.sh file
+
+** Body
+   #+BEGIN_SRC sh :tangle ~/bin/_etc_pacman.d_0_rank_them.sh
+     #!/usr/bin/bash
+
+     # rankmirrors /etc/pacman.d/mirrorlist.pacnew > ~/mirrorlist.tmp
+     # sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.old
+     # sudo cp ~/mirrorlist.tmp /etc/pacman.d/mirrorlist
+
+     # Source: https://wiki.archlinux.org/index.php/Mirrors#List_by_speed
+
+     # List by speed
+
+     # Take full advantage of using the fastest local mirror, which can be determined via the included Bash script, /usr/bin/rankmirrors.
+
+     # Back up the existing /etc/pacman.d/mirrorlist:
+     cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+
+     # Run the following sed line to uncomment every mirror:
+
+     sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
+
+     # Finally, rank the mirrors. Operand -n 6 means only output the 10 fastest mirrors:
+     rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+   #+END_SRC
+
