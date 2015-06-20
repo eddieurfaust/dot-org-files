@@ -4,6 +4,11 @@
    #+BEGIN_SRC sh :tangle ~/bin/_etc_pacman.d_0_rank_them.sh
      #!/usr/bin/bash
 
+     if [[ $EUID -ne 0 ]]; then
+        echo "This script must be run as root" 
+        exit 1
+     fi
+
      # rankmirrors /etc/pacman.d/mirrorlist.pacnew > ~/mirrorlist.tmp
      # sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.old
      # sudo cp ~/mirrorlist.tmp /etc/pacman.d/mirrorlist
