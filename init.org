@@ -170,6 +170,15 @@ Conventions]]
 ;;  #########################
 #+END_SRC
 
+** Use package
+   use-package ist ein sehr praktisches Paket von John Wiegley, das die Strukturierung und Optimierung der Emacs-Konfiguration ermöglicht. Weitere Informationen finden sich auf der Seite des Github-Projekts → https://github.com/jwiegley/use-package
+
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   ;; Bootstrap `use-package'
+   (unless (package-installed-p 'use-package)
+   (package-refresh-contents)
+   (package-install 'use-package))
+   #+END_SRC
 ** Enable ido-mode  # C-f für die NORMALE AUSWAHLMETHODE
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; Enable ido-mode global and with flex matching
@@ -410,7 +419,15 @@ don't want is there, but I haven't had any such problems yet.
      (setq browse-url-browser-function 'browse-url-generic
            browse-url-generic-program "chromium")
    #+END_SRC
+** Neotree auf <F1>
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   ;; Die Breite des Neotree-Fensters ist mir in der Grundeinstellung zu schmal.
+   (use-package neotree
+   :ensure t
+   :config (setq neo-window-width 40))
 
+   (define-key global-map (kbd "<f1>") 'neotree)
+   #+END_SRC
 
 
 
