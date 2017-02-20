@@ -5,6 +5,55 @@ should evaluate every piece of emacs-lisp code available here.
 
 Next time, simply reload changes with =C-c i=
 
+* Test - load early
+** PACKAGE MANAGER
+   emacs unter windows hat probleme mit jeglichen TLS (https://…), deswegen vorerst weg lassen.
+ #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   (require 'package)
+   (setq package-enable-at-startup nil)
+   (add-to-list 'package-archives
+                '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+   (setq package-enable-at-startup nil)
+   ;; (setq package-archives '(
+   ;;                          ("elpa" . "http://tromey.com/elpa/")
+   ;;                          ("gnu" . "http://elpa.gnu.org/packages/")
+   ;;                          ("marmalade" . "http://marmalade-repo.org/packages/")
+   ;;                          ("stable" . "http://melpa.org/packages/")))
+   (package-initialize)
+ #+END_SRC
+
+
+
+
+* ONLY for Windows portable Version
+** site-lisp.el
+   X:\!emacs\ sei das emacs portable Verzeichnis
+   → DATEI HÄNDISCH ERSTELLEN & EMACS NEU STARTEN: X:\!emacs\share\emacs\site-lisp\site-start.el
+#+BEGIN_SRC emacs-lisp :tangle no
+(defvar usb-drive-letter (substring data-directory 0 3))
+(defvar usb-home-dir (concat usb-drive-letter "home/"))
+
+(setenv "HOME" usb-home-dir)
+#+END_SRC
+
+
+** Setze die PATH-Variable für "CommandPromptPortable"
+   Die Variable usb-drive-letter muss gesetzt sein.
+   → siehe site-lisp.el
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+; these should be the same as for the portable app "CommandPromptPortable"
+;; example of setting env var named “path”, by appending a new path to existing path
+(setenv "PATH"
+        (concat
+         (getenv "PATH") ";"
+         (concat usb-drive-letter "gnuwin32\\bin") ";"
+         (concat usb-drive-letter "ImageMagick\\x64") ";"
+         (concat usb-drive-letter "gnuplot\\x64\\gnuplot\\bin\\")
+         )
+        )
+#+END_SRC
+
+
 * Loading essentials:
 
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -58,9 +107,10 @@ Next time, simply reload changes with =C-c i=
 ** Regarding Fonts
 *** Standard Font
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-;; set font for all windows
-;(set-frame-font "DejaVu Sans Mono-11" nil t)
-(set-frame-font "Inconsolata-13" nil t)
+  ;; set font for all windows
+  ;; (set-frame-font "Liberation Mono-14" t)
+  ;; (set-frame-font "DejaVu Sans Mono-11" nil t)
+  (set-frame-font "Inconsolata-14" nil t)
 #+END_SRC
 *** Font Size
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -157,6 +207,9 @@ Next time, simply reload changes with =C-c i=
 
 ;; *optische* Klammer-Hilfe aktivieren
 (setq show-paren-style 'expression)
+
+;; yay rainbows!
+;(global-rainbow-delimiters-mode t)
 #+END_SRC
 
 
@@ -170,7 +223,7 @@ Conventions]]
 ;;  #########################
 #+END_SRC
 
-** Use package
+** use-package
    use-package ist ein sehr praktisches Paket von John Wiegley, das die Strukturierung und Optimierung der Emacs-Konfiguration ermöglicht. Weitere Informationen finden sich auf der Seite des Github-Projekts → https://github.com/jwiegley/use-package
 
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -179,6 +232,24 @@ Conventions]]
    (package-refresh-contents)
    (package-install 'use-package))
    #+END_SRC
+** Use RegEx search by default
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Interactive search key bindings. By default, C-s runs
+;; isearch-forward, so this swaps the bindings.
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+#+END_SRC
+** Comments
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; comments
+(defun toggle-comment-on-line ()
+  "comment or uncomment current line"
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+(global-set-key (kbd "C-;") 'toggle-comment-on-line)
+#+END_SRC
 ** Enable ido-mode  # C-f für die NORMALE AUSWAHLMETHODE
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; Enable ido-mode global and with flex matching
@@ -223,18 +294,6 @@ Conventions]]
      (global-set-key (kbd "<C-M-right>")  'buf-move-right)
    #+END_SRC
 
-** PACKAGE MANAGER
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-  ;; activate package-maganer and define sources
-  (when (>= emacs-major-version 24)
-    (require 'package)
-    (package-initialize)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-    (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-    (package-initialize) )
-#+END_SRC
-
 ** Fullscreen-mode
    wird inzwischen von i3wm übernommen
 
@@ -250,8 +309,8 @@ Conventions]]
 #+END_SRC
 *** passender Shortcut
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-;; ... und der passende Shortcut
-(global-set-key [(control meta return)] 'toggle-fullscreen)
+  ;; ... und der passende Shortcut
+  (global-set-key [(control meta return)] 'toggle-fullscreen)
 #+END_SRC
 ** UNDO the region-word-wrap thingy (M-q)
 *** Code
@@ -333,7 +392,7 @@ don't want is there, but I haven't had any such problems yet.
 **** BACKWARD-KILL-WORD
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; backward-kill shortcut
-(global-set-key "\C-w"     'backward-kill-word)
+(global-set-key "\C-w" 'backward-kill-word)
 #+END_SRC
 
 **** KILL-REGION
@@ -430,7 +489,7 @@ don't want is there, but I haven't had any such problems yet.
    #+END_SRC
 
 
-
+   
 * ORG-MODE
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;;  ##############
@@ -508,10 +567,17 @@ don't want is there, but I haven't had any such problems yet.
 
 ** CAPTURE TEMPLATES
 *** Code
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.ec
+;; Meine Capture Templates
+(setq org-capture-templates
+'(("t" "Todo" entry (file+headline "~/org/work.org" "Inbox")
+"* TODO %?\n %i\n %a")))
+#+END_SRC
+*** Code - OLD
+#+BEGIN_SRC emacs-lisp :tangle no
   ;; Meine Capture-Templates
   (setq org-capture-templates '(
-          ("t" "Todo" entry (file+headline "~/org/life.org" "Tasks")
+          ("t" "Todo" entry (file+headline "~/org/life.org "Tasks")
            "* TODO %?\n  %i\n\n")
           ("w" "work-Todo" entry (file+headline "~/org/work.org" "Inbox")
            "* TODO %?\n  %i\n\n")
@@ -567,7 +633,7 @@ changes, in particular when a task is DONE?
 #+END_SRC
 
 ** Export-Options
-*** Extra-Ordner
+*** Extra publish Ordner
     Übernommen von:
     http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
 
@@ -600,6 +666,12 @@ changes, in particular when a task is DONE?
 
     #+END_SRC
 
+** truncate line hotkey for org-mode
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   ;; soft line-wrap for org-mode
+   (define-key org-mode-map "\M-q" 'toggle-truncate-lines)
+   #+END_SRC
+
 ** RefTeX with org-mode 
    [[http://blog.karssen.org/2013/08/22/using-bibtex-from-org-mode/][link]]
    Configure RefTeX for use with org-mode. At the end of your
@@ -607,7 +679,7 @@ changes, in particular when a task is DONE?
    \bibliographystyle{plain}
    \bibliography{ProbePosition}
    See http://www.mfasold.net/blog/2009/02/using-emacs-org-mode-to-draft-papers/
-   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   #+BEGIN_SRC emacs-lisp :tangle no
      ;; RefTeX with org-mode
      (defun org-mode-reftex-setup ()
        (setq TeX-master t)
@@ -624,7 +696,7 @@ changes, in particular when a task is DONE?
    [[http://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex/72#72][XeTeX, LuaTeX usw.]]
 *** pdf-export with minted & pygmentize & toc generated
     [[http://joat-programmer.blogspot.de/2013/07/org-mode-version-8-and-pdf-export-with.html][link]]
-    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+    #+BEGIN_SRC emacs-lisp :tangle no
       (setq org-latex-pdf-process (list "latexmk -pdflatex='pdflatex --shell-escape' -pdf %f"))
     #+END_SRC
 
@@ -657,12 +729,12 @@ Additional shortcuts for navigating through org-mode documents:
    Nur eines von beiden aktivieren.
 
 *** dvipng
-#+BEGIN_SRC emacs-lisp  :tangle no
+#+BEGIN_SRC emacs-lisp  :tangle ~/.emacs.d/init.el
   ;; dvipng für LaTeX formula export
   (setq org-latex-create-formula-image-program 'dvipng)
 #+END_SRC
 *** Imagemagick
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
   ;; imagemagick für LaTeX formula export
   (setq org-latex-create-formula-image-program 'imagemagick)
 #+END_SRC
@@ -737,14 +809,14 @@ Additional shortcuts for navigating through org-mode documents:
 #+END_SRC
 
 ** Automatic parsing of TeX files
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; Automatic parsing of TeX files
 (setq TeX-parse-self t) ; Enable parse on load.
 (setq TeX-auto-save t) ; Enable parse on save.
 #+END_SRC
 
 ** PDF-Mode
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; .pdf statt .dvi per default:
 (setq TeX-PDF-mode t)
 #+END_SRC
@@ -757,32 +829,32 @@ Additional shortcuts for navigating through org-mode documents:
 
 ** auto-fill-mode
 [[http://www.emacswiki.org/emacs/AutoFillMode][EmacsWiki: Auto Fill Mode]]
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; shortcut to quickly toggle auto fill mode
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 #+END_SRC
 ** Syntax highlight
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; Syntax Higlight
 (add-hook 'LaTeX-mode-hook 'turn-on-font-lock)
 #+END_SRC
 
 ** Math-Mode
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; Mathe Modus
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 #+END_SRC
 
 ** Reftex
 *** Reftex laden
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; Reftex einflechten und laden
 (setq reftex-plug-into-AUCTeX t)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 #+END_SRC
 
 *** OWN bib-file
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; RefTeX soll meine Diplomarbeits-Bibliothek finden
 (setq reftex-default-bibliography '("/home/urfaust/Dropbox/0_uni/00_Dipl/schriftlicher_Teil/Diplomarbeit.bib"))
 #+END_SRC
@@ -796,7 +868,7 @@ is no way to distinguish between periods that end sentences and those
 that indicate abbreviations. For convenient and reliable editing, we
 therefore recommend you follow the two-space convention. The variable
 sentence-end-double-space also affects filling (see [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Fill-Commands.html#Fill-Commands][Fill Commands]])."
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; Definition Satzende
 (setq sentence-end-double-space nil)
 #+END_SRC
@@ -808,7 +880,7 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
   (add-hook 'LaTeX-mode-hook '(flyspell-mode t))
 #+END_SRC
 *** dictionary-changer
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
   ;; dictionary changer
   (defun fd-switch-dictionary()
     (interactive)
@@ -820,7 +892,7 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 #+END_SRC
 
 *** Flyspell shortcuts
-    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+    #+BEGIN_SRC emacs-lisp :tangle no
       ;; Flyspell shortcuts
       (global-set-key (kbd "<f8>")   'fd-switch-dictionary)
       (global-set-key (kbd "C-S-<f8>") 'flyspell-mode)
@@ -831,13 +903,13 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 *** Aspell statt ispell nutzen
     "GNU Aspell, usually called just Aspell, is a free software spell
     checker designed to replace Ispell."
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; [ASPELL] Zeile auskommentieren, falls nicht installiert:
 (setq-default ispell-program-name "aspell")
 #+END_SRC
     
 *** Deutsche Rechtschreibung
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; Deutsche Rechtschreibung falls \usepackage{ngerman}
 ;; oder german benutzt wird
 (add-hook 'TeX-language-de-hook
@@ -851,13 +923,13 @@ sentence-end-double-space also affects filling (see [[http://www.gnu.org/softwar
 #+END_SRC
 
 ** Multifile-Dokumente
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; Query for master file.
 (setq-default TeX-master nil)
 #+END_SRC
 
 ** GNU Make nutzen
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; [AUCTEX] ADD Make TO THE TEX COMMAND LIST. 
 (eval-after-load "tex" 
   '(add-to-list 'TeX-command-list '("Make" "make" TeX-run-command nil t))) 
@@ -932,7 +1004,7 @@ the current directory in Python's search path."
 ** PlantUML
    [[http://plantuml.sourceforge.net/download.html][plantuml.jar]]
 *** auf plantuml.jar zeigen
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
   ;; auf plantuml.jar zeigen
   (setq org-plantuml-jar-path
         (expand-file-name "~/build/plantuml/plantuml.8000.jar"))
@@ -941,7 +1013,7 @@ the current directory in Python's search path."
 ** ditaa
    [[http://ditaa.sourceforge.net/#download][ditaa.jar]]
 *** auf ditaa.jar zeigen
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
   ;; auf ditaa.jar zeigen
   (setq org-ditaa-jar-path
         (expand-file-name "~/build/ditaa/ditaa0_9.jar"))
@@ -982,7 +1054,9 @@ the current directory in Python's search path."
 ** Zentrale ORG-Datei
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; meine zentrale ORG-Datei
-(find-file "~/org/life.org")
+(setq 
+ org-default-notes-file "~/org/work.org"
+ initial-buffer-choice  org-default-notes-file)
 #+END_SRC
 
 
