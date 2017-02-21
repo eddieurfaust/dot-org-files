@@ -296,17 +296,63 @@ Conventions]]
    #+END_SRC
 
 ** Fullscreen-mode
-   wird inzwischen von i3wm übernommen
+   - wird inzwischen von i3wm übernommen (WIN-F)
+   - DEFINE C-M-RET to go into fullscreen mode and C-M-RET to leave it.
+   - [2017-02-21 Tue] - added bar-toggles in fullscreen/non-fullscreen
+     + allerdings cycle ich aktuell zwischen 3 Modi durch (allerdings gefällt mir das im Moment sehr gut.):
+       * fullscreen, keine bars
+       * non-fullscreen, mit bars
+       * non-fullscreen, ohne bars
+*** toggle all bars
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  (defun toggle-bars ()
+    "Toggles bars visibility."
+    (interactive)
+    (menu-bar-mode)
+    (tool-bar-mode)
+    (scroll-bar-mode))
+#+END_SRC
 
-   DEFINE C-M-RET to go into fullscreen mode and C-M-RET to leave it.
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  (defun hide-bars ()
+    "Hides the bars."
+    (interactive)
+    (menu-bar-mode -1)
+    (tool-bar-mode -1)
+    (scroll-bar-mode -1))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  (defun show-bars ()
+    "Hides the bars."
+    (interactive)
+    (menu-bar-mode 1)
+    (tool-bar-mode 1)
+    (scroll-bar-mode 1))
+#+END_SRC
+
 *** Makro
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-;; mein eigener toggle-fullscreen approach ...
-(defun toggle-fullscreen ()
-  (interactive)
-  (set-frame-parameter nil 'fullscreen (if (frame-parameter nil
-                                           'fullscreen) nil
-                                           'fullboth)))
+  ;; mein eigener toggle-fullscreen approach ...
+  (defun go-fullscreen ()
+    (interactive)
+    (set-frame-parameter nil 'fullscreen (if (frame-parameter nil
+							      'fullscreen) nil
+					   'fullboth))
+    (hide-bars))
+
+  (defun go-non-fullscreen ()
+    (interactive)
+    (set-frame-parameter nil 'width 82)
+    (set-frame-parameter nil 'height 40)
+    (set-frame-parameter nil 'fullscreen 'fullheight)
+    (show-bars))
+
+  (defun toggle-fullscreen ()
+    (interactive)
+    (if (eq (frame-parameter nil 'fullscreen) 'fullboth)  ; tests if already in fullscreen
+	(go-non-fullscreen)
+      (go-fullscreen)))
 #+END_SRC
 *** passender Shortcut
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
