@@ -571,12 +571,16 @@ don't want is there, but I haven't had any such problems yet.
    - [[http://pygments.org/][pygmentize]]
    - [[http://mirror.ctan.org/macros/latex/contrib/minted.zip][minted.zip]]
    
-   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   Unfortunately this doesn't work this way in windows, right now.
+   #+BEGIN_SRC emacs-lisp :tangle no
      (require 'ox-latex)
      (add-to-list 'org-latex-packages-alist '("" "minted"))
      (setq org-latex-listings 'minted)   
    #+END_SRC
-
+** TODO org-export minted error fix for windows → --shell-escape? [[http://orgmode.org/worg/org-tutorials/org-latex-preview.html][link]]
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     (setq org-latex-to-pdf-process '("PDFLATEX=\"pdflatex –shell-escape\" texi2dvi -p %f"))
+   #+END_SRC
 ** org-id
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
      ;; org-id laden
