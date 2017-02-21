@@ -110,7 +110,8 @@ Next time, simply reload changes with =C-c i=
   ;; set font for all windows
   ;; (set-frame-font "Liberation Mono-14" t)
   ;; (set-frame-font "DejaVu Sans Mono-11" nil t)
-  (set-frame-font "Inconsolata-14" nil t)
+  ;; (set-frame-font "Inconsolata-14" nil t)
+  (set-face-attribute 'default nil :height 125 :family "Consolas")
 #+END_SRC
 *** Font Size
 #+BEGIN_SRC emacs-lisp :tangle no
