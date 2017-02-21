@@ -5,7 +5,9 @@ should evaluate every piece of emacs-lisp code available here.
 
 Next time, simply reload changes with =C-c i=
 
-* Test - load early
+This file can be opened quickly via =C-c e=
+
+* Test - muss sich erst noch beweisen
 ** PACKAGE MANAGER
    emacs unter windows hat probleme mit jeglichen TLS (https://…), deswegen vorerst weg lassen.
  #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -23,6 +25,26 @@ Next time, simply reload changes with =C-c i=
  #+END_SRC
 
 
+** use-package
+   use-package ist ein sehr praktisches Paket von John Wiegley, das die Strukturierung und Optimierung der Emacs-Konfiguration ermöglicht. Weitere Informationen finden sich auf der Seite des Github-Projekts → https://github.com/jwiegley/use-package
+
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   ;; Bootstrap `use-package'
+   (unless (package-installed-p 'use-package)
+   (package-refresh-contents)
+   (package-install 'use-package))
+   #+END_SRC
+
+
+** Softwareentwicklung - Allgemeines
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(use-package auto-complete
+  :ensure t)
+(use-package projectile
+  :ensure t)
+(use-package paredit
+  :ensure t)
+   #+END_SRC
 
 
 * ONLY for Windows portable Version
@@ -189,7 +211,7 @@ Next time, simply reload changes with =C-c i=
 #+END_SRC
 *** load Zenburn - WORKAROUND
     [[http://stackoverflow.com/questions/11127109/emacs-24-package-system-initialization-problems/11140619#11140619][link]]
-    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+    #+BEGIN_SRC emacs-lisp :tangle no
       (defun zenburn-init ()
         (load-theme 'zenburn)
         )
@@ -203,14 +225,15 @@ Next time, simply reload changes with =C-c i=
     #+END_SRC
 ** Parenthesis
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-;; Klammer-Hilfs-Modus aktivieren
-(show-paren-mode t)
+  ;; Klammer-Hilfs-Modus aktivieren
+  (show-paren-mode t)
 
-;; *optische* Klammer-Hilfe aktivieren
-(setq show-paren-style 'expression)
+  ;; *optische* Klammer-Hilfe aktivieren
+  ;; (setq show-paren-style 'expression)
+  (setq show-paren-style 'parenthesis)
 
-;; yay rainbows!
-;(global-rainbow-delimiters-mode t)
+  ;; yay rainbows!
+  ;(global-rainbow-delimiters-mode t)
 #+END_SRC
 
 
@@ -224,15 +247,6 @@ Conventions]]
 ;;  #########################
 #+END_SRC
 
-** use-package
-   use-package ist ein sehr praktisches Paket von John Wiegley, das die Strukturierung und Optimierung der Emacs-Konfiguration ermöglicht. Weitere Informationen finden sich auf der Seite des Github-Projekts → https://github.com/jwiegley/use-package
-
-   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-   ;; Bootstrap `use-package'
-   (unless (package-installed-p 'use-package)
-   (package-refresh-contents)
-   (package-install 'use-package))
-   #+END_SRC
 ** Use RegEx search by default
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; Interactive search key bindings. By default, C-s runs
@@ -242,6 +256,35 @@ Conventions]]
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 #+END_SRC
+** Which Key
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     ;; Popups mit Erläuterungen zu Tastenkombinationen, Beispiel C-x und dann warten.
+     (use-package which-key
+       :ensure t
+       :config
+       (which-key-mode))
+   #+END_SRC
+
+   #+RESULTS:
+   : t
+
+** powerline
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     (use-package powerline
+       :ensure t)
+     (require 'powerline)
+     (powerline-default-theme)
+   #+END_SRC
+** Flycheck
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     ;; Flycheck is a modern on-the-fly syntax checking extension for GNU Emacs.
+     (use-package flycheck
+       :ensure t
+       :init
+       (global-flycheck-mode t))
+
+
+   #+END_SRC
 ** Comments
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; comments
@@ -251,14 +294,30 @@ Conventions]]
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 (global-set-key (kbd "C-;") 'toggle-comment-on-line)
 #+END_SRC
-** Enable ido-mode  # C-f für die NORMALE AUSWAHLMETHODE
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+** (OLD) Enable ido-mode  # C-f für die NORMALE AUSWAHLMETHODE
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; Enable ido-mode global and with flex matching
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
 #+END_SRC
 
+** Ido-Mode und Smex
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     (ido-mode t)
+     (setq ido-enable-flex-matching t) ;; fuzzy matching is a must have
+     (setq ido-enable-last-directory-history nil) ;; forget latest selected directory names
+
+     (use-package smex
+       :ensure t
+       :bind (("M-x" . smex))
+       :config (smex-initialize))
+
+     ;; SMEX
+     (global-set-key (kbd "M-x") 'smex)
+     (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+     (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x:
+   #+END_SRC
 ** auto-complete 1.3.1
    sollte aus den Paketen installiert werden
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -376,7 +435,8 @@ Conventions]]
 (global-set-key "\C-\M-q" 'unfill-region)
 #+END_SRC
 ** Opening links to .pdf in evince
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   Not using this in Windows
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; evince um *.PDF Dateien zu öffnen
 (add-hook 'org-mode-hook
       '(lambda ()
@@ -395,6 +455,9 @@ don't want is there, but I haven't had any such problems yet.
 ;; BAD: "yes or no" - GOOD: "y or n"
 (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
+
+#+RESULTS:
+: yes-or-no-p
 
 ** Global shortcuts
 *** GNU-EMACS EXTENSIONS
@@ -468,8 +531,29 @@ don't want is there, but I haven't had any such problems yet.
                          (interactive)
                          (join-line -1)))
      #+END_SRC
-**** MAGIT-STATUS
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+**** Magit
+     #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+       (use-package magit
+         :ensure t
+         :config (setq magit-display-buffer-function  ;; Make Magit Fullscreen
+                       (lambda (buffer)
+                         (if magit-display-buffer-noselect
+          		   ;; the code that called `magit-display-buffer-function'
+          		   ;; expects the original window to stay alive, we can't go
+          		   ;; fullscreen
+          		   (magit-display-buffer-traditional buffer)
+                           (delete-other-windows)
+                           ;; make sure the window isn't dedicated, otherwise
+                           ;; `set-window-buffer' throws an error
+                           (set-window-dedicated-p nil nil)
+                           (set-window-buffer nil buffer)
+                           ;; return buffer's window
+                           (get-buffer-window buffer)))))
+
+       (global-set-key "\C-xg" 'magit-status)
+     #+END_SRC
+**** MAGIT-STATUS (ist jetzt im <use-package magit> Teil einbegriffen)
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; magit-status shortcut
 (global-set-key (kbd "C-x g") 'magit-status)
 #+END_SRC
@@ -513,6 +597,13 @@ don't want is there, but I haven't had any such problems yet.
 ;; don't display magit-message
 (setq magit-last-seen-setup-instructions "1.4.0")
 #+END_SRC
+**** Open emacs initialization file
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; Emacs-Konfigurationsdatei auf C-c e
+(global-set-key "\C-ce" '(lambda ()
+                           (interactive)
+                           (find-file "~/.dot-org-files/init.org")))
+#+END_SRC
 **** Load emacs initialization file
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; load emacs initialization file
@@ -527,12 +618,12 @@ don't want is there, but I haven't had any such problems yet.
    #+END_SRC
 ** Neotree auf <F1>
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-   ;; Die Breite des Neotree-Fensters ist mir in der Grundeinstellung zu schmal.
-   (use-package neotree
-   :ensure t
-   :config (setq neo-window-width 40))
+     ;; Die Breite des Neotree-Fensters ist mir in der Grundeinstellung zu schmal.
+     (use-package neotree
+       :ensure t
+       :config (setq neo-window-width 40))
 
-   (define-key global-map (kbd "<f1>") 'neotree)
+     (define-key global-map (kbd "<f1>") 'neotree)
    #+END_SRC
 
 
@@ -595,7 +686,7 @@ don't want is there, but I haven't had any such problems yet.
 *** Überwachte agenda-files
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; ZU ÜBERWACHENDE DATEIEN für den org-mode
-(setq org-agenda-files (list "~/org/life.org" "~/org/work.org"))
+(setq org-agenda-files (list "~/org/work.org"))
 #+END_SRC
 *** highlight current line
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -790,8 +881,32 @@ Additional shortcuts for navigating through org-mode documents:
   (setq org-latex-create-formula-image-program 'imagemagick)
 #+END_SRC
 
-** initial babel supported languages
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+** Source Code Blocks und Babel
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     (use-package org-babel
+       :init
+       (org-babel-do-load-languages
+        'org-babel-load-languages
+        '((sh . t)
+          (org . t)
+          (python . t)
+          (C . t)
+          (gnuplot . t)
+          (latex . t)
+          (R . t)
+          (calc . t)
+          (emacs-lisp . t)
+          (ruby . t)
+          (octave . t)
+          (matlab . t)
+          (perl . t)
+          (plantuml . t)
+          (ditaa . t)
+          (latex . t)
+          )))
+   #+END_SRC
+** (OLD) initial babel supported languages
+#+BEGIN_SRC emacs-lisp :tangle no
   ;; initial babel language support
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -810,17 +925,22 @@ Additional shortcuts for navigating through org-mode documents:
      (matlab . t)
      (perl . t)
      (plantuml . t)
-     (ditaa . t)
-     ))
+     (ditaa . t)))
 #+END_SRC
 
+** Einrückung im org-babel sourcecode hat bei Python "Erklärunsbedarf"
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     ;; Wenn man mit Sprachen wie Python arbeitet, bei denen die Einrückung des Codes „Erklärungswert“ hat, sind folgende Einstellungen sinnvoll: 
+     (setq org-edit-src-content-indentation 0)
+     (setq org-src-tab-acts-natively t)
+     (setq org-src-preserve-indentation t)
+   #+END_SRC
 ** babel code-block evaluation (no questions asked)
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
   ;; Do not ask whether to evaluate every single code-block, but rather
   ;; just DO IT!
   (setq org-confirm-babel-evaluate nil)
 #+END_SRC
-
 
 
 ** enlagre LaTeX fragments
@@ -830,6 +950,15 @@ Additional shortcuts for navigating through org-mode documents:
   ;; Enlarge the LaTeX fragnents in org-files by a factor
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
 #+END_SRC
+
+** Org-bullets
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+     (use-package org-bullets
+       :ensure t
+       :config
+       (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+   #+END_SRC
+
 
 * CC-MODE
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
