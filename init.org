@@ -823,6 +823,13 @@ Additional shortcuts for navigating through org-mode documents:
 
 
 
+** enlagre LaTeX fragments
+   - [[http://stackoverflow.com/questions/11272236/how-to-make-formule-bigger-in-org-mode-of-emacs][link]]
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ;; Enlarge the LaTeX fragnents in org-files by a factor
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+#+END_SRC
 
 * CC-MODE
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
