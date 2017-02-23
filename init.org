@@ -86,9 +86,10 @@ This file can be opened quickly via =C-c e=
 #+END_SRC
 
 ** Load common Lisp for Emacs
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-;; mandatory for tabbar to work 
-(require 'cl)
+#+BEGIN_SRC emacs-lisp :tangle no
+;; mandatory for tabbar to work
+;; (require 'cl)
+(use-package cl)
 #+END_SRC
 
 ** VERDAMMTE System-Locale setzen - Englisch -Punkt-
@@ -682,13 +683,19 @@ don't want is there, but I haven't had any such problems yet.
    #+END_SRC
 ** org-id
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-     ;; org-id laden
-     (require 'org-id)
+(use-package org-id
+  :config
+  (add-hook 'org-mode-hook
+	  (lambda ()
+	    (local-set-key "\C-ck" 'org-id-get-create))))
 
-     ;; passender shortcut - org-mode intern
-     (add-hook 'org-mode-hook
-               (lambda ()
-                 (local-set-key "\C-ck" 'org-id-get-create)))
+;; ;; org-id laden
+;; (require 'org-id)
+
+;; ;; passender shortcut - org-mode intern
+;; (add-hook 'org-mode-hook
+;; 	  (lambda ()
+;; 	    (local-set-key "\C-ck" 'org-id-get-create)))
    #+END_SRC
 ** Agenda
 *** Überwachte agenda-files
