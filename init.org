@@ -47,7 +47,7 @@ This file can be opened quickly via =C-c e=
    #+END_SRC
 
 
-* ONLY for Windows portable Version
+* For Windows portable Version ONLY
 ** site-lisp.el
    X:\!emacs\ sei das emacs portable Verzeichnis
    → DATEI HÄNDISCH ERSTELLEN & EMACS NEU STARTEN: X:\!emacs\share\emacs\site-lisp\site-start.el
@@ -64,13 +64,14 @@ This file can be opened quickly via =C-c e=
    → siehe site-lisp.el
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ; these should be the same as for the portable app "CommandPromptPortable"
-;; example of setting env var named “path”, by appending a new path to existing path
+;; example of setting env var named "path", by appending a new path to existing path
 (setenv "PATH"
         (concat
          (getenv "PATH") ";"
-         (concat usb-drive-letter "gnuwin32\\bin") ";"
-         (concat usb-drive-letter "ImageMagick\\x64") ";"
-         (concat usb-drive-letter "gnuplot\\x64\\gnuplot\\bin\\")
+         (concat usb-drive-letter "gnuwin32\\bin\\") ";"
+         (concat usb-drive-letter "ImageMagick\\x64\\") ";"
+         (concat usb-drive-letter "gnuplot\\x64\\gnuplot\\bin\\") ";"
+	 (concat usb-drive-letter "nmap-7.40\\")
          )
         )
 #+END_SRC
@@ -256,6 +257,15 @@ Conventions]]
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 #+END_SRC
+** Use =string= instead of =read= for the =re-builder=
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(use-package re-builder
+  :ensure t
+  :config (setq reb-re-syntax 'string))
+
+;; (require 're-builder)
+;; (setq reb-re-syntax 'string)
+#+END_SRC
 ** Which Key
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
      ;; Popups mit Erläuterungen zu Tastenkombinationen, Beispiel C-x und dann warten.
@@ -282,8 +292,6 @@ Conventions]]
        :ensure t
        :init
        (global-flycheck-mode t))
-
-
    #+END_SRC
 ** Comments
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -978,6 +986,21 @@ Additional shortcuts for navigating through org-mode documents:
 ** TODO see [[https://www.python.org/dev/peps/pep-0007/][PEP0007]]
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; nothing yet for PEP0007
+#+END_SRC
+
+
+* CSharp-MODE
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;;  #################
+;; ### CSharp-MODE ###
+;;  #################
+#+END_SRC
+** load csharp-mode
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(use-package csharp-mode
+  :ensure t
+  :config
+  (setq auto-mode-alist (append '(("\\.cs$" . csharp-mode)) auto-mode-alist)))
 #+END_SRC
 
 
