@@ -213,7 +213,7 @@ This file can be opened quickly via =C-c e=
 #+END_SRC
 *** load Zenburn - WORKAROUND
     [[http://stackoverflow.com/questions/11127109/emacs-24-package-system-initialization-problems/11140619#11140619][link]]
-    #+BEGIN_SRC emacs-lisp :tangle no
+    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
       (defun zenburn-init ()
         (load-theme 'zenburn)
         )
