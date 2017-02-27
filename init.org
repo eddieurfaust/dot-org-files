@@ -48,6 +48,30 @@ This file can be opened quickly via =C-c e=
 
 
 * For Windows portable Version ONLY
+  [[http://stackoverflow.com/questions/1817257/how-to-determine-operating-system-in-elisp][link]]
+  #+BEGIN_QUOTE
+  The system-type variable:
+
+  system-type is a variable defined in `C source code'.
+  Its value is darwin
+  
+  Documentation:
+  Value is symbol indicating type of operating system you are using.
+  Special values:
+    `gnu'         compiled for a GNU Hurd system.
+    `gnu/linux'   compiled for a GNU/Linux system.
+    `darwin'      compiled for Darwin (GNU-Darwin, Mac OS X, ...).
+    `ms-dos'      compiled as an MS-DOS application.
+    `windows-nt'  compiled as a native W32 application.
+    `cygwin'      compiled using the Cygwin library.
+  Anything else indicates some sort of Unix system.
+  #+END_QUOTE
+  #+BEGIN_QUOTE 
+  (if (eq system-type 'darwin)
+  ; something for OS X if true
+  ; optional something if not
+  )
+  #+END_QUOTE
 ** site-lisp.el
    X:\!emacs\ sei das emacs portable Verzeichnis
    → DATEI HÄNDISCH ERSTELLEN & EMACS NEU STARTEN: X:\!emacs\share\emacs\site-lisp\site-start.el
@@ -1191,6 +1215,13 @@ the current directory in Python's search path."
 #+END_SRC
 
 ** gnuplot
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(use-package gnuplot
+  :ensure t
+  :config
+  (setq auto-mode-alist (append '(("\\.gp$" . gnuplot-mode)) auto-mode-alist)))
+#+END_SRC
+** gnuplot (OLD)
    "==> To add the gnuplot mode in Emacs, add the content of
    /usr/share/emacs/site-lisp/dotemacs to your ~/.emacs file."
    #+BEGIN_SRC emacs-lisp :tangle no
