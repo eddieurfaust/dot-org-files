@@ -303,6 +303,18 @@ Conventions]]
    #+RESULTS:
    : t
 
+** avy, a better =ace-jump=
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; =avy= a better =ace-jump-mode=
+;; inklusive Anpassung an NEO2-Layout
+(use-package avy
+  :ensure t
+  :init (setq avy-background t)
+  :config (setq avy-keys-alist
+		`((avy-goto-char . ,(number-sequence ?a ?f))
+		  (avy-goto-word-1 . (?u ?i ?a ?e ?o ?s ?n ?r ?t ?d))))
+  :bind ("C-c j" . avy-goto-word-or-subword-1))
+   #+END_SRC
 ** powerline
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
      (use-package powerline
