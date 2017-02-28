@@ -313,6 +313,7 @@ Conventions]]
 (use-package avy
   :ensure t
   :init (setq avy-background t)
+
   :config (setq avy-keys '(?u ?i ?a ?e ?o ?s ?n ?r ?t ?d ?y ?w ?c ?l ?v ?x ?k ?h ?g ?f ?q ?p ?z ?b ?m ?j))
   :bind (("M-g n" . avy-goto-word-or-subword-1)
 	 ("M-g r" . avy-goto-char-2)
