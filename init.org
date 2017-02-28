@@ -24,7 +24,6 @@ This file can be opened quickly via =C-c e=
    (package-initialize)
  #+END_SRC
 
-
 ** use-package
    use-package ist ein sehr praktisches Paket von John Wiegley, das die Strukturierung und Optimierung der Emacs-Konfiguration ermöglicht. Weitere Informationen finden sich auf der Seite des Github-Projekts → https://github.com/jwiegley/use-package
 
@@ -34,7 +33,6 @@ This file can be opened quickly via =C-c e=
    (package-refresh-contents)
    (package-install 'use-package))
    #+END_SRC
-
 
 ** Softwareentwicklung - Allgemeines
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -81,7 +79,6 @@ This file can be opened quickly via =C-c e=
 
 (setenv "HOME" usb-home-dir)
 #+END_SRC
-
 
 ** Setze die PATH-Variable für "CommandPromptPortable"
    Die Variable usb-drive-letter muss gesetzt sein.
@@ -304,16 +301,22 @@ Conventions]]
    : t
 
 ** avy, a better =ace-jump=
+   #+BEGIN_QUOTE
+   You can actually replace the <M-g g> binding of =goto-line=, since if you enter a digit for =avy-goto-line=, it will switch to =goto-line= with that digit already entered.
+   #+END_QUOTE
+   - =avy-keys= erwartet offenbar eine Liste mit allen Buchstaben [a-z]. Der "unterliegende Code" wird offenbar mit dem <?> Operator zurück gegeben.
+   - ?a evaluated gives: "97 (#o141, #x61, ?a)" → (octal hexadecimal ASCII(?))
+   - Die Liste wird gefüllt, in absteigender Reihenfolge, mit den Buchstaben welche ich für das Springen für die avy-Kommandos nutzen möchte.
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; =avy= a better =ace-jump-mode=
 ;; inklusive Anpassung an NEO2-Layout
 (use-package avy
   :ensure t
   :init (setq avy-background t)
-  :config (setq avy-keys-alist
-		`((avy-goto-char . ,(number-sequence ?a ?f))
-		  (avy-goto-word-1 . (?u ?i ?a ?e ?o ?s ?n ?r ?t ?d))))
-  :bind ("C-c j" . avy-goto-word-or-subword-1))
+  :config (setq avy-keys '(?u ?i ?a ?e ?o ?s ?n ?r ?t ?d ?y ?w ?c ?l ?v ?x ?k ?h ?g ?f ?q ?p ?z ?b ?m ?j))
+  :bind (("M-g n" . avy-goto-word-or-subword-1)
+	 ("M-g r" . avy-goto-char-2)
+	 ("M-g g" . avy-goto-line)))
    #+END_SRC
 ** powerline
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -355,7 +358,8 @@ Conventions]]
 
      (use-package smex
        :ensure t
-       :bind (("M-x" . smex))
+       :bind (("M-x" . smex)
+	      ("C-x m" . smex))
        :config (smex-initialize))
 
      ;; SMEX
@@ -363,6 +367,10 @@ Conventions]]
      (global-set-key (kbd "M-X") 'smex-major-mode-commands)
      (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x:
    #+END_SRC
+
+   #+RESULTS:
+   : execute-extended-command
+
 ** auto-complete 1.3.1
    sollte aus den Paketen installiert werden
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -558,8 +566,9 @@ don't want is there, but I haven't had any such problems yet.
 (global-set-key "\C-x\C-k" 'kill-region)
 #+END_SRC
 
-**** GOTO-LINE
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+**** GOTO-LINE (OLD)
+     See [[*avy, a better =ace-jump=][avy, a better =ace-jump=]]
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; goto-line shortcut
 (global-set-key "\M-g" 'goto-line)
 #+END_SRC
