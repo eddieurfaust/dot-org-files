@@ -311,9 +311,13 @@ Conventions]]
   :ensure t
   :init (setq avy-background t)
   :config (setq avy-keys-alist
-		`((avy-goto-char . ,(number-sequence ?a ?f))
-		  (avy-goto-word-1 . (?u ?i ?a ?e ?o ?s ?n ?r ?t ?d))))
-  :bind ("C-c j" . avy-goto-word-or-subword-1))
+		`((avy-goto-char . (?u ?i ?a ?e ?o ?s ?n ?r ?t ?d))
+		  (avy-goto-word-1 . (?u ?i ?a ?e ?o ?s ?n ?r ?t ?d))
+		  (avy-goto-char-2 . (?u ?i ?a ?e ?o ?s ?n ?r ?t ?d))
+		  (avy-goto-line . (?u ?i ?a ?e ?o ?s ?n ?r ?t ?d))))
+  :bind (("C-c n" . avy-goto-word-or-subword-1)
+	 ("C-c r" . avy-goto-char-2)
+	 ("C-c s" . avy-goto-line)))
    #+END_SRC
 ** powerline
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
