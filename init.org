@@ -1,4 +1,4 @@
-*USAGE*
+*USAGE* 
 [[http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php][QUELLE]]
 Do =M-x org-babel-load-file= and provide this file (=~/.emacs.d/init.org=). This
 should evaluate every piece of emacs-lisp code available here.
@@ -304,7 +304,7 @@ Conventions]]
    #+BEGIN_QUOTE
    You can actually replace the <M-g g> binding of =goto-line=, since if you enter a digit for =avy-goto-line=, it will switch to =goto-line= with that digit already entered.
    #+END_QUOTE
-   - =avy-keys= erwartet offenbar eine Liste mit allen Buchstaben [a-z]. Der "unterliegende Code" wird offenbar mit dem <?> Operator zurück gegeben.
+   - =avy-keys= erwartet offenbar eine Liste mit allen Buchstaben [a-z]. Der "Code point" wird offenbar mit dem <?> Operator zurück gegeben.
    - ?a evaluated gives: "97 (#o141, #x61, ?a)" → (octal hexadecimal ASCII(?))
    - Die Liste wird gefüllt, in absteigender Reihenfolge, mit den Buchstaben welche ich für das Springen für die avy-Kommandos nutzen möchte.
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -314,11 +314,11 @@ Conventions]]
   :ensure t
   :init (setq avy-background t)
   :config
-  (setq avy-keys '(?n ?e ?r ?a ?s ?o ?t ?i ?d ?u ?y ?h ?c ?g ?l ?f ?v ?k ?w ?q ?x ?b ?p ?m ?z ?j))
-  (setq avy-keys-alist '((avy-goto-word-or-subword-1 . (?n ?e ?r ?a ?s ?o ?t ?i))
-			 (avy-goto-word-1 . (?n ?e ?r ?a ?s ?o ?t ?i))
-			 (avy-goto-char-2 . (?n ?e ?r ?a ?s ?o ?t ?i))
-			 (avy-goto-line . (?n ?e ?r ?a ?s ?o ?t ?i))))
+  (setq avy-keys '(?n ?e ?r ?a ?t ?i ?s ?o ?d ?u ?y ?h ?c ?g ?l ?f ?v ?k ?w ?q ?x ?b ?p ?m ?z ?j))
+  (setq avy-keys-alist '((avy-goto-word-or-subword-1 . (?n ?e ?r ?a ?t ?i ?s ?o))
+			 (avy-goto-word-1 . (?n ?e ?r ?a ?t ?i ?s ?o))
+			 (avy-goto-char-2 . (?n ?e ?r ?a ?t ?i ?s ?o))
+			 (avy-goto-line . (?n ?e ?r ?a ?t ?i ?s ?o))))
   (setq avy-all-windows nil)
   :bind
   (("M-g n" . avy-goto-word-or-subword-1)
