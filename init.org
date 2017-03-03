@@ -7,6 +7,75 @@ Next time, simply reload changes with =C-c i=
 
 This file can be opened quickly via =C-c e=
 
+
+* For Windows portable Version ONLY
+** code from
+   [[http://stackoverflow.com/questions/1817257/how-to-determine-operating-system-in-elisp][link]]
+   #+BEGIN_QUOTE
+   The system-type variable:
+
+   system-type is a variable defined in `C source code'.
+   Its value is darwin
+
+   Documentation:
+   Value is symbol indicating type of operating system you are using.
+   Special values:
+     `gnu'         compiled for a GNU Hurd system.
+     `gnu/linux'   compiled for a GNU/Linux system.
+     `darwin'      compiled for Darwin (GNU-Darwin, Mac OS X, ...).
+     `ms-dos'      compiled as an MS-DOS application.
+     `windows-nt'  compiled as a native W32 application.
+     `cygwin'      compiled using the Cygwin library.
+   Anything else indicates some sort of Unix system.
+   #+END_QUOTE
+** actual code I use from [[http://ergoemacs.org/emacs/elisp_determine_OS_version.html][ergo-emacs]]
+   another [[https://www.emacswiki.org/emacs/CustomizingBoth][link]]
+   #+BEGIN_SRC emacs-lisp
+;; check OS type
+(cond
+ ((string-equal system-type "windows-nt") ; Microsoft Windows
+  (progn
+    (message "Microsoft Windows")))
+ ((string-equal system-type "darwin") ; Mac OS X
+  (progn
+    (message "Mac OS X")))
+ ((string-equal system-type "gnu/linux") ; linux
+  (progn
+    (message "Linux"))))Γ
+   #+END_SRC
+
+** site-lisp.el
+   X:\!emacs\ sei das emacs portable Verzeichnis
+   → DATEI HÄNDISCH ERSTELLEN & EMACS NEU STARTEN: X:\!emacs\share\emacs\site-lisp\site-start.el
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  (if (string-equal system-type "windows-nt")
+    (defvar usb-drive-letter (substring data-directory 0 3))
+    (defvar usb-home-dir (concat usb-drive-letter "home/"))
+
+    (setenv "HOME" usb-home-dir)
+    )
+#+END_SRC
+
+** Setze die PATH-Variable für/von (?) "CommandPromptPortable"
+   Die Variable usb-drive-letter muss gesetzt sein.
+   → siehe site-lisp.el
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+  ; these should be the same as for the portable app "CommandPromptPortable"
+  ;; example of setting env var named "path", by appending a new path to existing path
+  (if (string-equal system-type "windows-nt")
+      (setenv "PATH"
+              (concat
+               (getenv "PATH") ";"
+               (concat usb-drive-letter "gnuwin32\\bin\\") ";"
+               (concat usb-drive-letter "ImageMagick\\x64\\") ";"
+               (concat usb-drive-letter "gnuplot\\x64\\gnuplot\\bin\\") ";"
+               (concat usb-drive-letter "nmap-7.40\\")
+               )
+              )
+    )
+#+END_SRC
+
+
 * Test - muss sich erst noch beweisen
 ** PACKAGE MANAGER
    emacs unter windows hat probleme mit jeglichen TLS (https://…), deswegen vorerst weg lassen.
@@ -38,64 +107,11 @@ This file can be opened quickly via =C-c e=
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 (use-package auto-complete
   :ensure t)
-(use-package projectile
-  :ensure t)
+;; (use-package projectile
+;;   :ensure t)
 (use-package paredit
   :ensure t)
    #+END_SRC
-
-
-* For Windows portable Version ONLY
-  [[http://stackoverflow.com/questions/1817257/how-to-determine-operating-system-in-elisp][link]]
-  #+BEGIN_QUOTE
-  The system-type variable:
-
-  system-type is a variable defined in `C source code'.
-  Its value is darwin
-  
-  Documentation:
-  Value is symbol indicating type of operating system you are using.
-  Special values:
-    `gnu'         compiled for a GNU Hurd system.
-    `gnu/linux'   compiled for a GNU/Linux system.
-    `darwin'      compiled for Darwin (GNU-Darwin, Mac OS X, ...).
-    `ms-dos'      compiled as an MS-DOS application.
-    `windows-nt'  compiled as a native W32 application.
-    `cygwin'      compiled using the Cygwin library.
-  Anything else indicates some sort of Unix system.
-  #+END_QUOTE
-  #+BEGIN_QUOTE 
-  (if (eq system-type 'darwin)
-  ; something for OS X if true
-  ; optional something if not
-  )
-  #+END_QUOTE
-** site-lisp.el
-   X:\!emacs\ sei das emacs portable Verzeichnis
-   → DATEI HÄNDISCH ERSTELLEN & EMACS NEU STARTEN: X:\!emacs\share\emacs\site-lisp\site-start.el
-#+BEGIN_SRC emacs-lisp :tangle no
-(defvar usb-drive-letter (substring data-directory 0 3))
-(defvar usb-home-dir (concat usb-drive-letter "home/"))
-
-(setenv "HOME" usb-home-dir)
-#+END_SRC
-
-** Setze die PATH-Variable für "CommandPromptPortable"
-   Die Variable usb-drive-letter muss gesetzt sein.
-   → siehe site-lisp.el
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-; these should be the same as for the portable app "CommandPromptPortable"
-;; example of setting env var named "path", by appending a new path to existing path
-(setenv "PATH"
-        (concat
-         (getenv "PATH") ";"
-         (concat usb-drive-letter "gnuwin32\\bin\\") ";"
-         (concat usb-drive-letter "ImageMagick\\x64\\") ";"
-         (concat usb-drive-letter "gnuplot\\x64\\gnuplot\\bin\\") ";"
-	 (concat usb-drive-letter "nmap-7.40\\")
-         )
-        )
-#+END_SRC
 
 
 * Loading essentials:
@@ -152,11 +168,17 @@ This file can be opened quickly via =C-c e=
 ** Regarding Fonts
 *** Standard Font
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-  ;; set font for all windows
-  ;; (set-frame-font "Liberation Mono-14" t)
-  ;; (set-frame-font "DejaVu Sans Mono-11" nil t)
-  ;; (set-frame-font "Inconsolata-14" nil t)
-  (set-face-attribute 'default nil :height 125 :family "Consolas")
+    ;; set font for all windows
+    ;; (set-frame-font "Liberation Mono-14" t)
+    ;; (set-frame-font "DejaVu Sans Mono-11" nil t)
+
+  (if (string-equal system-type "gnu/linux")
+      (set-frame-font "Inconsolata-14" nil t)
+    )
+
+  (if (string-equal system-type "windows-nt")
+      (set-face-attribute 'default nil :height 125 :family "Consolas")
+    )
 #+END_SRC
 *** Font Size
 #+BEGIN_SRC emacs-lisp :tangle no
