@@ -9,6 +9,28 @@ This file can be opened quickly via =C-c e=
 
 
 * For Windows portable Version ONLY
+** !NEWEST -> this seems to work (finally) [[http://stackoverflow.com/a/26137517][link]]
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(defmacro with-system (type &rest body)
+  "Evaluate BODY if `system-type' equals TYPE."
+  (declare (indent defun))
+  `(when (eq system-type ',type)
+     ,@body))
+
+(with-system windows-nt
+  (defvar usb-drive-letter (substring data-directory 0 3))
+  (defvar usb-home-dir (concat usb-drive-letter "home/"))
+  (setenv "PATH"
+	  (concat
+	   (getenv "PATH") ";"
+	   (concat usb-drive-letter "gnuwin32\\bin\\") ";"
+	   (concat usb-drive-letter "ImageMagick\\x64\\") ";"
+	   (concat usb-drive-letter "gnuplot\\x64\\gnuplot\\bin\\") ";"
+	   (concat usb-drive-letter "nmap-7.40\\")
+	   )
+	  )
+  )
+   #+END_SRC
 ** code from
    [[http://stackoverflow.com/questions/1817257/how-to-determine-operating-system-in-elisp][link]]
    #+BEGIN_QUOTE
@@ -47,7 +69,7 @@ This file can be opened quickly via =C-c e=
 ** site-lisp.el
    X:\!emacs\ sei das emacs portable Verzeichnis
    → DATEI HÄNDISCH ERSTELLEN & EMACS NEU STARTEN: X:\!emacs\share\emacs\site-lisp\site-start.el
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
   (if (string-equal system-type "windows-nt")
     (defvar usb-drive-letter (substring data-directory 0 3))
     (defvar usb-home-dir (concat usb-drive-letter "home/"))
@@ -59,7 +81,7 @@ This file can be opened quickly via =C-c e=
 ** Setze die PATH-Variable für/von (?) "CommandPromptPortable"
    Die Variable usb-drive-letter muss gesetzt sein.
    → siehe site-lisp.el
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
   ; these should be the same as for the portable app "CommandPromptPortable"
   ;; example of setting env var named "path", by appending a new path to existing path
   (if (string-equal system-type "windows-nt")
@@ -168,17 +190,16 @@ This file can be opened quickly via =C-c e=
 ** Regarding Fonts
 *** Standard Font
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-    ;; set font for all windows
-    ;; (set-frame-font "Liberation Mono-14" t)
-    ;; (set-frame-font "DejaVu Sans Mono-11" nil t)
+;; set font for all windows
+;; (set-frame-font "Liberation Mono-14" t)
+;; (set-frame-font "DejaVu Sans Mono-11" nil t)
 
-  (if (string-equal system-type "gnu/linux")
-      (set-frame-font "Inconsolata-14" nil t)
-    )
-
-  (if (string-equal system-type "windows-nt")
-      (set-face-attribute 'default nil :height 125 :family "Consolas")
-    )
+(with-system windows-nt
+  (set-face-attribute 'default nil :height 125 :family "Consolas")
+  )
+(with-system gnu/linux
+  (set-frame-font "Inconsolata-14" nil t)
+  )
 #+END_SRC
 *** Font Size
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -515,7 +536,7 @@ Conventions]]
 ;; passenden Shortcut setzen
 (global-set-key "\C-\M-q" 'unfill-region)
 #+END_SRC
-** Opening links to .pdf in evince
+** TODO Opening links to .pdf in evince [WIN <-> LINUX distinction]
    Not using this in Windows
 #+BEGIN_SRC emacs-lisp :tangle no
 ;; evince um *.PDF Dateien zu öffnen
@@ -693,7 +714,7 @@ don't want is there, but I haven't had any such problems yet.
 (lambda() (interactive)(org-babel-load-file "~/.dot-org-files/init.org")))
 #+END_SRC
 
-** Opening external links in chromium
+** TODO Opening external links in chromium [WIN <-> LINUX distinction]
    #+BEGIN_SRC emacs-lisp :tangle no
      (setq browse-url-browser-function 'browse-url-generic
            browse-url-generic-program "chromium")
