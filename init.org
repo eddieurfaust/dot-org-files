@@ -1285,14 +1285,17 @@ the current directory in Python's search path."
 #+END_SRC
 
 ** gnuplot
+   - [[http://emacs.stackexchange.com/questions/2303/making-an-image-ie-image-mode-auto-reload-changes-from-disk][link]]
+   - esp. [[http://git.net/ml/bug-gnu-emacs-gnu/2014-01/msg01061.html][link]]
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 (use-package gnuplot
   :ensure t
   :config
   (setq auto-mode-alist (append '(("\\.gp$" . gnuplot-mode)) auto-mode-alist))
-  (setq auto-mode-alist (append '(("\\.png$" . auto-revert-mode)) auto-mode-alist))
-  (setq revert-without-query '(".*.png"))
-  (setq auto-image-file-mode '(".*.png"))
+  ;; For auto refreshing image-buffers, when working on plots from within emacs
+  (add-hook 'image-mode-hook (lambda ()
+			       (auto-revert-mode 1)
+			       (auto-image-file-mode +1)))
 )
 #+END_SRC
 
