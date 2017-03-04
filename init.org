@@ -1268,8 +1268,19 @@ the current directory in Python's search path."
 (use-package gnuplot
   :ensure t
   :config
-  (setq auto-mode-alist (append '(("\\.gp$" . gnuplot-mode)) auto-mode-alist)))
+  (setq auto-mode-alist (append '(("\\.gp$" . gnuplot-mode)) auto-mode-alist))
+  (setq auto-mode-alist (append '(("\\.png$" . auto-revert-mode)) auto-mode-alist))
+  (setq revert-without-query '(".*.png"))
+  (setq auto-image-file-mode '(".*.png"))
+)
 #+END_SRC
+
+** Revert without Query
+   #+BEGIN_SRC emacs-lisp :tangle no
+;; nützlich um Bilder die in einem Buffer angezeigt werden automatisch neu zu laden
+;; z.B. während einer gnuplot session
+(setq revert-without-query '(".*.png"))
+   #+END_SRC
 ** gnuplot (OLD)
    "==> To add the gnuplot mode in Emacs, add the content of
    /usr/share/emacs/site-lisp/dotemacs to your ~/.emacs file."
