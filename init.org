@@ -524,6 +524,26 @@ Conventions]]
   ;; ... und der passende Shortcut
   (global-set-key [(control meta return)] 'toggle-fullscreen)
 #+END_SRC
+*** my-toggle-bars
+    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(defun my-toggle-bars ()
+    "Toggle bars, the scroll-bar will be toggled right."
+    (interactive)
+    (if (eq menu-bar-mode t)
+	(menu-bar-mode -1)
+      (menu-bar-mode +1))
+
+    (if (eq tool-bar-mode t)
+	(tool-bar-mode -1)
+      (tool-bar-mode +1))
+
+    (if (eq scroll-bar-mode 'right)
+	(scroll-bar-mode -1)
+      (scroll-bar-mode 'right)))
+
+(global-set-key [f9] 'my-toggle-bars)
+
+    #+END_SRC
 ** UNDO the region-word-wrap thingy (M-q)
 *** Code
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
