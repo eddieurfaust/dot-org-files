@@ -313,6 +313,10 @@ Conventions]]
 ;;  #########################
 #+END_SRC
 
+** disable the blinking cursor
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(blink-cursor-mode 0)
+   #+END_SRC
 ** Use RegEx search by default
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; Interactive search key bindings. By default, C-s runs
