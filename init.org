@@ -469,7 +469,7 @@ Conventions]]
        * non-fullscreen, mit bars
        * non-fullscreen, ohne bars
 *** toggle all bars
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
   (defun toggle-bars ()
     "Toggles bars visibility."
     (interactive)
@@ -478,7 +478,7 @@ Conventions]]
     (scroll-bar-mode))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
   (defun hide-bars ()
     "Hides the bars."
     (interactive)
@@ -487,7 +487,7 @@ Conventions]]
     (scroll-bar-mode -1))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
   (defun show-bars ()
     "Hides the bars."
     (interactive)
@@ -497,7 +497,7 @@ Conventions]]
 #+END_SRC
 
 *** Makro
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+#+BEGIN_SRC emacs-lisp :tangle no
   ;; mein eigener toggle-fullscreen approach ...
   (defun go-fullscreen ()
     (interactive)
@@ -519,31 +519,30 @@ Conventions]]
 	(go-non-fullscreen)
       (go-fullscreen)))
 #+END_SRC
-*** passender Shortcut
+** Shortcut für den eingebauten fullscreen-toggle
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-  ;; ... und der passende Shortcut
-  (global-set-key [(control meta return)] 'toggle-fullscreen)
+;; ... und der passende Shortcut
+(global-set-key [(control meta return)] 'toggle-frame-fullscreen)
 #+END_SRC
-*** my-toggle-bars
-    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+** my-toggle-bars
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 (defun my-toggle-bars ()
-    "Toggle bars, the scroll-bar will be toggled right."
-    (interactive)
-    (if (eq menu-bar-mode t)
-	(menu-bar-mode -1)
-      (menu-bar-mode +1))
+  "Toggle bars, the scroll-bar will be toggled right."
+  (interactive)
+  (if (eq menu-bar-mode t)
+      (menu-bar-mode -1)
+    (menu-bar-mode +1))
 
-    (if (eq tool-bar-mode t)
-	(tool-bar-mode -1)
-      (tool-bar-mode +1))
+  (if (eq tool-bar-mode t)
+      (tool-bar-mode -1)
+    (tool-bar-mode +1))
 
-    (if (eq scroll-bar-mode 'right)
-	(scroll-bar-mode -1)
-      (scroll-bar-mode 'right)))
+  (if (eq scroll-bar-mode 'right)
+      (scroll-bar-mode -1)
+    (scroll-bar-mode 'right)))
 
 (global-set-key [f9] 'my-toggle-bars)
-
-    #+END_SRC
+   #+END_SRC
 ** UNDO the region-word-wrap thingy (M-q)
 *** Code
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
