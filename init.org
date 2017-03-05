@@ -64,7 +64,7 @@ This file can be opened quickly via =C-c e=
     (message "Mac OS X")))
  ((string-equal system-type "gnu/linux") ; linux
   (progn
-    (message "Linux"))))Γ
+    (message "Linux"))))
    #+END_SRC
 
 ** site-lisp.el
@@ -1101,11 +1101,17 @@ Additional shortcuts for navigating through org-mode documents:
 #+END_SRC
 
 ** Indentation
-   - [[http://emacswiki.org/emacs/IndentingC][link]],
-#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   - [[http://emacswiki.org/emacs/IndentingC][link]]
+#+BEGIN_SRC emacs-lisp :tangle no
 ;; 4-space indents and K&R-Style
 (setq c-default-style "k&r"
           c-basic-offset 4)
+#+End_SRC
+
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; 2-space indents and GNU-Style
+(setq c-default-style "gnu"
+      c-basic-offset 2)
 #+END_SRC
 
 ** TODO see [[https://www.python.org/dev/peps/pep-0007/][PEP0007]]
