@@ -232,7 +232,7 @@ This file can be opened quickly via =C-c e=
 ;; window-decoration - Toolbar
 (tool-bar-mode -1)
 #+END_SRC
-** Status-bar customization
+** mode-line customization
 *** Zeilennummern anzeigen
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; status-bar - Zeilennummern
@@ -374,11 +374,18 @@ Conventions]]
    ("M-g g" . avy-goto-line)))
    #+END_SRC
 ** powerline
-   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   #+BEGIN_SRC emacs-lisp :tangle no
      (use-package powerline
        :ensure t)
      (require 'powerline)
      (powerline-default-theme)
+   #+END_SRC
+** smart-mode-line
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(use-package smart-mode-line
+  :ensure t)
+(setq sml/theme 'respectful)
+(sml/setup)
    #+END_SRC
 ** Flycheck
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
