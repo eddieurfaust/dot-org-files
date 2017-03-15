@@ -27,7 +27,8 @@ This file can be opened quickly via =C-c e=
 	   (concat usb-drive-letter "ImageMagick\\x64\\") ";"
 	   (concat usb-drive-letter "gnuplot\\x64\\gnuplot\\bin\\") ";"
 	   (concat usb-drive-letter "nmap-7.40\\") ";"
-	   (concat usb-drive-letter "mingw-w64\\x86_64-6.3.0-posix-seh-rt_v5-rev1\\mingw64\\bin")
+	   (concat usb-drive-letter "mingw-w64\\x86_64-6.3.0-posix-seh-rt_v5-rev1\\mingw64\\bin") ";"
+	   (concat usb-drive-letter "graphviz-2.38\\release\\bin")
 	   )
 	  )
   )
@@ -771,6 +772,10 @@ don't want is there, but I haven't had any such problems yet.
    #+END_SRC
 
 
+** winner-mode
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(winner-mode t)
+   #+END_SRC
    
 * ORG-MODE
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
