@@ -387,7 +387,7 @@ Conventions]]
      (powerline-default-theme)
    #+END_SRC
 ** smart-mode-line
-   #+BEGIN_SRC emacs-lisp :tangle no
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 (use-package smart-mode-line-powerline-theme
   :ensure t)
 (use-package smart-mode-line
