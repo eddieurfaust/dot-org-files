@@ -256,7 +256,7 @@ This file can be opened quickly via =C-c e=
 *** Uhrzeit anzeigen - [24h]
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; status-bar - Uhrzeit aktivieren
-(display-time-mode 1)
+(display-time-mode t)
 
 ;; status-bar - Uhrzeit im 24h Format
 (setq display-time-24hr-format t)
@@ -401,9 +401,12 @@ Conventions]]
 (use-package smart-mode-line
   :ensure t
   :init
-  (setq sml/no-confirm-load-theme t))
-(setq sml/theme 'powerline)
-(sml/setup)
+  (setq sml/no-confirm-load-theme t)
+  :config
+  (setq sml/theme 'powerline)
+  (sml/setup)
+  (setq display-time-24hr-format t)
+  (setq display-time-day-and-date t))
    #+END_SRC
 ** Flycheck
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
