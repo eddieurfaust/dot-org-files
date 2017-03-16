@@ -137,6 +137,13 @@ This file can be opened quickly via =C-c e=
   :ensure t)
    #+END_SRC
 
+** set gdb path
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(with-system windows-nt
+  ;; (setq gdb-command-name (concat usb-drive-letter "mingw-w64\\x86_64-6.3.0-posix-seh-rt_v5-rev1\\mingw64\\bin\\gdb.exe -i=mi"))
+  (setq gud-gdb-command-name (concat usb-drive-letter "mingw-w64\\x86_64-6.3.0-posix-seh-rt_v5-rev1\\mingw64\\bin\\gdb.exe -i=mi")))
+   #+END_SRC
+
 
 * Loading essentials:
 
@@ -777,6 +784,7 @@ don't want is there, but I haven't had any such problems yet.
 (winner-mode t)
    #+END_SRC
    
+
 * ORG-MODE
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;;  ##############
