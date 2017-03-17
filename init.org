@@ -157,7 +157,8 @@ This file can be opened quickly via =C-c e=
 #+BEGIN_SRC emacs-lisp :tangle no
 ;; mandatory for tabbar to work
 ;; (require 'cl)
-(use-package cl)
+(use-package cl
+  :ensure t)
 #+END_SRC
 
 ** VERDAMMTE System-Locale setzen - Englisch -Punkt-
@@ -366,9 +367,10 @@ Conventions]]
    #+BEGIN_QUOTE
    You can actually replace the <M-g g> binding of =goto-line=, since if you enter a digit for =avy-goto-line=, it will switch to =goto-line= with that digit already entered.
    #+END_QUOTE
-   - =avy-keys= erwartet offenbar eine Liste mit allen Buchstaben [a-z]. Der "Code point" wird offenbar mit dem <?> Operator zurück gegeben.
+   - =avy-keys= erwartet offenbar eine Liste mit allen Buchstaben [a-z]. Der "Code point" wird offenbar mit dem unären <?> Operator zurück gegeben.
    - ?a evaluated gives: "97 (#o141, #x61, ?a)" → (octal hexadecimal ASCII(?))
    - Die Liste wird gefüllt, in absteigender Reihenfolge, mit den Buchstaben welche ich für das Springen für die avy-Kommandos nutzen möchte.
+   - Listen in =avy-keys-alist= überschreiben offenbar die (globale?) =avy-keys= Liste.
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; =avy= a better =ace-jump-mode=
 ;; inklusive Anpassung an NEO2-Layout
@@ -376,12 +378,12 @@ Conventions]]
   :ensure t
   :init (setq avy-background t)
   :config
-  (setq avy-keys '(?n ?e ?r ?a ?t ?i ?s ?o ?d ?u ?y ?h ?c ?g ?l ?f ?v ?k ?w ?q ?x ?b ?p ?m ?z ?j))
+  (setq avy-keys '(?n ?e ?r ?a ?t ?i ?s ?o ?d ?u ?h ?c ?g ?l ?f ?v ?k ?w ?q ?x ?b ?p ?m ?z ?y ?j))
   (setq avy-keys-alist '((avy-goto-word-or-subword-1 . (?n ?e ?r ?a ?t ?i ?s ?o))
 			 (avy-goto-word-1 . (?n ?e ?r ?a ?t ?i ?s ?o))
 			 (avy-goto-char-2 . (?n ?e ?r ?a ?t ?i ?s ?o))
 			 (avy-goto-line . (?n ?e ?r ?a ?t ?i ?s ?o))))
-  (setq avy-all-windows nil)
+  (setq avy-all-windows t)
   :bind
   (("M-g n" . avy-goto-word-or-subword-1)
    ("M-g r" . avy-goto-char-2)
@@ -835,6 +837,7 @@ don't want is there, but I haven't had any such problems yet.
 ** org-id
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 (use-package org-id
+  :ensure t
   :config
   (add-hook 'org-mode-hook
 	  (lambda ()
@@ -1050,6 +1053,7 @@ Additional shortcuts for navigating through org-mode documents:
 ** Source Code Blocks und Babel
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
      (use-package org-babel
+       :ensure t
        :init
        (org-babel-do-load-languages
         'org-babel-load-languages
