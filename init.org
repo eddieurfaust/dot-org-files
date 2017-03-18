@@ -109,11 +109,12 @@ This file can be opened quickly via =C-c e=
    (add-to-list 'package-archives
                 '("melpa-stable" . "http://stable.melpa.org/packages/") t)
    (setq package-enable-at-startup nil)
-   ;; (setq package-archives '(
-   ;;                          ("elpa" . "http://tromey.com/elpa/")
-   ;;                          ("gnu" . "http://elpa.gnu.org/packages/")
-   ;;                          ("marmalade" . "http://marmalade-repo.org/packages/")
-   ;;                          ("stable" . "http://melpa.org/packages/")))
+   (with-system gnu/linux
+     (setq package-archives '(
+                              ("elpa" . "http://tromey.com/elpa/")
+                              ("gnu" . "http://elpa.gnu.org/packages/")
+                              ("marmalade" . "http://marmalade-repo.org/packages/")
+                              ("stable" . "http://melpa.org/packages/"))))
    (package-initialize)
  #+END_SRC
 
@@ -145,7 +146,7 @@ This file can be opened quickly via =C-c e=
    #+END_SRC
 
 
-* Loading essentials:
+* Loading essentials
 
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;;  ########################
@@ -294,10 +295,13 @@ This file can be opened quickly via =C-c e=
 *** load Zenburn - WORKAROUND
     [[http://stackoverflow.com/questions/11127109/emacs-24-package-system-initialization-problems/11140619#11140619][link]]
     #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-      (defun zenburn-init ()
-        (load-theme 'zenburn)
-        )
-      (add-hook 'after-init-hook 'zenburn-init)
+      (use-package zenburn-theme
+        :init
+        (defun zenburn-init ()
+          (load-theme 'zenburn)
+          )
+        :config
+        (add-hook 'after-init-hook 'zenburn-init))
     #+END_SRC
 *** Solarized
     #+BEGIN_SRC emacs-lisp :tangle no
@@ -800,6 +804,7 @@ don't want is there, but I haven't had any such problems yet.
 ** Default Directory
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; Set to the location of your Org files on your local system
+(require 'org)
 (setq org-directory "~/org")
 #+END_SRC
 ** File association
@@ -835,7 +840,7 @@ don't want is there, but I haven't had any such problems yet.
      (setq org-latex-to-pdf-process '("PDFLATEX=\"pdflatex –shell-escape\" texi2dvi -p %f"))
    #+END_SRC
 ** org-id
-   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   #+BEGIN_SRC emacs-lisp :tangle no
 (use-package org-id
   :ensure t
   :config
@@ -1052,9 +1057,9 @@ Additional shortcuts for navigating through org-mode documents:
 
 ** Source Code Blocks und Babel
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-     (use-package org-babel
-       :ensure t
-       :init
+     ;; (use-package org-babel
+     ;;   :ensure t
+     ;;   :init
        (org-babel-do-load-languages
         'org-babel-load-languages
         '((sh . t)
@@ -1073,7 +1078,8 @@ Additional shortcuts for navigating through org-mode documents:
           (plantuml . t)
           (ditaa . t)
           (latex . t)
-          )))
+          ))
+     ;; )
    #+END_SRC
 ** (OLD) initial babel supported languages
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -1413,7 +1419,10 @@ the current directory in Python's search path."
   :init
   (with-system windows-nt
     (setq org-plantuml-jar-path
-	  (expand-file-name "~\\build\\plantuml\\plantuml.8058.jar"))))
+	  (expand-file-name "~\\build\\plantuml\\plantuml.8058.jar")))
+  # (with-system gnu/linux
+  #   (setq org-plantuml-jar-path "~/build/plantuml/plantuml.jar"))
+    )
 #+END_SRC
 
 ** ditaa
