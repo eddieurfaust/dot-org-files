@@ -1420,9 +1420,9 @@ the current directory in Python's search path."
   (with-system windows-nt
     (setq org-plantuml-jar-path
 	  (expand-file-name "~\\build\\plantuml\\plantuml.8058.jar")))
-  # (with-system gnu/linux
-  #   (setq org-plantuml-jar-path "~/build/plantuml/plantuml.jar"))
-    )
+  ;; (with-system gnu/linux
+  ;;   (setq org-plantuml-jar-path "~/build/plantuml/plantuml.jar"))
+  )
 #+END_SRC
 
 ** ditaa
