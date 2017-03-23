@@ -414,6 +414,10 @@ Conventions]]
   (setq display-time-24hr-format t)
   (setq display-time-day-and-date t))
    #+END_SRC
+** imenu
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(global-set-key (kbd "M-i") 'imenu)
+   #+END_SRC
 ** Flycheck
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
      ;; Flycheck is a modern on-the-fly syntax checking extension for GNU Emacs.
