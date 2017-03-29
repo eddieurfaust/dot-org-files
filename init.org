@@ -786,7 +786,9 @@ don't want is there, but I haven't had any such problems yet.
      ;; Die Breite des Neotree-Fensters ist mir in der Grundeinstellung zu schmal.
      (use-package neotree
        :ensure t
-       :config (setq neo-window-width 40))
+       :config
+       (setq neo-window-width 40)
+       (setq neo-smart-open t))
 
      (define-key global-map (kbd "<f1>") 'neotree)
    #+END_SRC
