@@ -427,6 +427,12 @@ Conventions]]
        :init
        (global-flycheck-mode t))
    #+END_SRC
+*** C++11 / C++14 language standard
+    - [[https://stackoverflow.com/questions/30949847/configuring-flycheck-to-work-with-c11][link]]
+      + Open the root directory of your project in Dired with =C-x d=, and then type =M-x add-dir-local-variable RET c++-mode RET flycheck-gcc-language-standard RET "c++11"=.
+      + This will create a =.dir-locals.el= file in the root directory of your project.
+      + Emacs reads this file whenever you visit a file from this directory or any subdirectory, and sets variables according to the rules in this file.
+      + Specifically, Emacs will now set the language standard for Flycheck syntax checking to C++ 11 for all C++ files in your project.
 ** Comments
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; comments
