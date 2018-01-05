@@ -821,10 +821,16 @@ don't want is there, but I haven't had any such problems yet.
 (require 'org)
 (setq org-directory "~/org")
 #+END_SRC
-** File association
+** File associations
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;; file associations for org-mode
-(add-to-list 'auto-mode-alist '("\\.\\(org\\|jrnl\\)$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(org\\|jrnl\\|txt\\)$" . org-mode))
+#+END_SRC
+
+** ORG-MODE = default major mode for all files with an unspecified mode
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; set emacs as default major mode to for all files with an unspecified mode
+(setq default-major-mode 'org-mode)
 #+END_SRC
 
 ** Hide leading starts
