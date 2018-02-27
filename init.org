@@ -1429,7 +1429,7 @@ the current directory in Python's search path."
 ** TODO PlantUML
    [[http://plantuml.com/emacs][www-link]]
    Das Ganze für Windows und Linux anpassen.
-   - Pfad für Windows: /M:\home\build\plantuml\plantuml.8058.jar/
+   - Pfad für Windows: /M:\home\build\plantuml\plantuml.1.2018.jar/
    [[http://plantuml.sourceforge.net/download.html][plantuml.jar]]
 *** auf plantuml.jar zeigen
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -1439,7 +1439,7 @@ the current directory in Python's search path."
   :init
   (with-system windows-nt
     (setq org-plantuml-jar-path
-	  (expand-file-name "~\\build\\plantuml\\plantuml.8058.jar")))
+	  (expand-file-name "~\\build\\plantuml\\plantuml.1.2018.1.jar")))
   ;; (with-system gnu/linux
   ;;   (setq org-plantuml-jar-path "~/build/plantuml/plantuml.jar"))
   )
