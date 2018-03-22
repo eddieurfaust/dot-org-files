@@ -29,8 +29,9 @@ This file can be opened quickly via =C-c e=
 	   (concat usb-drive-letter "nmap-7.40\\") ";"
 	   (concat usb-drive-letter "mingw-w64\\x86_64-6.3.0-posix-seh-rt_v5-rev1\\mingw64\\bin") ";"
 	   (concat usb-drive-letter "graphviz-2.38\\release\\bin") ";"
-	   (concat usb-drive-letter "WinPython\\WinPython-64bit-3.6.0.1Qt5\\python-3.6.0.amd64") ";"
-	   (concat usb-drive-letter "LMDcmder\vendor\git-for-windows\bin")
+	   ;; (concat usb-drive-letter "WinPython\\WinPython-64bit-3.6.3.0Qt5\\python-3.6.0.
+	   (concat usb-drive-letter "WinPython\\\WinPython-64bit-3.6.0.1Qt5\\python-3.6.0.amd64") ";"
+	   (concat usb-drive-letter "LMDcmder\\vendor\\git-for-windows\\bin")
 	   )
 	  )
   )
@@ -349,6 +350,13 @@ Conventions]]
 (global-set-key (kbd "C-M-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-M-r") 'isearch-backward-regexp)
 #+END_SRC
+** Browse Kill Ring
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;; shows the kill-ring content in a buffer. You can skim over it or even C-s through it.
+(use-package browse-kill-ring
+  :ensure t)
+#+END_SRC
+
 ** Use =string= instead of =read= for the =re-builder=
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 (use-package re-builder
