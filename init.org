@@ -1192,6 +1192,21 @@ Additional shortcuts for navigating through org-mode documents:
 #+END_SRC
 
 
+* GO-MODE
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+;;  #############
+;; ### GO-MODE ###
+;;  #############
+#+END_SRC
+
+** load go-mode
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(use-package go-mode
+  :ensure t
+  :config
+  (setq auto-mode-alist (append '(("\\.go$" . go-mode)) auto-mode-alist)))
+#+END_SRC
+
 * CSharp-MODE
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
 ;;  #################
