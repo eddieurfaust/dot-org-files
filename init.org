@@ -298,7 +298,7 @@ This file can be opened quickly via =C-c e=
 #+END_SRC
 *** load Zenburn - WORKAROUND
     [[http://stackoverflow.com/questions/11127109/emacs-24-package-system-initialization-problems/11140619#11140619][link]]
-    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+    #+BEGIN_SRC emacs-lisp :tangle no
       (use-package zenburn-theme
         :init
         (defun zenburn-init ()
@@ -326,6 +326,14 @@ This file can be opened quickly via =C-c e=
   ;(global-rainbow-delimiters-mode t)
 #+END_SRC
 
+*** load material-theme
+    [[https://github.com/cpaulik/emacs-material-theme][link]]
+    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(use-package material-theme
+  :init
+  (load-theme 'material)
+  )
+    #+END_SRC
 
 * Personal ease of use
 Schöner Artikel zum Thema [[http://ergoemacs.org/emacs/emacs_make_modern.html][How to Set Emacs's User Interface to Modern
@@ -1206,6 +1214,7 @@ Additional shortcuts for navigating through org-mode documents:
   :config
   (setq auto-mode-alist (append '(("\\.go$" . go-mode)) auto-mode-alist)))
 #+END_SRC
+
 
 * CSharp-MODE
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
