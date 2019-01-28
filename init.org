@@ -300,6 +300,7 @@ This file can be opened quickly via =C-c e=
     [[http://stackoverflow.com/questions/11127109/emacs-24-package-system-initialization-problems/11140619#11140619][link]]
     #+BEGIN_SRC emacs-lisp :tangle no
       (use-package zenburn-theme
+	:ensure t
         :init
         (defun zenburn-init ()
           (load-theme 'zenburn)
@@ -312,6 +313,24 @@ This file can be opened quickly via =C-c e=
       ;; load Solarized theme
       ;(load-theme 'solarized-light t)
       (load-theme 'solarized-dark t)
+    #+END_SRC
+*** load material-theme
+    [[https://github.com/cpaulik/emacs-material-theme][link]]
+    #+BEGIN_SRC emacs-lisp :tangle no
+(use-package material-theme
+  :ensure t
+  :init
+  (load-theme 'material)
+  )
+    #+END_SRC
+*** Atom One Dark Theme for Emacs
+    [[https://github.com/jonathanchu/atom-one-dark-theme][link]]
+    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(use-package atom-one-dark-theme
+  :ensure t
+  :init
+  (load-theme 'atom-one-dark)
+  )
     #+END_SRC
 ** Parenthesis
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
@@ -326,14 +345,6 @@ This file can be opened quickly via =C-c e=
   ;(global-rainbow-delimiters-mode t)
 #+END_SRC
 
-*** load material-theme
-    [[https://github.com/cpaulik/emacs-material-theme][link]]
-    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
-(use-package material-theme
-  :init
-  (load-theme 'material)
-  )
-    #+END_SRC
 
 * Personal ease of use
 Schöner Artikel zum Thema [[http://ergoemacs.org/emacs/emacs_make_modern.html][How to Set Emacs's User Interface to Modern
@@ -420,7 +431,7 @@ Conventions]]
      (powerline-default-theme)
    #+END_SRC
 ** smart-mode-line
-   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+   #+BEGIN_SRC emacs-lisp :tangle no
 (use-package smart-mode-line-powerline-theme
   :ensure t)
 (use-package smart-mode-line
@@ -432,6 +443,23 @@ Conventions]]
   (sml/setup)
   (setq display-time-24hr-format t)
   (setq display-time-day-and-date t))
+   #+END_SRC
+** TODO telephone-line (change section colors dependent on activated theme?)
+   - https://github.com/dbordak/telephone-line
+   #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(use-package telephone-line
+  :ensure t
+  :config
+  (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
+	telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
+	telephone-line-primary-right-separator 'telephone-line-cubed-right
+	telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
+  (setq telephone-line-height 24
+	telephone-line-evil-use-short-tag t)
+  (telephone-line-mode 1)
+  (setq display-time-24hr-format t)
+  (setq display-time-day-and-date t)
+  )
    #+END_SRC
 ** imenu
    #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
