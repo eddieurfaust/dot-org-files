@@ -1227,6 +1227,8 @@ Additional shortcuts for navigating through org-mode documents:
 ;; nothing yet for PEP0007
 #+END_SRC
 
+** TODO consider irony-mode - C/C++ Code Completion
+   → [[https://github.com/Sarcasm/irony-mode][link]]
 
 * GO-MODE
 #+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
