@@ -208,18 +208,51 @@ This file can be opened quickly via =C-c e=
 ;; set font for all windows
 ;; (set-frame-font "Liberation Mono-14" t)
 ;; (set-frame-font "DejaVu Sans Mono-11" nil t)
-
-(with-system windows-nt
-  (set-face-attribute 'default nil :height 125 :family "Consolas")
-  )
-(with-system gnu/linux
-  (set-frame-font "Inconsolata-14" nil t)
-  )
+ (with-system windows-nt
+   (set-face-attribute 'default nil :height 125 :family "Consolas")
+   )
+ (with-system gnu/linux
+   (set-frame-font "Inconsolata-14" nil t)
+   )
 #+END_SRC
 *** Font Size
 #+BEGIN_SRC emacs-lisp :tangle no
 ;; Font size
 (set-default-font "9x15")
+#+END_SRC
+*** Fira Code == !=
+#+BEGIN_SRC emacs-lisp :tangle ~/.emacs.d/init.el
+(when (window-system)
+  (set-frame-font "Fira Code"))
+(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+               (36 . ".\\(?:>\\)")
+               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+               (48 . ".\\(?:x[a-zA-Z]\\)")
+               (58 . ".\\(?:::\\|[:=]\\)")
+               (59 . ".\\(?:;;\\|;\\)")
+               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+               (91 . ".\\(?:]\\)")
+               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+               (94 . ".\\(?:=\\)")
+               (119 . ".\\(?:ww\\)")
+               (123 . ".\\(?:-\\)")
+               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+               )
+             ))
+  (dolist (char-regexp alist)
+    (set-char-table-range composition-function-table (car char-regexp)
+                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
 #+END_SRC
 
 ** Zeilennummern anzeigen
@@ -1563,8 +1596,7 @@ the current directory in Python's search path."
 
 ** TODO Neue Funktion zum Einbinden
    [[http://www.emacswiki.org/emacs/DescribeThingAtPoint][DescribeThingsAtPoint]]
-** DONE Kommentare
-   CLOSED: [2014-03-27 Thu 17:05]
+** TODO Kommentare
    Ich könnte in jedem SRC-Block noch einen Kommentar schrieben, der
    dann (vielleicht?) mit in die =.el=-Datei geschrieben wird. Damit
    hätte ich dann auch meine =initl.el= kommentiert.
